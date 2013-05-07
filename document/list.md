@@ -1,5 +1,5 @@
-百度云数据库资料（php版）
+鐧惧害浜戞暟鎹簱璧勬枡锛坧hp鐗堬級
 http://developer.baidu.com/wiki/index.php?title=docs/cplat/rt/php/mysql
 
-php对mysql的api
+php瀵筸ysql鐨刟pi
 http://cn2.php.net/manual/zh/book.mysql.php
