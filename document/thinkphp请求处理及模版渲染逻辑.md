@@ -13,7 +13,7 @@ View.class.php -> display() -> tag('view_begin',$templateFile)
 common.php -> tag() -> B($name, $params) -> $behavior->run($params)
 LocationTemplateBehavior.class.php -> run() -> parseTemplateFile($templateFile) -> $templateFile = C('TEMPLATE_NAME')
 
-��û��ָ��ģ��ʱĬ��Ϊ ./houseRent/Tpl/Bae/index.tpl ���̼� 
+当没有指定模版时默认为 ./houseRent/Tpl/Bae/index.tpl 过程见
 App.class.php ->  init() 
 	/* 模板相关目录常量 */
         define('THEME_NAME',   $templateSet);                  // 当前模板主题名称
