@@ -1,4 +1,4 @@
-index.php -> require './ThinkPHP/ThinkPHP.php'
+﻿index.php -> require './ThinkPHP/ThinkPHP.php'
 Think.php -> require THINK_PATH.'Common/runtime.php'
 runtime.php -> Think::Start()
 Think.class.php -> Start() ->  App::run()
