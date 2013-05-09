@@ -5,7 +5,7 @@ Think.class.php -> Start() ->  App::run()
 App.class.php -> run() -> App::init() -> App::exec() -> call_user_func(array(&$module,'_before_'.$action))
 ModuleAction -> method()
 
-以BaeAction.class.php->index()为例
+浠aeAction.class.php->index()涓轰緥
 
 $this->display()
 Action.class.php -> $this->view->display($templateFile,$charset,$contentType)
@@ -13,10 +13,10 @@ View.class.php -> display() -> tag('view_begin',$templateFile)
 common.php -> tag() -> B($name, $params) -> $behavior->run($params)
 LocationTemplateBehavior.class.php -> run() -> parseTemplateFile($templateFile) -> $templateFile = C('TEMPLATE_NAME')
 
-当没有指定模版时默认为 ./houseRent/Tpl/Bae/index.tpl 过程见 
+锟斤拷没锟斤拷指锟斤拷模锟斤拷时默锟斤拷为 ./houseRent/Tpl/Bae/index.tpl 锟斤拷锟教硷拷 
 App.class.php ->  init() 
-	/* 模板相关目录常量 */
-        define('THEME_NAME',   $templateSet);                  // 当前模板主题名称
+	/* 妯℃澘鐩稿叧鐩綍甯搁噺 */
+        define('THEME_NAME',   $templateSet);                  // 褰撳墠妯℃澘涓婚鍚嶇О
         $group   =  defined('GROUP_NAME')?GROUP_NAME.'/':'';
         define('THEME_PATH',   TMPL_PATH.$group.(THEME_NAME?THEME_NAME.'/':''));
         define('APP_TMPL_PATH',__ROOT__.'/'.APP_NAME.(APP_NAME?'/':'').basename(TMPL_PATH).'/'.$group.(THEME_NAME?THEME_NAME.'/':''));
