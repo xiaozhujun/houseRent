@@ -10,10 +10,6 @@ class UserModel extends Model{
             array("password","checkLength","密码长度的要求是5~15位之间",0,'callback'),  
             array("password","repassword","两次密码输入不一致",0,'confirm'),  
             array("qq","require","qq必须填写"),  
-              
-                  
-            //array("cdate","require","时间不能为空",callback),  
-                  
             );  
       
       
@@ -27,12 +23,6 @@ class UserModel extends Model{
             );  
       
       
-      
-      
-      
-      
-      
-      
         //自定义验证方法，来验证用户名的长度是否合法  
         //$date形参  可以写成任意如 $AA  $bb  
         function checkLength($data){  
@@ -44,12 +34,19 @@ class UserModel extends Model{
                   
                 return true;  
             }  
-              
-              
-        }  
+        }
+
+        //用户登录
+        function login($name,$password)
+        {
+        	$result=$this->query("select name from user where name='$name' and password='$password'");
+        	if(sizeof($result)==1)
+        	{
+        		return true;
+        	}
+        	return false;
+        }
       
-  
-          
         //返回访问者的IP地址  
         function getIp(){  
               
@@ -60,7 +57,4 @@ class UserModel extends Model{
                   
             return date("Y-m-d H:i:s");  
         }  
-      
-      
-      
 }  

@@ -1,27 +1,28 @@
 <?php
+import("@.Model.UserModel");
 // 本类由系统自动生成，仅供测试用途
 class UserAction extends Action {
 	public function index() {
-		header( "Content-Type:text/html; charset=utf-8" );
+		header ( "Content-Type:text/html; charset=utf-8" );
 		$this->display ( "register" );
 	}
 	
-	//注册用户
+	// 注册用户
 	function add() {
-		session_start();
+		session_start ();
 		if (md5 ( $_POST ['verify'] ) != $_SESSION ['verify']) {
-			$this->error (" {$_GET ['verify']} = $_SESSION ['verify']");
+			$this->error ( " {$_GET ['verify']} = $_SESSION ['verify']" );
 		}
 		
 		// 实例化自定义模型 M('User')实例化基础模型
-		$user = D( "User" );
+		$user = D ( "User" );
 		
-		if ($user->create()) {
+		if ($user->create ()) {
 			// 执行插入操作，执行成功后，返回新插入的数据库的ID
-			if ($user->add()) {
-				$this->regSuccess();
+			if ($user->add ()) {
+				$this->regSuccess ();
 			} else {
-				$this->error( "{$user->getError ()} register fail " );
+				$this->error ( "{$user->getError ()} register fail " );
 			}
 		} else {
 			// 把错误信息提示给用户看
@@ -29,10 +30,33 @@ class UserAction extends Action {
 		}
 	}
 	
-	//注册成功处理
-	function regSuccess()
-	{
-		$this->display("regSuccess");
+	// 用户登录
+	function login() {
+		
+		// 判断有无参数
+		if (!isset ( $_POST ['name'] ))
+			// 展示本页面
+			$this->display ( 'login' );
+		else {
+			// 获取参数
+			$name = $_POST ['name'];
+			$password = $_POST ['password'];
+			
+			// 执行登录
+			$userModel = new UserModel ();
+			
+			if ($userModel->login ( $name, $password )) {
+				$_SESSION ['user'] = $name;
+				$this->display ( 'loginSuccess' );
+			} else {
+				$this->display ( 'loginFail' );
+			}
+		}
+	}
+	
+	// 注册成功处理
+	function regSuccess() {
+		$this->display ( "regSuccess" );
 	}
 	
 	// 生成图片验证码
@@ -60,10 +84,8 @@ class UserAction extends Action {
 		// 实现中文验证码
 		// image::GBVerify();
 	}
-	
-	function register()
-	{
-		header("Content-Type:text/html; charset=utf-8" );
-		$this->display("register");		
+	function register() {
+		header ( "Content-Type:text/html; charset=utf-8" );
+		$this->display ( "register" );
 	}
 } 
