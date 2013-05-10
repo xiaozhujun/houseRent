@@ -11,7 +11,7 @@
  * @file index.php
  *  
  **/
-define('APP_PATH','./app/');
+define('APP_PATH','./houseRent/');
 define('THINK_PATH','./ThinkPHP/');
 define('APP_DEBUG',true);
 require './ThinkPHP/ThinkPHP.php';

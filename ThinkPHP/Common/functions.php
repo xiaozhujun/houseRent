@@ -447,6 +447,7 @@ function session($name,$value='') {
             unset($_SESSION[$name]);
         }
     }else{ // 设置session
+    	session_start();
         if($prefix){
             if (!is_array($_SESSION[$prefix])) {
                 $_SESSION[$prefix] = array();

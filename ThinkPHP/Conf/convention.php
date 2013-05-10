@@ -56,10 +56,10 @@ return  array(
     /* 数据库设置 */
     'DB_TYPE'               => 'mysql',     // 数据库类型
 	'DB_HOST'               => IS_BAE?getenv('HTTP_BAE_ENV_ADDR_SQL_IP'):'localhost', // 服务器地址
-	'DB_NAME'               => 'xspMMDfNUoPlSySGmRXf',          // 数据库名
+	'DB_NAME'               => IS_BAE?'xspMMDfNUoPlSySGmRXf':'house_rent',          // 数据库名
 	'DB_USER'               => IS_BAE?getenv('HTTP_BAE_ENV_AK'):'root',      // 用户名
-	'DB_PWD'                => IS_BAE?getenv('HTTP_BAE_ENV_SK'):'',          // 密码
-	'DB_PORT'               => IS_BAE?getenv('HTTP_BAE_ENV_ADDR_SQL_PORT'):'',        // 端口
+	'DB_PWD'                => IS_BAE?getenv('HTTP_BAE_ENV_SK'):'root',          // 密码
+	'DB_PORT'               => IS_BAE?getenv('HTTP_BAE_ENV_ADDR_SQL_PORT'):'3306',        // 端口
 	'DB_PREFIX'             => '',    // 数据库表前缀
     'DB_FIELDTYPE_CHECK'    => false,       // 是否进行字段类型检查
     'DB_FIELDS_CACHE'       => true,        // 启用字段缓存

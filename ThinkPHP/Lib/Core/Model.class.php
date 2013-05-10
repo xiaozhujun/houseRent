@@ -832,6 +832,7 @@ class Model {
         // 如果没有传值默认取POST数据
         if(empty($data)) {
             $data    =   $_POST;
+            //$data    =   $_GET;
         }elseif(is_object($data)){
             $data   =   get_object_vars($data);
         }
@@ -876,7 +877,7 @@ class Model {
         // 赋值当前数据对象
         $this->data =   $vo;
         // 返回创建的数据以供其他调用
-        return $vo;
+        return true;
      }
 
     // 自动表单令牌验证
