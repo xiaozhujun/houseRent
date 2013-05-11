@@ -12,11 +12,11 @@
       <td><table align="center">  
         <tr>  
           <td width="74" align="right">用户名：</td>  
-          <td align="left"><input type="text" name="name">*</td>  
+          <td align="left"><input type="text" name="name">*(长度的要求是5~15位之间)</td>  
           </tr>  
         <tr>  
           <td align="right">密码：</td>  
-          <td align="left"><input type="password" name="password">*(密码长度的要求是5~15位之间)</td>  
+          <td align="left"><input type="password" name="password">*(长度的要求是5~15位之间)</td>  
           </tr>  
         <tr>  
           <td align="right">确认密码:</td>  
@@ -30,6 +30,9 @@
           <td align="right">验证码:</td>  
           <td align="left"><input type="text" name="verify" >  
             <img id="verify" alt="验证码" onClick="show()" src="?m=User&a=verify"><a href="javascript:show()">看不清楚</a></td>  
+          </tr> 
+           <tr>  
+          <td colspan="2" align="center"><font color='red'>{$error_msg}</font></td>  
           </tr>  
         <tr>  
           <td colspan="2" align="center"><input type="submit" value="提交"> &nbsp;<a href="?m=User&a=login">登录</a></td>  

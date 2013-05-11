@@ -10,8 +10,19 @@ class UserAction extends Action {
 	// 注册用户
 	function add() {
 		session_start ();
+		$error_msg  = '';
+		
+		if (!isset($_POST ['verify'] ) || $_POST['verify']=='') {
+			$this->assign('error_msg','验证码不能为空');
+			$this->display('register');
+			return;
+		}
+		
 		if (md5 ( $_POST ['verify'] ) != $_SESSION ['verify']) {
-			$this->error ( " {$_POST ['verify']} = $_SESSION ['verify']" );
+			//$this->error ( " {$_POST ['verify']} = $_SESSION ['verify']",$error_page );
+			$this->assign('error_msg','验证码不正确');
+			$this->display('register');
+			return;
 		}
 		
 		// 实例化自定义模型 M('User')实例化基础模型
@@ -22,11 +33,15 @@ class UserAction extends Action {
 			if ($user->add ()) {
 				$this->regSuccess ();
 			} else {
-				$this->error ( "{$user->getError ()} register fail " );
+				$this->assign('error_msg',$user->getError ());
+				$this->display('register');
+				//$this->error ( "{$user->getError ()} register fail ",$error_page );
 			}
 		} else {
 			// 把错误信息提示给用户看
-			$this->error ( $user->getError () );
+			$this->assign('error_msg',$user->getError ());
+			//$this->error ( $user->getError (),$error_page );
+			$this->display('register');
 		}
 	}
 	
