@@ -4,8 +4,8 @@ class UserModel extends Model{
     //自动验证  
     protected $_validate=array(  
             //每个字段的详细验证内容  
-            array("username","require","用户名不能为空"),  
-            array("username","checkLength","用户名长度不符合要求",0,'callback'),  
+            array("name","require","用户名不能为空"),  
+            array("name","checkLength","用户名长度不符合要求",0,'callback'),  
             array("password","require","密码不能为空"),  
             array("password","checkLength","密码长度的要求是5~15位之间",0,'callback'),  
             array("password","repassword","两次密码输入不一致",0,'confirm'),  
@@ -16,9 +16,9 @@ class UserModel extends Model{
     //自动填充  
     protected $_auto=array(  
               
-            array("password","md5",3,'function'),  
-            array("cdate","shijian",3,'callback'),  
-            array("dizhi","getIp",3,'callback'),  
+            array("password","md5",3,'function') 
+            //array("cdate","shijian",3,'callback'),  
+            //array("dizhi","getIp",3,'callback'),  
                   
             );  
       
@@ -39,7 +39,8 @@ class UserModel extends Model{
         //用户登录
         function login($name,$password)
         {
-        	$result=$this->query("select name from user where name='$name' and password='$password'");
+        	$md5_pass = md5($password);
+        	$result=$this->query("select name from user where name='$name' and password='$md5_pass'");
         	if(sizeof($result)==1)
         	{
         		return true;

@@ -46,7 +46,7 @@ return  array(
     'DEFAULT_LANG'          => 'zh-cn', // 默认语言
     'DEFAULT_THEME'    => '',	// 默认模板主题名称
     'DEFAULT_GROUP'         => 'Home',  // 默认分组
-    'DEFAULT_MODULE'        => 'Bae', // 默认模块名称
+    'DEFAULT_MODULE'        => 'User', // 默认模块名称
     'DEFAULT_ACTION'        => 'index', // 默认操作名称
     'DEFAULT_CHARSET'       => 'utf-8', // 默认输出编码
     'DEFAULT_TIMEZONE'      => 'PRC',	// 默认时区
@@ -56,7 +56,7 @@ return  array(
     /* 数据库设置 */
     'DB_TYPE'               => 'mysql',     // 数据库类型
 	'DB_HOST'               => IS_BAE?getenv('HTTP_BAE_ENV_ADDR_SQL_IP'):'localhost', // 服务器地址
-	'DB_NAME'               => IS_BAE?'xspMMDfNUoPlSySGmRXf':'house_rent',          // 数据库名
+	'DB_NAME'               => IS_BAE?'wZPhzsANmcCRTnWQdRqe':'house_rent',          // 数据库名
 	'DB_USER'               => IS_BAE?getenv('HTTP_BAE_ENV_AK'):'root',      // 用户名
 	'DB_PWD'                => IS_BAE?getenv('HTTP_BAE_ENV_SK'):'root',          // 密码
 	'DB_PORT'               => IS_BAE?getenv('HTTP_BAE_ENV_ADDR_SQL_PORT'):'3306',        // 端口

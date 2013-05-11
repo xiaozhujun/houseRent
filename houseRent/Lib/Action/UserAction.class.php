@@ -11,7 +11,7 @@ class UserAction extends Action {
 	function add() {
 		session_start ();
 		if (md5 ( $_POST ['verify'] ) != $_SESSION ['verify']) {
-			$this->error ( " {$_GET ['verify']} = $_SESSION ['verify']" );
+			$this->error ( " {$_POST ['verify']} = $_SESSION ['verify']" );
 		}
 		
 		// 实例化自定义模型 M('User')实例化基础模型

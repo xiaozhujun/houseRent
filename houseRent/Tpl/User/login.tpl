@@ -6,10 +6,10 @@
 </head>  
 <body>  
     <form action="?m=User&a=login"  method="post" >  
-      <table width="407" height="424" align="center">  
+      <table align="center">  
         <th height="95"><H2>用户登录</H2></th>  
       <tr>  
-      <td><table height="273" align="center">  
+      <td><table align="center">  
         <tr>  
           <td width="74" align="right">用户名：</td>  
           <td width="304" align="left"><input type="text" name="name"></td>  
@@ -19,7 +19,7 @@
           <td align="left"><input type="password" name="password"></td>  
           </tr>  
         <tr>  
-          <td colspan="2" align="center"><input type="submit" value="登录"></td>  
+          <td colspan="2" align="center"><input type="submit" value="登录">&nbsp;<a href="?m=User&a=register">注册</a></td>  
           </tr>  
         </table></td>  
       </tr>  
