@@ -1,5 +1,7 @@
 <?php
 import("@.Model.UserModel");
+import('Common.MailUtil',APP_PATH,'.php');
+
 // 本类由系统自动生成，仅供测试用途
 class UserAction extends Action {
 	public function index() {
@@ -31,6 +33,10 @@ class UserAction extends Action {
 		if ($user->create ()) {
 			// 执行插入操作，执行成功后，返回新插入的数据库的ID
 			if ($user->add ()) {
+				
+				//发送欢迎邮件
+				think_send_mail($_POST['email'], $_POST['name'], '租客团，欢迎邮件', '恭喜您，注册成功！');
+				
 				$this->regSuccess ();
 			} else {
 				$this->assign('error_msg',$user->getError ());

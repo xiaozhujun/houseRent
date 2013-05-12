@@ -9,7 +9,8 @@ class UserModel extends Model{
             array("password","require","密码不能为空"),  
             array("password","checkLength","密码长度的要求是5~15位之间",0,'callback'),  
             array("password","repassword","两次密码输入不一致",0,'confirm'),  
-            array("qq","require","qq必须填写"),  
+            array("email","require","qq必须填写"),  
+    		array("email","email","邮箱格式不正确",2),
             );  
       
       

@@ -23,8 +23,8 @@
           <td align="left"><input type="password" name="repassword">*</td>  
           </tr>  
         <tr>  
-          <td align="right">QQ:</td>  
-          <td align="left"><input type="text" name="qq">*</td>  
+          <td align="right">邮箱:</td>  
+          <td align="left"><input type="text" name="email">*</td>  
           </tr>  
         <tr>  
           <td align="right">验证码:</td>  
