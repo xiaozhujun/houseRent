@@ -13,14 +13,13 @@ class UserModel extends Model{
     		array("email","email","邮箱格式不正确",2),
             );  
       
-      
     //自动填充  
     protected $_auto=array(  
               
-            array("password","md5",3,'function') 
-            //array("cdate","shijian",3,'callback'),  
-            //array("dizhi","getIp",3,'callback'),  
-                  
+            array("password","md5",3,'function') ,
+    		array("activateCode","genActivateCode",3,'callback'),
+            array("createTime","dateTime",3,'callback'),  
+            array("codeEffectTime","getCodeEffectTime",3,'callback'),  
             );  
       
       
@@ -48,6 +47,67 @@ class UserModel extends Model{
         	}
         	return false;
         }
+        
+        //激活用户
+        function regActivate($name,$activateCode)
+        {
+        	$date = date('Y-m-d h-i-s');
+        	$querySQL = "select id from user where codeEffectTime IS NOT NULL and status=0 and name='{$name}' and activateCode='{$activateCode}' and  codeEffectTime >='{$date}'";
+        	$result = $this->query($querySQL);
+        	if(sizeof($result)==1)
+        	{
+        		$data_update=array(
+        				'status'=>1,
+        				'activateCode'=>NULL,
+        				'codeEffectTime'=>NULL,
+        				'activeTime'=> date('Y-m-d h-i-s'),
+        				'id'=>$result[0]['id'],
+        		);
+        		return $this->save($data_update);
+        	}
+        	else 
+        	{
+        		$querySQL = "select id from user where status=1 and name='{$name}'";
+        		$result = $this->query($querySQL);
+        		if(sizeof($result)==1)
+        		{
+        			$this->error = '用户已经激活，您可以正常登陆哦！';
+        			return false;
+        		}
+        		
+        		$querySQL = "select id from user where status=0 and name='{$name}' and codeEffectTime < '{$date}'";
+        		$result = $this->query($querySQL);
+        		if(sizeof($result)==1)
+        		{
+        			$this->error = '激活码已经过期，请重新申请激活！';
+        			return false;
+        		}
+        	}
+        	$this->error = '对不起，您的激活请求失败了哦！您可以重新申请激活或者联系管理员帮您解决！';
+        	return false;
+        }
+        
+        //通过用户名查找
+        function findByName($name)
+        {
+        	if($name!=null && $name!='')
+        	{
+        		$querySQL = "select * from user where name='{$name}'";
+        		$list= $this->query($querySQL);
+        		if(sizeof($list)>=1)
+        		{
+        			return $list[0];
+        		}
+        	}
+        	return null;
+        }
+        
+        //添加激活码
+        function genActivateCode()
+        {
+        	import('ORG.Util.String');
+        	return md5(String::randString(6, 1));
+        }
       
         //返回访问者的IP地址  
         function getIp(){  
@@ -55,8 +115,15 @@ class UserModel extends Model{
             return $_SERVER['REMOTE_ADDR'];  
         }  
       
-        function shijian(){  
+        //当前系统时间
+        function dateTime(){  
                   
-            return date("Y-m-d H:i:s");  
+            return date("Y-m-d h:i:s");  
         }  
+        
+        //激活码有效期截止时间
+        function getCodeEffectTime()
+        {
+        	return date('Y-m-d h-i-s', time()+86400);
+        }
 }  

@@ -831,8 +831,8 @@ class Model {
      public function create($data='',$type='') {
         // 如果没有传值默认取POST数据
         if(empty($data)) {
-            $data    =   $_POST;
-            //$data    =   $_GET;
+           $data    =   $_POST;
+           //$data    =   $_GET;
         }elseif(is_object($data)){
             $data   =   get_object_vars($data);
         }

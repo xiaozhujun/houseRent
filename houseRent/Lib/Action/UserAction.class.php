@@ -11,16 +11,19 @@ class UserAction extends Action {
 	
 	// 注册用户
 	function add() {
-		session_start ();
+		session_start();
 		$error_msg  = '';
+		$verify = $_POST['verify'];
+		$name = $_POST['name'];
 		
-		if (!isset($_POST ['verify'] ) || $_POST['verify']=='') {
+		//$_GET $_POST
+		if (!isset($verify) || $verify =='') {
 			$this->assign('error_msg','验证码不能为空');
 			$this->display('register');
 			return;
 		}
 		
-		if (md5 ( $_POST ['verify'] ) != $_SESSION ['verify']) {
+		if (md5 ( $verify ) != $_SESSION ['verify']) {
 			//$this->error ( " {$_POST ['verify']} = $_SESSION ['verify']",$error_page );
 			$this->assign('error_msg','验证码不正确');
 			$this->display('register');
@@ -31,11 +34,14 @@ class UserAction extends Action {
 		$user = D ( "User" );
 		
 		if ($user->create ()) {
+			$vo = $user->data;
 			// 执行插入操作，执行成功后，返回新插入的数据库的ID
 			if ($user->add ()) {
-				
+				$vo = $user->findByName($name);
 				//发送欢迎邮件
-				think_send_mail($_POST['email'], $_POST['name'], '租客团，欢迎邮件', '恭喜您，注册成功！');
+				$activateAddress = C('DOMAIN').C('BASE_URL').'?m=User&a=regActivate&name='.$name.'&activateCode='.$vo['activateCode'];
+				$email_content = "亲爱的，{$name}:<br>感谢您的支持并使用租客团，我们将竭尽所能与您分担租房、住房过程中的烦扰哦！\n\t请您点击激活链接，开始使用我们为精心打造的服务吧！\n\t{$activateAddress}";
+				think_send_mail($_POST['email'], $_POST['name'], '租客团，感谢您的支持！', $email_content);
 				
 				$this->regSuccess ();
 			} else {
@@ -48,6 +54,32 @@ class UserAction extends Action {
 			$this->assign('error_msg',$user->getError ());
 			//$this->error ( $user->getError (),$error_page );
 			$this->display('register');
+		}
+	}
+	
+	//用户注册激活
+	function regActivate()
+	{
+		if(!isset( $_GET['name']) || !isset( $_GET['activateCode']))
+		{
+			$this->assign('result_msg','请求出错，请您重新申请激活！');
+			$this->display('regActivateFail');
+			return;
+		}
+		
+		$name = $_GET['name'];
+		$activateCode = $_GET['activateCode'];
+		// 执行登录
+		$userModel = new UserModel ();
+		if($userModel->regActivate($name,$activateCode))
+		{
+			$this->assign('result_msg','恭喜您，激活成功！');
+			$this->display('regActivateSuccess');
+		}
+		else
+		{
+			$this->assign('result_msg',$userModel->getError());
+			$this->display('regActivateFail');
 		}
 	}
 	
