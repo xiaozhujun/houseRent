@@ -144,5 +144,6 @@ return  array(
 	),
 	'DOMAIN' =>'http://www.zuketuan.com',//系统域名
 	'BASE_URL' =>'/index.php',
+	'EMAIL_QUEUE'=>'b346bf8c750c4c95dd0eb164dc47dfc9',
 	
 );
