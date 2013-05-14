@@ -16,15 +16,15 @@
           </tr>  
         <tr>  
           <td align="right">密码：</td>  
-          <td align="left"><input type="password" name="password" value='123456'>*(长度的要求是5~15位之间)</td>  
+          <td align="left"><input type="password" name="password">*(长度的要求是5~15位之间)</td>  
           </tr>  
         <tr>  
           <td align="right">确认密码:</td>  
-          <td align="left"><input type="password" name="repassword" value='123456'>*</td>  
+          <td align="left"><input type="password" name="repassword">*</td>  
           </tr>  
         <tr>  
           <td align="right">邮箱:</td>  
-          <td align="left"><input type="text" name="email" value='346012526@qq.com'>*</td>  
+          <td align="left"><input type="text" name="email">*</td>  
           </tr>  
         <tr>  
           <td align="right">验证码:</td>  

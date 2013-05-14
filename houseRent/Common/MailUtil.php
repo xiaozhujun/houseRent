@@ -37,3 +37,21 @@ function think_send_mail($to, $name, $subject = '', $body = '', $attachment = nu
 	}
 	return $mail->Send() ? true : $mail->ErrorInfo;
 }
+
+
+function sendMail($to, $name, $subject = '', $body = '', $attachment = null)
+{
+	$email_result = false;
+	if(IS_BAE)
+	{
+		import ( "COM.BAIDU.Bcms" );
+		global $accessKey, $secretKey, $host;
+		$bcms = new Bcms ( $accessKey, $secretKey, $host ) ;
+		$email_result = $bcms->mail ( C('EMAIL_QUEUE'), $email_content, array(0=>$email) , array( Bcms::MAIL_SUBJECT => $subject)) ;
+	}
+	else
+	{
+		$email_result = think_send_mail($email, $name, $subject, $email_content);
+	}
+	return $email_result;
+}

@@ -42,18 +42,9 @@ class UserAction extends Action {
 				$activateAddress = C('DOMAIN').C('BASE_URL').'?m=User&a=regActivate&name='.$name.'&activateCode='.$vo['activateCode'];
 				$subject = '租客团，感谢您的支持！';
 				$email_content = "亲爱的，{$name}:<br>感谢您的支持并使用租客团，我们将竭尽所能与您分担租房、住房过程中的烦扰哦！\n\t请您点击激活链接，开始使用我们为精心打造的服务吧！\n\t{$activateAddress}";
-				$email_result = '';
-				if(IS_BAE)
-				{
-					import ( "COM.BAIDU.Bcms" );
-					global $accessKey, $secretKey, $host;
-					$bcms = new Bcms ( $accessKey, $secretKey, $host ) ;
-					$email_result = $bcms->mail ( C('EMAIL_QUEUE'), $email_content, array(0=>$email) , array( Bcms::MAIL_SUBJECT => $subject)) ;
-				}
-				else 
-				{
-					$email_result = think_send_mail($email, $name, $subject, $email_content);
-				}
+				
+				//发送邮件
+				$email_result = sendMail($email, $name, $subject, $email_content);
 				
 				$this->assign('email',$email);
 				$this->display ( 'regSuccess' );
