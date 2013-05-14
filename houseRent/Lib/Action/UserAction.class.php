@@ -11,6 +11,14 @@ class UserAction extends Action {
 	
 	// 注册用户
 	function add() {
+		
+		if(C('USE_INVITATION') && (!isset($_POST['invitor']) || !isset($_POST['invitationCode'])))
+		{
+			$this->assign('error_msg','您需要邀请码或者现有用户发送邀请邮件方可注册，对您的支持表示衷心的感谢哦！');
+			$this->display('register');
+			return;
+		}
+		
 		session_start();
 		$error_msg  = '';
 		//$_GET $_POST
@@ -103,6 +111,7 @@ class UserAction extends Action {
 			$userModel = new UserModel ();
 			
 			if ($userModel->login ( $name, $password )) {
+				session_start();
 				$_SESSION ['user'] = $name;
 				$this->display ( 'loginSuccess' );
 			} else {
@@ -141,6 +150,15 @@ class UserAction extends Action {
 	//用户注册页面
 	function register() {
 		header ( "Content-Type:text/html; charset=utf-8" );
+		if(isset($_GET['invitor']))
+		{
+			$this->assign('invitor',$_GET['invitor']);
+		}
+		if(isset($_GET['invitationCode']))
+		{
+			$this->assign('invitationCode',$_GET['invitationCode']);
+		}
+		
 		$this->display ( "register" );
 	}
 	

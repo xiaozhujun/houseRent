@@ -40,6 +40,8 @@
         </table></td>  
       </tr>  
       </table>  
+      <input type='hidden' name='invitor' value='{$invitor}'/>
+      <input type='hidden' name='invitationCode' value='{$invitationCode}'/>
 </form>  
 </body>  
 </html>  
