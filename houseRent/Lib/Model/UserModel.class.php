@@ -76,7 +76,7 @@ class UserModel extends Model{
         		return false;
         	}
         	
-        	$date = date('Y-m-d h-i-s');
+        	$date = date('Y-m-d H:i:s');
         	$querySQL = "select id from user where status=0 and name='{$name}'";
         	$result = $this->query($querySQL);
         	if(sizeof($result)>=1)
@@ -132,7 +132,7 @@ class UserModel extends Model{
         //激活用户
         function regActivate($name,$activateCode)
         {
-        	$date = date('Y-m-d h-i-s');
+        	$date = date('Y-m-d H:i:s');
         	$querySQL = "select id from user where name='{$name}' and activateCode='{$activateCode}' and  codeEffectTime >='{$date}' and codeEffectTime IS NOT NULL and status=0";
         	$result = $this->query($querySQL);
         	if(sizeof($result)==1)
@@ -141,7 +141,7 @@ class UserModel extends Model{
         				'status'=>1,
         				'activateCode'=>NULL,
         				'codeEffectTime'=>NULL,
-        				'activeTime'=> date('Y-m-d h-i-s'),
+        				'activeTime'=> date('Y-m-d H:i:s'),
         				'id'=>$result[0]['id'],
         		);
         		return $this->save($data_update);
@@ -158,7 +158,7 @@ class UserModel extends Model{
         		$result = $this->query($querySQL);
         		if(sizeof($result)==1)
         		{
-        			$this->error = '激活码已经过期，请重新申请激活！';
+        			$this->error = '激活码已经过期，请重新申请激活！'.$querySQL;
         			return false;
         		}
         	}
@@ -197,12 +197,12 @@ class UserModel extends Model{
         //当前系统时间
         function dateTime(){  
                   
-            return date("Y-m-d h:i:s");  
+            return date("Y-m-d H:i:s");  
         }  
         
         //激活码有效期截止时间
         function getCodeEffectTime()
         {
-        	return date('Y-m-d h-i-s', time()+86400);
+        	return date('Y-m-d H:i:s', time()+86400);
         }
 }  
