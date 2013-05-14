@@ -145,5 +145,5 @@ return  array(
 	'DOMAIN' =>'http://www.zuketuan.com',//系统域名
 	'BASE_URL' =>'/index.php',//首页地址
 	'EMAIL_QUEUE'=>'b346bf8c750c4c95dd0eb164dc47dfc9',//使用的百度云消息服务队列名
-	'USE_INVITATION'=>true,//是否使用邀请方可注册
+	'USE_INVITATION'=>false,//是否使用邀请方可注册
 );
