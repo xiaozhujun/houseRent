@@ -12,7 +12,7 @@ class UserModel extends Model{
             array("password","repassword","两次密码输入不一致",0,'confirm'),  
             array("email","require","qq必须填写"),  
     		array("email","email","邮箱格式不正确",2),
-    		array('email','isEmailExist','邮箱已经使用',0,'callback'),
+    		//array('email','isEmailExist','邮箱已经使用',0,'callback'),
             );  
       
     //自动填充  
