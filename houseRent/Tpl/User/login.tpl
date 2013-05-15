@@ -2,29 +2,35 @@
 <html>  
 <head>  
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
+<link href="css/common.css" type="text/css" rel="stylesheet">
+<link href="css/login.css" type="text/css" rel="stylesheet">
 <title>登录</title>  
 </head>  
 <body>  
+	<div id='mainContainer'>
     <form action="?m=User&a=login"  method="post" >  
-      <table align="center">  
-        <th height="95"><H2>用户登录</H2></th>  
-      <tr>  
-      <td><table align="center">  
-        <tr>  
-          <td width="74" align="right">用户名：</td>  
-          <td width="304" align="left"><input type="text" name="name"></td>  
-          </tr>  
-        <tr>  
-          <td height="70" align="right">密码：</td>  
-          <td align="left"><input type="password" name="password"></td>  
-          </tr>  
-        <tr>  
-          <td colspan="2" align="center"><input type="submit" value="登录">&nbsp;<a href="?m=User&a=register">注册</a></td>  
-          </tr>  
-        </table></td>  
-      </tr>  
-      </table>  
-</form>  
+    	<div class='titleDiv'>用户登录 </div>  
+    	<div class='rowDiv'>  
+        	<div class='labelDiv'>用户名：</div>  
+        	<div class='inputDiv'><input type="text" name="name"></div>  
+      	</div>  
+      	<div class='rowDiv'>  
+        	<div class='labelDiv'>密码：</div>  
+        	<div class='inputDiv'><input type="password" name="password"></div>  
+      	</div>  
+      	<div class='messageDiv'>  
+    		{$result_msg}  
+	   	</div> 
+       	<div class='rowDiv'>  
+        	<div id='rememberLoginDiv'><input type='checkbox'/>下次自动登录</div>
+        	<div id='forgotPwdDiv'><a href=''>忘记密码？</a></div>
+      	</div>  
+      	<div class='actionDiv'>  
+        	<div id='loginActionDiv'><input type="submit" value="登录"></div>
+        	<div id='registerLinkDiv'><a id='registerLink' href="?m=User&a=register">注册</a></div></div>  
+      	</div>  
+	</form>  
+	</div>
 </body>  
 </html>  
  

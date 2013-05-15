@@ -1,0 +1,40 @@
+@CHARSET "UTF-8";
+.titleDiv
+{
+	text-align:center;
+	margin-left:0;
+	margin-right: 0;
+	font-family: 宋体;
+	font-size: 28px;
+	margin-top: 25px;
+	margin-bottom: 50px;
+}
+
+.rowDiv
+{
+	float:left;
+	width:100%;
+	height: 30px;
+	padding: 0;
+}
+
+.messageDiv
+{
+	float:left;
+	width:100%;
+	height: 30px;
+	padding: 0;
+	font-family: Arial;
+	font-size: 14px;
+	color: red;
+	text-align: center;
+}
+
+.actionDiv
+{
+	float:left;
+	width:100%;
+	height: 30px;
+	padding: 0;
+	margin-top: 20px;
+}

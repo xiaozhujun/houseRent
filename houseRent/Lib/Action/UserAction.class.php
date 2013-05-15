@@ -26,14 +26,14 @@ class UserAction extends Action {
 		$name = $_POST['name'];
 		$email = $_POST['email'];
 		if (!isset($verify) || $verify =='') {
-			$this->assign('error_msg','验证码不能为空');
+			$this->assign('result_msg','验证码不能为空');
 			$this->display('register');
 			return;
 		}
 		
 		if (md5 ( $verify ) != $_SESSION ['verify']) {
 			//$this->error ( " {$_POST ['verify']} = $_SESSION ['verify']",$error_page );
-			$this->assign('error_msg','验证码不正确');
+			$this->assign('result_msg','验证码不正确');
 			$this->display('register');
 			return;
 		}
@@ -57,13 +57,13 @@ class UserAction extends Action {
 				$this->assign('email',$email);
 				$this->display ( 'regSuccess' );
 			} else {
-				$this->assign('error_msg',$user->getError ());
+				$this->assign('result_msg',$user->getError ());
 				$this->display('register');
 				//$this->error ( "{$user->getError ()} register fail ",$error_page );
 			}
 		} else {
 			// 把错误信息提示给用户看
-			$this->assign('error_msg',$user->getError ());
+			$this->assign('result_msg',$user->getError ());
 			//$this->error ( $user->getError (),$error_page );
 			$this->display('register');
 		}
@@ -115,8 +115,8 @@ class UserAction extends Action {
 				$_SESSION ['user'] = $name;
 				$this->display ( 'loginSuccess' );
 			} else {
-				$this->assign('error_msg',$userModel->getError());
-				$this->display ( 'loginFail' );
+				$this->assign('result_msg',$userModel->getError());
+				$this->display ( 'login' );
 			}
 		}
 	}

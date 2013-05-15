@@ -46,7 +46,7 @@ return  array(
     'DEFAULT_LANG'          => 'zh-cn', // 默认语言
     'DEFAULT_THEME'    => '',	// 默认模板主题名称
     'DEFAULT_GROUP'         => 'Home',  // 默认分组
-    'DEFAULT_MODULE'        => 'User', // 默认模块名称
+    'DEFAULT_MODULE'        => 'Public', // 默认模块名称
     'DEFAULT_ACTION'        => 'index', // 默认操作名称
     'DEFAULT_CHARSET'       => 'utf-8', // 默认输出编码
     'DEFAULT_TIMEZONE'      => 'PRC',	// 默认时区
