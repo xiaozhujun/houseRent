@@ -9,7 +9,10 @@
 <body>  
 <script type="text/javascript">
 	$(document).ready(function(){
-		//alert('hello');
+		$('.moduleTitle').click(function(){
+			$(this).next().toggle(500);
+		});
+		
 	});
 </script>
 <div id='mainContainer'>
@@ -39,27 +42,37 @@
     
     <div id='mainBodyDiv'>
     	<div id='menuDiv'>
+    		<div class='menuModule'>
+	    		<div class='moduleTitle'>个人信息</div>
+	    		<div class='menuItems'>
+	    			<div class='menuItem' page='/User/update'><div class='menuNameDiv'>维护信息</div></div>
+	    			<div class='menuItem' page='/User/resetPwd'><div class='menuNameDiv'>修改密码</div></div>
+	    		</div>
+	    	</div>
+    	
 	    	<div class='menuModule'>
 	    		<div class='moduleTitle'>我的好友</div>
 	    		<div class='menuItems'>
-	    			<div class='menuItem' page='/User/inviteFriends'>邀请好友</div>
-	    			<div class='menuItem'>其它好友</div>
+	    			<div class='menuItem' page='/User/inviteFriends'><div class='menuNameDiv'>邀请好友</div></div>
+	    			<div class='menuItem'><div class='menuNameDiv'>其它好友</div></div>
 	    		</div>
 	    	</div>
 	    	
 	    	<div class='menuModule'>
 	    		<div class='moduleTitle'>我的房源</div>
 	    		<div class='menuItems'>
-	    			<div class='menuItem'>我的房源</div>
-	    			<div class='menuItem'>我申请的房源</div>
+	    			<div class='menuItem'><div class='menuNameDiv'>我的房源</div></div>
+	    			<div class='menuItem'><div class='menuNameDiv'>我关注的房源</div></div>
+	    			<div class='menuItem'><div class='menuNameDiv'>谁关注的房源</div></div>
 	    		</div>
 	    	</div>
 	    	
 	    	<div class='menuModule'>
 	    		<div class='moduleTitle'>我的圈子</div>
 	    		<div class='menuItems'>
-	    			<div class='menuItem'>我的圈子</div>
-	    			<div class='menuItem'>我申请的圈子</div>
+	    			<div class='menuItem'><div class='menuNameDiv'>我的圈子</div></div>
+	    			<div class='menuItem'><div class='menuNameDiv'>圈内好友</div></div>
+	    			<div class='menuItem'><div class='menuNameDiv'>圈内房源</div></div>
 	    		</div>
 	    	</div>
     	</div>
