@@ -3,7 +3,7 @@
 <head>  
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
 <link href="/css/common.css" type="text/css" rel="stylesheet">
-<link href="/css/login.css" type="text/css" rel="stylesheet">
+<link href="/css/user/login.css" type="text/css" rel="stylesheet">
 <title>登录</title>  
 </head>  
 <body>  

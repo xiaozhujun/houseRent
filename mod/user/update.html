@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">  
+<html>  
+<head>  
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
+<title>个人信息维护</title>  
+</head>  
+<body>  
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#updatedBtn').click(function(){
+				var data = {};
+				data.phone = $('#phoneInput').val();
+				$.post($.URL.user.update,data,callback,"json");
+			});
+			
+			$.get($.URL.user.info,null,iniUserInfo,"json");
+		});
+		
+		function callback(result)
+		{
+			$('.messageDiv').html(result.data.msg);
+		}
+		
+		function iniUserInfo(result)
+		{
+			$("#phoneInput").val(result.data.phone);
+		}
+	</script>
+	<div id='updateContainer'>
+    <form action="/User/update"  method="post" >  
+    	<div class='titleDiv'>个人信息维护 </div>  
+    	<div class='rowDiv'>  
+        	<div class='labelDiv'>手机号：</div>  
+        	<div class='inputDiv'><input id='phoneInput' type="text" name="phone"></div>  
+      	</div>  
+      	<div class='messageDiv'> 
+	   	  </div> 
+      	<div class='actionDiv'>  
+        	<div class='actionRightDiv'><input id='updatedBtn' type="button" value="更新"></div>
+      	</div>  
+	</form>  
+	</div>
+</body>  
+</html>  
+ 

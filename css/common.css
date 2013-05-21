@@ -18,11 +18,23 @@
 	padding: 0;
 }
 
+.labelDiv
+{
+	float: left;
+	text-align: right;
+	width: 50%;
+}
+
+.inputDiv
+{
+	float: left;
+	text-align: left;
+}
+
 .messageDiv
 {
 	float:left;
 	width:100%;
-	height: 30px;
 	padding: 0;
 	font-family: Arial;
 	font-size: 14px;
@@ -37,4 +49,11 @@
 	height: 30px;
 	padding: 0;
 	margin-top: 20px;
+}
+
+.actionRightDiv
+{
+	float:right;
+	text-align: left;
+	width: 50%;
 }

@@ -178,6 +178,15 @@ class UserModel extends Model{
         	return false;
         }
         
+        //更新用户数据
+        function update($data)
+        {
+        	if(sizeof($data)>1)
+        	{
+        		return $this->save($data);
+        	}
+        }
+        
         //激活用户
         function regActivate($name,$activateCode)
         {
@@ -228,6 +237,17 @@ class UserModel extends Model{
         		}
         	}
         	return null;
+        }
+        
+        //修改用户密码
+        function resetPwd($userId,$newPwd)
+        {
+        	$data_update=array(
+        			'password'=>md5($newPwd),
+        			'id'=>$userId,
+        	);
+        	return $this->save($data_update);
+        	
         }
         
         //添加激活码

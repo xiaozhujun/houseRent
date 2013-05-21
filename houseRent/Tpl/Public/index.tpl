@@ -1,8 +1,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">  
 <html>  
 <head>  
+<link href="/css/common.css" type="text/css" rel="stylesheet">
 <link href="/css/index.css" type="text/css" rel="stylesheet">
 <script src="/js/jquery-1.7.2.min.js" type="text/javascript"></script>
+<script src="/js/config.js" type="text/javascript"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
 <title>首页</title>  
 </head>  
@@ -11,6 +13,10 @@
 	$(document).ready(function(){
 		$('.moduleTitle').click(function(){
 			$(this).next().toggle(500);
+		});
+		
+		$('.menuItem').click(function(){
+			$('#mainContentDiv').load($(this).attr('page'));
 		});
 		
 	});
@@ -45,8 +51,8 @@
     		<div class='menuModule'>
 	    		<div class='moduleTitle'>个人信息</div>
 	    		<div class='menuItems'>
-	    			<div class='menuItem' page='/User/update'><div class='menuNameDiv'>维护信息</div></div>
-	    			<div class='menuItem' page='/User/resetPwd'><div class='menuNameDiv'>修改密码</div></div>
+	    			<div class='menuItem' page='/mod/user/update.html'><div class='menuNameDiv'>维护信息</div></div>
+	    			<div class='menuItem' page='/mod/user/resetPwd.html'><div class='menuNameDiv'>修改密码</div></div>
 	    		</div>
 	    	</div>
     	

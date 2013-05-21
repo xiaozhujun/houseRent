@@ -1,6 +1,7 @@
 <?php
 import ( "@.Model.UserModel" );
 import ( 'Common.MailUtil', APP_PATH, '.php' );
+import ( 'Common.Misc', APP_PATH, '.php' );
 
 // 本类由系统自动生成，仅供测试用途
 class UserAction extends Action {
@@ -121,6 +122,8 @@ class UserAction extends Action {
 			if ($userModel->login ( $name, $password )) {
 				session_start ();
 				$_SESSION ['user'] = $name;
+				$vo = $userModel->findByName($name);
+				$_SESSION ['userId'] = $vo['id'];
 				header ( "Content-Type:text/html; charset=utf-8" );
 				redirect ( '/Public/index', 0, '页面跳转中...' );
 				// $this->display ( 'loginSuccess' );
@@ -235,44 +238,105 @@ class UserAction extends Action {
 		$this->display ( 'resendActivate' );
 	}
 	
-	//验证身份证规则
-	function checkIdentifyNum()
+	//用户重置密码
+	function resetPwd()
 	{
-		header ( "Content-Type:text/html; charset=utf-8" );
-		$identifyNum = $_GET['identifyNum'];
+		if(!isLogin())
+		{
+			redirect('/User/login');
+			return;
+		}
 		
-	if (strlen($identifyNum) != 18)
-        	{ 
-        		echo 'true'; 
-        	}
-        	$idcard_base = substr($identifyNum, 0, 17);
-        	if ($this->idcard_verify_number($idcard_base) != strtoupper(substr($identifyNum, 17, 1)))
-        	{
-        		echo 'true';
-        	}else{
-        		echo 'false';
-        	}
+		if(!isset($_POST['oldPwd'])|| empty($_POST['oldPwd'])||!isset($_POST['newPwd'])||empty($_POST['newPwd'])||!isset($_POST['rePwd'])||empty($_POST['rePwd']))
+		{
+			$result = array("success"=>false,"msg"=>"参数填写不完整！");
+			$this->ajaxReturn($result);
+			return;
+		}
+		
+		if($_POST['newPwd'] == $_POST['oldPwd'])
+		{
+			$result = array("success"=>false,"msg"=>"对不起，您输入的新密码与老密码一致！");
+			$this->ajaxReturn($result);
+			return;
+		}
+		
+		if($_POST['newPwd'] != $_POST['rePwd'])
+		{
+			$result = array("success"=>false,"msg"=>"新密码与确认密码不一致！");
+			$this->ajaxReturn($result);
+			return;
+		}
+		
+		session_start ();
+		$userName = $_SESSION['user'];
+		$userModel = new UserModel();
+		$user = $userModel->findByName($userName);
+		
+		if(md5($_POST['oldPwd']) != $user['password'])
+		{
+			$result = array("success"=>false,"msg"=>$user['email']);
+			$this->ajaxReturn($result);
+			return;
+		}
+		
+		if($userModel->resetPwd($user['id'],$_POST['newPwd']))
+		{
+			$result = array("success"=>true,"msg"=>"重置密码成功！");
+			$this->ajaxReturn($result);
+		}
+		else
+		{
+			$result = array("success"=>false,"msg"=>"重置密码失败！");
+			$this->ajaxReturn($result);
+		}
 		
 	}
-        				
 	
-	function idcard_verify_number($idcard_base)
+	//维护个人信息
+	function update()
 	{
-		if (strlen($idcard_base) != 17)
-		{ 
-			return true; 
+		if(!isLogin())
+		{
+			redirect('/User/login');
+			return;
 		}
-		//加权因子
-		$factor = array(7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2);
-		//校验码对应值
-		$verify_number_list = array('1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2');
-		$checksum = 0;
-		$length = strlen($idcard_base);
-		for($i = 0;$i<$length; $i++){
-			$checksum += substr($idcard_base, $i, 1) * $factor[$i];
+		
+		$data = array();
+		if(isset($_POST['phone']) && !empty($_POST['phone']))
+		{
+			$data["phone"] = $_POST['phone'];
 		}
-		$mod = $checksum % 11;
-		$verify_number = $verify_number_list[$mod];
-		return $verify_number;
+		session_start();
+		$data["id"] = $_SESSION['userId'];
+		
+		$userModel = new UserModel();
+		if($userModel->update($data))
+		{
+			$result = array("success"=>true,"msg"=>"更新信息成功！");
+			$this->ajaxReturn($result);
+		}
+		else
+		{
+			$result = array("success"=>false,"msg"=>"更新信息失败！");
+			$this->ajaxReturn($result);
+		}
+	}
+	
+	//返回用户的基本信息
+	function info()
+	{
+		if(!isLogin())
+		{
+			redirect('/User/login');
+			return;
+		}
+		
+		session_start();
+		$userId = $_SESSION['userId'];
+		$userModel = new UserModel();
+		$vo = $userModel->query("select id,realName,name,email,phone,identifyNum from user where id=".$userId);
+		//unset($vo['password']);
+		$this->ajaxReturn($vo[0]);
 	}
 }

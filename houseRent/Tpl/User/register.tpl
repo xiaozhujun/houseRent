@@ -2,7 +2,7 @@
 <html>  
 <head>  
 <link href="/css/common.css" type="text/css" rel="stylesheet">
-<link href="/css/register.css" type="text/css" rel="stylesheet">
+<link href="/css/user/register.css" type="text/css" rel="stylesheet">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
 <title>注册</title>  
 </head>  
