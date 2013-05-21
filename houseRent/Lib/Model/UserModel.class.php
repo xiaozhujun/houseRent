@@ -6,18 +6,22 @@ class UserModel extends Model{
             //每个字段的详细验证内容  
             array("name","require","用户名不能为空"),  
             array("name","checkLength","用户名长度不符合要求",0,'callback'), 
-    		array('name','isUserExist','账号已经使用',0,'callback'),
+    		array("name","isUserExist","账号已经使用",0,"callback"),
+    		array("realName","require","真实姓名不能为空"),
             array("password","require","密码不能为空"),  
             array("password","checkLength","密码长度的要求是5~15位之间",0,'callback'),  
             array("password","repassword","两次密码输入不一致",0,'confirm'),  
             array("email","require","qq必须填写"),  
     		array("email","email","邮箱格式不正确",2),
+    		array("phone","require","手机号必须填写"),
+    		array("phone","isPhone","手机号不正确",0,"callback"),
+    		array("identifyNum","require","身份证号必须填写"),
+    		array("identifyNum","isIdentifyNum","身份证号不正确",0,"callback"),
     		//array('email','isEmailExist','邮箱已经使用',0,'callback'),
             );  
       
     //自动填充  
     protected $_auto=array(  
-              
             array("password","md5",3,'function') ,
     		array("activateCode","genActivateCode",3,'callback'),
             array("createTime","dateTime",3,'callback'),  
@@ -36,6 +40,51 @@ class UserModel extends Model{
                   
                 return true;  
             }  
+        }
+        
+        //匹配手机号
+        function isPhone($phone)
+        {
+        	//return false;
+        	$pattern = "/^(13[123569]{1}\d{8})|(15[1235689]{1}\d{8})|(18[1235689]{1}\d{8})/i";
+        	return preg_match($pattern,$phone);
+        }
+        
+        //验证身份证规则
+        function isIdentifyNum($identifyNum)
+        {
+        	if (strlen($identifyNum) != 18)
+        	{
+        		return false;
+        	}
+        	$idcard_base = substr($identifyNum, 0, 17);
+        	if ($this->idcard_verify_number($idcard_base) != strtoupper(substr($identifyNum, 17, 1)))
+        	{
+        		return false;
+        	}else{
+        		return true;
+        	}
+        }
+        
+        //根据身份证的前17位计算最后一位校验位
+        function idcard_verify_number($idcard_base)
+        {
+        	if (strlen($idcard_base) != 17)
+        	{
+        		return true;
+        	}
+        	//加权因子
+        	$factor = array(7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2);
+        	//校验码对应值
+        	$verify_number_list = array('1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2');
+        	$checksum = 0;
+        	$length = strlen($idcard_base);
+        	for($i = 0;$i<$length; $i++){
+        		$checksum += substr($idcard_base, $i, 1) * $factor[$i];
+        	}
+        	$mod = $checksum % 11;
+        	$verify_number = $verify_number_list[$mod];
+        	return $verify_number;
         }
 
         //用户登录

@@ -2,28 +2,35 @@
 <html>  
 <head>  
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
-<title>登录</title>  
+<link href="/css/common.css" type="text/css" rel="stylesheet">
+<link href="/css/invite.css" type="text/css" rel="stylesheet">
+<title>邀请好友</title>  
 </head>  
 <body>  
-    <form action="?m=InvitationCode&a=inviteFriend"  method="post" >  
-      <table align="center">  
-        <th height="95"><H2>邀请好友</H2></th>  
-      <tr>  
-      <td><table align="center">  
-        <tr>  
-          <td align="right">好友邮箱：</td>  
-          <td width="304" align="left"><input type="text" name="invitedEmail"></td>  
-          </tr>
-          <tr>  
-          <td colspan="2" align="center"><font color='red'>{$result_msg}</font></td>  
-          </tr>    
-        <tr>  
-          <td colspan="2" align="center"><input type="submit" value="邀请"></td>  
-          </tr>  
-        </table></td>  
-      </tr>  
-      </table>  
-</form>  
+	<div id='mainContainer'>
+    <form action="/InvitationCode/inviteFriend"  method="post" >  
+    	<div class='titleDiv'>邀请好友</div>  
+    	<div class='rowDiv'>  
+        	<div class='labelDiv'>好友邮箱：</div>  
+        	<div class='inputDiv'><input type="text" name="invitedEmail"></div>
+        	<div class='selectDiv'>
+        		<select name='relationship'>
+        			<option value='frend'>朋友</option>
+        			<option value='workmate'>同事</option>
+        			<option value='classmate'>同学</option>
+        			<option value='relatives'>亲属</option>
+        			<option value='other'>其它</option>
+        		</select>
+        	</div>  
+      	</div>  
+      	<div class='messageDiv'>  
+    		{$result_msg}  
+	   	</div> 
+      	<div class='actionDiv'>  
+        	<div id='inviteActionDiv'><input type="submit" value="邀请"></div>
+      	</div>  
+	</form>  
+	</div>
 </body>  
 </html>  
  

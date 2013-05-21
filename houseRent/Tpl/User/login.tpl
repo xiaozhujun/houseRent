@@ -2,13 +2,13 @@
 <html>  
 <head>  
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
-<link href="css/common.css" type="text/css" rel="stylesheet">
-<link href="css/login.css" type="text/css" rel="stylesheet">
+<link href="/css/common.css" type="text/css" rel="stylesheet">
+<link href="/css/login.css" type="text/css" rel="stylesheet">
 <title>登录</title>  
 </head>  
 <body>  
 	<div id='mainContainer'>
-    <form action="?m=User&a=login"  method="post" >  
+    <form action="/User/doLogin"  method="post" >  
     	<div class='titleDiv'>用户登录 </div>  
     	<div class='rowDiv'>  
         	<div class='labelDiv'>用户名：</div>  
@@ -27,7 +27,7 @@
       	</div>  
       	<div class='actionDiv'>  
         	<div id='loginActionDiv'><input type="submit" value="登录"></div>
-        	<div id='registerLinkDiv'><a id='registerLink' href="?m=User&a=register">注册</a></div></div>  
+        	<div id='registerLinkDiv'><a id='registerLink' href="/User/register">注册</a></div></div>  
       	</div>  
 	</form>  
 	</div>
