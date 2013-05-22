@@ -11,7 +11,7 @@
 		$(document).ready(function(){
 			$('#inviteBtn').click(function(){
 				var data = {};
-				data.inviteEmail = $('#inviteEmailInput').val();
+				data.invitedEmail = $('#inviteEmailInput').val();
 				$.post($.URL.user.invite,data,callback,"json");
 			});
 		});

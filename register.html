@@ -28,6 +28,9 @@
 			});
 			
 			$('#verify').attr('src',$.URL.user.verify);
+			
+			$('#invitorInput').val($.getUrlParam('invitor'));
+			$('#invitationCodeInput').val($.getUrlParam('invitationCode'));
 		});
 		
 		//回调函数
@@ -81,8 +84,8 @@
     	<div id='registerActionDiv'><input id='registerBtn' type="button" value="注册"></div>
     	<div id='loginLinkDiv'><a href="/login.html">登录</a></div></div>  
     </div>     
-	<input id='invitorInput' type='hidden' name='invitor' value='{$invitor}'/>
-	<input id='invitationCodeInput' type='hidden' name='invitationCode' value='{$invitationCode}'/>
+	<input id='invitorInput' type='hidden' name='invitor'/>
+	<input id='invitationCodeInput' type='hidden' name='invitationCode'/>
 </form>  
 </div>
 </body>  
