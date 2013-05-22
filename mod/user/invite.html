@@ -3,16 +3,30 @@
 <head>  
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
 <link href="/css/common.css" type="text/css" rel="stylesheet">
-<link href="/css/invite.css" type="text/css" rel="stylesheet">
+<link href="/css/user/invite.css" type="text/css" rel="stylesheet">
 <title>邀请好友</title>  
 </head>  
 <body>  
-	<div id='mainContainer'>
-    <form action="/InvitationCode/inviteFriend"  method="post" >  
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#inviteBtn').click(function(){
+				var data = {};
+				data.inviteEmail = $('#inviteEmailInput').val();
+				$.post($.URL.user.invite,data,callback,"json");
+			});
+		});
+		
+		function callback(result)
+		{
+			$('.messageDiv').html(result.data.msg);
+		}
+	</script>
+	<div id='inviteBodyContainer'>
+    <form action=""  method="post" >  
     	<div class='titleDiv'>邀请好友</div>  
     	<div class='rowDiv'>  
         	<div class='labelDiv'>好友邮箱：</div>  
-        	<div class='inputDiv'><input type="text" name="invitedEmail"></div>
+        	<div class='inputDiv'><input id='inviteEmailInput' type="text" name="invitedEmail"></div>
         	<div class='selectDiv'>
         		<select name='relationship'>
         			<option value='frend'>朋友</option>
@@ -23,11 +37,9 @@
         		</select>
         	</div>  
       	</div>  
-      	<div class='messageDiv'>  
-    		{$result_msg}  
-	   	</div> 
+      	<div class='messageDiv'></div> 
       	<div class='actionDiv'>  
-        	<div id='inviteActionDiv'><input type="submit" value="邀请"></div>
+        	<div class='actionRightDiv'><input id='inviteBtn' type="button" value="邀请"></div>
       	</div>  
 	</form>  
 	</div>

@@ -19,6 +19,10 @@
 			$('#mainContentDiv').load($(this).attr('page'));
 		});
 		
+		$("#inviteLink").click(function(){
+			$("#mainContentDiv").load($(this).attr("href"));
+			return false;
+		});
 	});
 </script>
 <div id='mainContainer'>
@@ -40,7 +44,7 @@
     			</div>
     			<div id='contactDiv'>联系我们</div>
     			{if isset($user)}
-    			<div id='inviteDiv'><a href='/InvitationCode/index'>邀请好友</a></div>
+    			<div id='inviteDiv'><a id='inviteLink' href='/mod/user/invite.html'>邀请好友</a></div>
     			{/if}
     		</div>
     	</div>

@@ -1,6 +1,6 @@
 @CHARSET "UTF-8";
 
-#mainContainer
+#inviteBodyContainer
 {
 	font-size: 18px;
 	font-family:宋体;
@@ -8,33 +8,10 @@
 	margin: 0px auto;
 	height: 324px;
 	width: 570px;
-	border-color: gray;
-	border-style: solid;
-	border-width: 3px; 
-}
-
-.labelDiv
-{
-	float: left;
-	text-align: right;
-	width: 50%;
-}
-
-.inputDiv
-{
-	float: left;
-	text-align: left;
 }
 
 .selectDiv
 {
 	float: left;
 	padding-left: 15px;
-}
-
-#inviteActionDiv
-{
-	float:right;
-	width:50%;
-	text-align: left;
 }

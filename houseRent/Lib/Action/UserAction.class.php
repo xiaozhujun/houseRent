@@ -12,9 +12,11 @@ class UserAction extends Action {
 	
 	// 注册用户
 	function add() {
+		$data = array();
+		$data['success'] = false;
 		if (C ( 'USE_INVITATION' ) && (! isset ( $_POST ['invitor'] ) || ! isset ( $_POST ['invitationCode'] ))) {
-			$this->assign ( 'error_msg', '您需要邀请码或者现有用户发送邀请邮件方可注册，对您的支持表示衷心的感谢哦！' );
-			$this->display ( 'register' );
+			$data['msg'] = '您需要邀请码或者现有用户发送邀请邮件方可注册，对您的支持表示衷心的感谢哦！';
+			$this->ajaxReturn($data);
 			return;
 		}
 		
@@ -25,15 +27,14 @@ class UserAction extends Action {
 		$name = $_POST ['name'];
 		$email = $_POST ['email'];
 		if (! isset ( $verify ) || $verify == '') {
-			$this->assign ( 'result_msg', '验证码不能为空' );
-			$this->display ( 'register' );
+			$data['msg'] =  '验证码不能为空';
+			$this->ajaxReturn($data);
 			return;
 		}
 		
 		if (md5 ( $verify ) != $_SESSION ['verify']) {
-			// $this->error ( " {$_POST ['verify']} = $_SESSION ['verify']",$error_page );
-			$this->assign ( 'result_msg', '验证码不正确' );
-			$this->display ( 'register' );
+			$data['msg'] =  '验证码不正确';
+			$this->ajaxReturn($data);
 			return;
 		}
 		
@@ -53,18 +54,20 @@ class UserAction extends Action {
 				// 发送邮件
 				$email_result = sendMail ( $email, $name, $subject, $email_content );
 				
-				$this->assign ( 'email', $email );
-				$this->display ( 'regSuccess' );
+				$data['msg'] =  '恭喜您，注册成功！已发送激活邮件，请您注意查收账户激活邮件！';
+				$data['success'] = true;
+				$this->ajaxReturn($data);
+				return;
 			} else {
-				$this->assign ( 'result_msg', $user->getError () );
-				$this->display ( 'register' );
-				// $this->error ( "{$user->getError ()} register fail ",$error_page );
+				$data['msg'] = $user->getError();
+				$this->ajaxReturn($data);
+				return;
 			}
 		} else {
 			// 把错误信息提示给用户看
-			$this->assign ( 'result_msg', $user->getError () );
-			// $this->error ( $user->getError (),$error_page );
-			$this->display ( 'register' );
+			$data['msg'] = $user->getError();
+			$this->ajaxReturn($data);
+			return;
 		}
 	}
 	
@@ -81,11 +84,13 @@ class UserAction extends Action {
 		// 执行登录
 		$userModel = new UserModel ();
 		if ($userModel->regActivate ( $name, $activateCode )) {
-			$this->assign ( 'result_msg', '恭喜您，激活成功！' );
-			$this->display ( 'regActivateSuccess' );
+		header ( "Content-Type:text/html; charset=utf-8" );
+			redirect(C('LOGIN_URL'),3,'恭喜您，激活成功！系统3秒内将自动跳转到登陆页！感谢您的支持！');
 		} else {
 			$this->assign ( 'result_msg', $userModel->getError () );
 			$this->display ( 'regActivateFail' );
+			header ( "Content-Type:text/html; charset=utf-8" );
+			redirect('/User/resendActivate',5,'对不起，激活失败！系统5秒内将自动跳转到重新发送激活邮件申请页！感谢您的支持！');
 		}
 	}
 	
@@ -97,18 +102,19 @@ class UserAction extends Action {
 	
 	// 用户登录
 	function doLogin() {
-		
+		$data = array();
+		$data['success'] = false;
 		// 判断有无参数
 		if (! isset ( $_POST ['name']) )
 		{
-			$this->assign ( 'result_msg','请填写用户名！');
-			$this->display ( 'login' );
+			$data['msg'] = '请填写用户名！';
+			$this->ajaxReturn($data);
 			return;
 		}
 		else if (! isset ( $_POST ['password']) )
 		{
-			$this->assign ( 'result_msg','请填写登陆密码！');
-			$this->display ( 'login' );
+			$data['msg'] = '请填写登陆密码！';
+			$this->ajaxReturn($data);
 			return;
 		}
 		else {
@@ -124,12 +130,15 @@ class UserAction extends Action {
 				$_SESSION ['user'] = $name;
 				$vo = $userModel->findByName($name);
 				$_SESSION ['userId'] = $vo['id'];
-				header ( "Content-Type:text/html; charset=utf-8" );
-				redirect ( '/Public/index', 0, '页面跳转中...' );
+				
+				$data['success'] = true;
+				$this->ajaxReturn($data);
+				//header ( "Content-Type:text/html; charset=utf-8" );
+				//redirect ( '/Public/index', 0, '页面跳转中...' );
 				// $this->display ( 'loginSuccess' );
 			} else {
-				$this->assign ( 'result_msg', $userModel->getError () );
-				$this->display ( 'login' );
+				$data['msg'] = $userModel->getError ();
+				$this->ajaxReturn($data);
 			}
 		}
 	}
@@ -140,7 +149,7 @@ class UserAction extends Action {
 		session_start ();
 		session_destroy();
 		header ( "Content-Type:text/html; charset=utf-8" );
-		redirect ( '/Public/index', 0, '页面跳转中...' );
+		redirect ( C('LOGIN_URL'));
 	}
 	
 	// 生成图片验证码
@@ -243,7 +252,7 @@ class UserAction extends Action {
 	{
 		if(!isLogin())
 		{
-			redirect('/User/login');
+			redirect ( C('LOGIN_URL'));
 			return;
 		}
 		
@@ -298,7 +307,7 @@ class UserAction extends Action {
 	{
 		if(!isLogin())
 		{
-			redirect('/User/login');
+			redirect ( C('LOGIN_URL'));
 			return;
 		}
 		
@@ -328,7 +337,7 @@ class UserAction extends Action {
 	{
 		if(!isLogin())
 		{
-			redirect('/User/login');
+			redirect ( C('LOGIN_URL'));
 			return;
 		}
 		

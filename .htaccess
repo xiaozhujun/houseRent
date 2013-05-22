@@ -1,5 +1,6 @@
 <IfModule mod_rewrite.c>
 RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule (.*\.html)$ $1 [QSA,PT,L]
 RewriteRule !(css|assets|js|mod)/(.*)$ index.php?/$1/$2 [QSA,PT,L]
 </IfModule>

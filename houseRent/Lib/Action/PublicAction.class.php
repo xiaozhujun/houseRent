@@ -8,7 +8,7 @@ class PublicAction extends Action
 	{
 		if(!isLogin())
 		{
-			redirect('/User/login');
+			redirect(C('LOGIN_URL'));
 			return;
 		}
 		

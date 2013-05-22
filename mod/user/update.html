@@ -24,11 +24,26 @@
 		function iniUserInfo(result)
 		{
 			$("#phoneInput").val(result.data.phone);
+			$('#realNameDiv').html(result.data.realName);
+			$('#identifyNumDiv').html(result.data.identifyNum);
+			$('#emailDiv').html(result.data.email);
 		}
 	</script>
 	<div id='updateContainer'>
     <form action="/User/update"  method="post" >  
-    	<div class='titleDiv'>个人信息维护 </div>  
+    	<div class='titleDiv'>个人信息维护 </div> 
+    	<div class='rowDiv'>  
+        	<div class='labelDiv'>真实姓名：</div>  
+        	<div id="realNameDiv" class='inputDiv'></div>  
+      	</div> 
+      	<div class='rowDiv'>  
+        	<div class='labelDiv'>身份证号：</div>  
+        	<div id="identifyNumDiv" class='inputDiv'></div>  
+      	</div>
+      	<div class='rowDiv'>  
+        	<div class='labelDiv'>邮箱：</div>  
+        	<div id="emailDiv" class='inputDiv'></div>  
+      	</div>      
     	<div class='rowDiv'>  
         	<div class='labelDiv'>手机号：</div>  
         	<div class='inputDiv'><input id='phoneInput' type="text" name="phone"></div>  
