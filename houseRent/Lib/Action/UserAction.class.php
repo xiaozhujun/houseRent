@@ -84,11 +84,9 @@ class UserAction extends Action {
 		// 执行登录
 		$userModel = new UserModel ();
 		if ($userModel->regActivate ( $name, $activateCode )) {
-		header ( "Content-Type:text/html; charset=utf-8" );
+			header ( "Content-Type:text/html; charset=utf-8" );
 			redirect(C('LOGIN_URL'),3,'恭喜您，激活成功！系统3秒内将自动跳转到登陆页！感谢您的支持！');
 		} else {
-			$this->assign ( 'result_msg', $userModel->getError () );
-			$this->display ( 'regActivateFail' );
 			header ( "Content-Type:text/html; charset=utf-8" );
 			redirect('/User/resendActivate',5,'对不起，激活失败！系统5秒内将自动跳转到重新发送激活邮件申请页！感谢您的支持！');
 		}
