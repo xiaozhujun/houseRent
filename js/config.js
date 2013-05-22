@@ -7,6 +7,7 @@
 			"invite":"/InvitationCode/inviteFriend",
 			"login":"/User/doLogin",
 			"register":"/User/add",
+			"verify":"/User/verify",
 		}	
 	}
 })(jQuery);

@@ -26,6 +26,8 @@
 				data.invitationCode = $('#invitationCodeInput').val();
 				$.post($.URL.user.register,data,callback,"json");
 			});
+			
+			$('#verify').attr('src',$.URL.user.verify);
 		});
 		
 		//回调函数
@@ -33,6 +35,11 @@
 		{
 			$('.messageDiv').html(result.data.msg);
 		}
+		
+		function show(){  
+	        document.getElementById("verify").src=$.URL.user.verify +'/' +Math.random();  
+	          
+	    }  
 	</script>
 <div id='mainContainer'>
     <form action=""  method="post" >  
@@ -67,7 +74,7 @@
     </div> 
     <div class='rowDiv'>  
     	<div class='labelDiv'>验证码：</div>  
-        <div class='inputDiv'><input id='verifyInput' type="text" name="verify" ><img id="verify" alt="验证码" onClick="show()" src="/User/verify"><a href="javascript:show()">看不清楚</a></div>  
+        <div class='inputDiv'><input id='verifyInput' type="text" name="verify" ><img id="verify" alt="验证码" onClick="show()" src=""><a href="javascript:show()">看不清楚</a></div>  
     </div>
     <div class='messageDiv'></div>      
     <div class='actionDiv'>  
@@ -80,14 +87,3 @@
 </div>
 </body>  
 </html>  
-  
-<script>  
-  
-      
-    function show(){  
-        document.getElementById("verify").src="/User/verify/"+Math.random();  
-          
-    }  
-      
-      
-</script>  
