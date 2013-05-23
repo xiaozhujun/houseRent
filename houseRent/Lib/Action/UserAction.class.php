@@ -333,17 +333,21 @@ class UserAction extends Action {
 	//返回用户的基本信息
 	function info()
 	{
-		if(!isLogin())
-		{
-			redirect ( C('LOGIN_URL'));
-			return;
-		}
+// 		if(!isLogin())
+// 		{
+// 			redirect ( C('LOGIN_URL'));
+// 			return;
+// 		}
 		
-		session_start();
-		$userId = $_SESSION['userId'];
+		//session_start();
+// 		$userId = $_SESSION['userId'];
+		$userId = 56;
+		//$userModel = new UserModel();
+		$condition = array();
+		$condition['id'] = $userId;
 		$userModel = new UserModel();
-		$vo = $userModel->query("select id,realName,name,email,phone,identifyNum from user where id=".$userId);
-		//unset($vo['password']);
+		$vo = $userModel->where($condition)->select();
+		//$vo = $userModel->query("select id,realName,name,email,phone,identifyNum from user where id=".$userId);
 		$this->ajaxReturn($vo[0]);
 	}
 }
