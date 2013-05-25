@@ -27,11 +27,16 @@
 			$('#realNameDiv').html(result.data.realName);
 			$('#identifyNumDiv').html(result.data.identifyNum);
 			$('#emailDiv').html(result.data.email);
+			$('#nameDiv').html(result.data.name);
 		}
 	</script>
 	<div id='updateContainer'>
     <form action="/User/update"  method="post" >  
     	<div class='titleDiv'>个人信息维护 </div> 
+    	<div class='rowDiv'>  
+        	<div class='labelDiv'>用户名：</div>  
+        	<div id="nameDiv" class='inputDiv'></div>  
+      	</div> 
     	<div class='rowDiv'>  
         	<div class='labelDiv'>真实姓名：</div>  
         	<div id="realNameDiv" class='inputDiv'></div>  

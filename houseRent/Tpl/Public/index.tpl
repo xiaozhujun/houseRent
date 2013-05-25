@@ -63,7 +63,8 @@
 	    	<div class='menuModule'>
 	    		<div class='moduleTitle'>我的好友</div>
 	    		<div class='menuItems'>
-	    			<div class='menuItem' page='/User/inviteFriends'><div class='menuNameDiv'>邀请好友</div></div>
+	    			<div class='menuItem' page='/mod/user/invite.html'><div class='menuNameDiv'>邀请好友</div></div>
+	    			<div class='menuItem' page='/mod/friend/addFriend.html'><div class='menuNameDiv'>添加好友</div></div>
 	    			<div class='menuItem'><div class='menuNameDiv'>其它好友</div></div>
 	    		</div>
 	    	</div>

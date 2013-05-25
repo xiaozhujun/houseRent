@@ -1,0 +1,56 @@
+@CHARSET "UTF-8";
+
+#listDiv
+{
+	width: 100%;
+	text-align: center;
+	
+}
+
+#listBodyDiv
+{
+	width: auto 0;
+	margin-left:10px;
+	margin-right:10px;
+	
+}
+
+.listItemDiv
+{
+	width:33%;
+	float:left;
+	
+	border-style: solid;
+	border-color: #eee;
+	border-width: 1px;
+	margin-right: -1px;
+	margin-bottom:-1px;
+}
+
+.listItemDiv:HOVER
+{
+	background-color: #eee;
+}
+
+.namesDiv
+{
+	width:100%;
+	float:left;
+	text-align: left;
+	margin:5px;
+}
+
+.addFriendDiv
+{
+	width:100%;
+	float:left;
+	text-align: left;
+	cursor: pointer;
+	margin:5px;
+}
+
+.addFriendDiv:HOVER
+{
+	color: red;
+}
+

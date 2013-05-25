@@ -333,21 +333,43 @@ class UserAction extends Action {
 	//返回用户的基本信息
 	function info()
 	{
-// 		if(!isLogin())
-// 		{
-// 			redirect ( C('LOGIN_URL'));
-// 			return;
-// 		}
+		if(!isLogin())
+		{
+			redirect ( C('LOGIN_URL'));
+			return;
+		}
 		
-		//session_start();
-// 		$userId = $_SESSION['userId'];
-		$userId = 56;
-		//$userModel = new UserModel();
-		$condition = array();
-		$condition['id'] = $userId;
-		$userModel = new UserModel();
-		$vo = $userModel->where($condition)->select();
-		//$vo = $userModel->query("select id,realName,name,email,phone,identifyNum from user where id=".$userId);
-		$this->ajaxReturn($vo[0]);
+		session_start();
+		$userModel =M('User');
+		$vo = $userModel->where('id='.$_SESSION['userId'])->getField('id,name,realName,phone,identifyNum');
+		$this->ajaxReturn($vo[$_SESSION['userId']]);
 	}
+	
+	//查找系统好友
+	function findFriend()
+	{
+		
+		if(!isLogin())
+		{
+			redirect ( C('LOGIN_URL'));
+			return;
+		}
+		
+		$condition = $_POST['condition'];
+		$data = array();
+		$data['success'] = false;
+		if(!isset($condition) || empty($condition))
+		{
+			$data['msg'] = '请输入查询条件';
+			$this->ajaxReturn($data);
+			return;
+		}
+		
+		$userModel = M('User');
+		$list = $userModel->where("name ='{$condition}' or email='{$condition}' or realName='{$condition}'")->limit(12)->getField('id,id,name,realName');
+		$data['list'] = array_values($list);
+		$data['success'] = true;
+		$this->ajaxReturn($data);
+	}
+	
 }

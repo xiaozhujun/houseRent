@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">  
+<html>  
+<head>  
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
+<script type="text/javascript" src="/js/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+<script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+<link rel="stylesheet" type="text/css" href="/js/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+<link href="/css/common.css" type="text/css" rel="stylesheet">
+<link href="/css/user/addFriend.css" type="text/css" rel="stylesheet">
+<title>查找好友</title>  
+</head>  
+<body>  
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#findBtn').click(function(){
+				var data = {};
+				data.condition = $('#conditionInput').val();
+				$.post($.URL.user.findFriend,data,callback,"json");
+			});
+		});
+		
+		function callback(result)
+		{
+			$('.messageDiv').html("");
+			$("#listBodyDiv").html("");
+			if(!result.data.success)
+			{
+				$('.messageDiv').html(result.data.msg);
+			}
+			else
+			{
+				if($(result.data.list).size()>0)
+				{
+					$(result.data.list).each(function(index,data){
+						names = $("<div class='namesDiv'></div>").html(data.realName+"("+data.name+")");
+						actions = $("<div class='addFriendDiv'><a class='applyFriendLink' href='/Friend/applyFriendPage?userId=" + data.id +"'>添加</a></div>");
+						listItem = $("<div class='listItemDiv'/>").append(names).append(actions);
+						$("#listBodyDiv").append(listItem);
+						$("a.applyFriendLink").fancybox({
+							'transitionIn'	:	'elastic',
+							'transitionOut'	:	'elastic',
+							'speedIn'		:	200, 
+							'speedOut'		:	200, 
+							'overlayShow'	:	false
+							});
+					});
+				
+				}
+				else
+				{
+					$("#listBodyDiv").html("对不起，没有符合条件的结果哦！");
+				}
+			}
+		}
+	</script>
+	<div class='modContainer'>
+   	<div class='titleDiv'>添加好友</div>  
+   	<div class='rowDiv'>  
+       	<div class='labelDiv'>查询条件：</div>  
+       	<div class='inputDiv'><input id='conditionInput' type="text" name="condition">&nbsp;<input id='findBtn' type="button" value="查找"></div>
+   	</div>  
+   	<div class='messageDiv'></div> 
+  	<div id='listDiv'>
+   		<div id='listBodyDiv'>
+   		</div>  
+   	</div>  
+	</div>
+</body>  
+</html>  
+ 

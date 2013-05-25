@@ -8,6 +8,11 @@
 			"login":"/User/doLogin",
 			"register":"/User/add",
 			"verify":"/User/verify",
-		}	
+			"findFriend":"/User/findFriend",
+		},
+		"friend":{
+			"applyFriend":"/Friend/applyFriend",
+		}
+			
 	}
 })(jQuery);

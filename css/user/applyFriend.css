@@ -1,0 +1,12 @@
+@CHARSET "UTF-8";
+
+#applyFriendContainer
+{
+	min-height: 180px;
+}
+
+#applyFriendContainer .actionDiv
+{
+	margin-top: 10px;
+}
+
