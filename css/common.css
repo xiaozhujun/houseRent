@@ -58,12 +58,13 @@
 	width: 50%;
 }
 
-。modContainer
+.modContainer
 {
 	font-size: 18px;
 	font-family:宋体;
 	
 	width:100%;
+	float: left;
 }
 
 .listDiv

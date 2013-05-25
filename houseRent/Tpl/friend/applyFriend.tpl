@@ -2,7 +2,7 @@
 <html>  
 <head>  
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="/css/user/applyFriend.css" type="text/css" rel="stylesheet">  
+<link href="/css/friend/applyFriend.css" type="text/css" rel="stylesheet">  
 <title>申请添加好友</title>  
 </head>  
 <body>  

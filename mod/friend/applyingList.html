@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">  
+<html>  
+<head>  
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
+<link href="/css/common.css" type="text/css" rel="stylesheet">
+<link href="/css/friend/applyingList.css" type="text/css" rel="stylesheet">
+<title>查找好友</title>  
+</head>  
+<body>  
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$('.tab').mouseover(function(){
+			 
+			$(this).addClass("current").siblings().removeClass(); 
+		 
+			$("."+$(this).attr("id")).show().siblings().hide(); 
+		 
+		});
+	});
+	</script>
+	<div class='modContainer'>
+		<div id="sidebar-tab">
+			<div id="tab-1" class="tab current">未处理</div>
+			<div class="tab" id="tab-2">已通过</div>
+			<div class="tab" id="tab-3">被忽略</div>
+			<div class="tab" id="tab-3">被拒绝</div> 
+			<div id="tab-content">
+				<div class="tab-1">hello1</div>
+				<div class="tab-2">hello2</div>
+				<div class="tab-3">hello3</div>
+				<div class="tab-4">hello4</div>
+			</div> 
+		</div>
+	</div>
+</body>  
+</html>  
+ 

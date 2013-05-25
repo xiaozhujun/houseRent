@@ -62,3 +62,16 @@ INSERT INTO user_invitation_code VALUES ('3', null, '2ea76b5b73c50642099b594c6d0
 INSERT INTO user_invitation_code VALUES ('4', null, 'ddba00b6255a95ece07fd7e0261de792', '2013-05-14 11:21:50', '2013-05-17 11:21:50');
 INSERT INTO user_invitation_code VALUES ('5', '56', '559f5db94baa13b51ef8a623c72065ad', '2013-05-14 11:23:13', '2013-05-17 11:23:13');
 INSERT INTO user_invitation_code VALUES ('6', '56', '235cc069f144a37fda0d4333f7277793', '2013-05-19 16:41:56', '2013-05-22 16:41:56');
+
+DROP TABLE IF EXISTS `friend_apply`;
+CREATE TABLE `friend_apply` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `fromUser` bigint(20) DEFAULT NULL,
+  `toUser` bigint(20) DEFAULT NULL,
+  `createTime` datetime DEFAULT NULL,
+  `updateTime` datetime DEFAULT NULL,
+  `status` tinyint(4) DEFAULT NULL,
+  `authInfo` varchar(255) DEFAULT NULL,
+  `replyInfo` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8

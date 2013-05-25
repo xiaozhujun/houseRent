@@ -59,6 +59,14 @@
 	    			<div class='menuItem' page='/mod/user/resetPwd.html'><div class='menuNameDiv'>修改密码</div></div>
 	    		</div>
 	    	</div>
+
+	    	<div class='menuModule'>
+	    		<div class='moduleTitle'>我的申请</div>
+	    		<div class='menuItems'>
+	    			<div class='menuItem' page='/mod/friend/applyingList.html'><div class='menuNameDiv'>好友申请</div></div>
+	    			<div class='menuItem' page='/mod/friend/addFriend.html'><div class='menuNameDiv'>房源申请</div></div>
+	    		</div>
+	    	</div>
     	
 	    	<div class='menuModule'>
 	    		<div class='moduleTitle'>我的好友</div>
