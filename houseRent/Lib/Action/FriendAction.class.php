@@ -85,4 +85,26 @@ class FriendAction extends Action
 		$this->ajaxReturn($data);
 		
 	}
+	
+	//没有被处理的申请
+	function applyingUntreat()
+	{
+		$data = array();
+		$data['success'] = false;
+		if(!isLogin())
+		{
+			$data['msg'] = "没有权限！";
+			$this->ajaxReturn($data);
+			return;
+		}
+		
+		session_start();
+		$userId = $_SESSION['userId'];
+		$friendApply = M('FriendApply');
+		$querySQL = "select b.id,b.name,b.realName from user a,friend_apply where status=0 and a.fromUser={$userId} and a.toUser=b.id order by a.createTime desc limit=10";
+		$applyList = $friendApply->where('status=0 and fromUser='.$userId);
+		
+		
+		
+	}
 }
