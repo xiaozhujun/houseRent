@@ -73,5 +73,7 @@ CREATE TABLE `friend_apply` (
   `status` tinyint(4) DEFAULT NULL,
   `authInfo` varchar(255) DEFAULT NULL,
   `replyInfo` varchar(255) DEFAULT NULL,
+  `fromRealName` varchar(255) DEFAULT NULL,
+  `toRealName` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
