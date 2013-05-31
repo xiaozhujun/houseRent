@@ -58,9 +58,14 @@ class FriendAction extends Action
 		}
 		
 		session_start();
+		$userModel = M('User');
+		$fromUser = $userModel->find($_SESSION['userId']);
+		$toUser = $userModel->find($_POST['toUser']);
 		$friendApplyData = array(
 			"fromUser"=>$_SESSION['userId'],
+			"fromRealName"=>$fromUser['realName'],
 			"toUser"=>$_POST['toUser'],
+			"toRealName"=>$toUser['realName'],
 			"authInfo"=>$_POST['authInfo'],
 			"status"=>0,
 		);
@@ -87,7 +92,7 @@ class FriendAction extends Action
 	}
 	
 	//没有被处理的申请
-	function applyingUntreat()
+	function applyingUntreated()
 	{
 		$data = array();
 		$data['success'] = false;
@@ -101,10 +106,118 @@ class FriendAction extends Action
 		session_start();
 		$userId = $_SESSION['userId'];
 		$friendApply = M('FriendApply');
-		$querySQL = "select b.id,b.name,b.realName from user a,friend_apply where status=0 and a.fromUser={$userId} and a.toUser=b.id order by a.createTime desc limit=10";
-		$applyList = $friendApply->where('status=0 and fromUser='.$userId);
+		$applyList = $friendApply->where('status=0 and fromUser='.$userId)->field("toUser,fromUser,fromRealName,toRealName,authInfo,createTime")->order("createTime desc")->limit(1,10)->select();
+		$data['success'] = true;
+		$data['list'] = $applyList;
+		$this->ajaxReturn($data);
 		
 		
-		
+	}
+	
+	//被通过的申请
+	function applyingPassed()
+	{
+		$data = array();
+		$data['success'] = false;
+		if(!isLogin())
+		{
+			$data['msg'] = "没有权限！";
+			$this->ajaxReturn($data);
+			return;
+		}
+	
+		session_start();
+		$userId = $_SESSION['userId'];
+		$friendApply = M('FriendApply');
+		$applyList = $friendApply->where('status=1 and fromUser='.$userId)->field("toUser,fromUser,fromRealName,toRealName,authInfo,createTime")->order("createTime desc")->limit(1,10)->select();
+		$data['success'] = true;
+		$data['list'] = $applyList;
+		$this->ajaxReturn($data);
+	}
+	
+	//被拒绝的申请
+	function applyingRefused()
+	{
+		$data = array();
+		$data['success'] = false;
+		if(!isLogin())
+		{
+			$data['msg'] = "没有权限！";
+			$this->ajaxReturn($data);
+			return;
+		}
+	
+		session_start();
+		$userId = $_SESSION['userId'];
+		$friendApply = M('FriendApply');
+		$applyList = $friendApply->where('status=2 and fromUser='.$userId)->field("toUser,fromUser,fromRealName,toRealName,authInfo,createTime")->order("createTime desc")->limit(1,10)->select();
+		$data['success'] = true;
+		$data['list'] = $applyList;
+		$this->ajaxReturn($data);
+	}
+	
+	//没有处理的申请
+	function applyingUntreat()
+	{
+		$data = array();
+		$data['success'] = false;
+		if(!isLogin())
+		{
+			$data['msg'] = "没有权限！";
+			$this->ajaxReturn($data);
+			return;
+		}
+	
+		session_start();
+		$userId = $_SESSION['userId'];
+		$friendApply = M('FriendApply');
+		$applyList = $friendApply->where('status=0 and toUser='.$userId)->field("toUser,fromUser,fromRealName,toRealName,authInfo,createTime")->order("createTime desc")->limit(1,10)->select();
+		$data['success'] = true;
+		$data['list'] = $applyList;
+		$this->ajaxReturn($data);
+	
+	
+	}
+	
+	//通过的申请
+	function applyingPass()
+	{
+		$data = array();
+		$data['success'] = false;
+		if(!isLogin())
+		{
+			$data['msg'] = "没有权限！";
+			$this->ajaxReturn($data);
+			return;
+		}
+	
+		session_start();
+		$userId = $_SESSION['userId'];
+		$friendApply = M('FriendApply');
+		$applyList = $friendApply->where('status=1 and toUser='.$userId)->field("toUser,fromUser,fromRealName,toRealName,authInfo,createTime")->order("createTime desc")->limit(1,10)->select();
+		$data['success'] = true;
+		$data['list'] = $applyList;
+		$this->ajaxReturn($data);
+	}
+	
+	//拒绝的申请
+	function applyingRefuse()
+	{
+		$data = array();
+		$data['success'] = false;
+		if(!isLogin())
+		{
+			$data['msg'] = "没有权限！";
+			$this->ajaxReturn($data);
+			return;
+		}
+	
+		session_start();
+		$userId = $_SESSION['userId'];
+		$friendApply = M('FriendApply');
+		$applyList = $friendApply->where('status=2 and toUser='.$userId)->field("toUser,fromUser,fromRealName,toRealName,authInfo,createTime")->order("createTime desc")->limit(1,10)->select();
+		$data['success'] = true;
+		$data['list'] = $applyList;
+		$this->ajaxReturn($data);
 	}
 }

@@ -10,7 +10,7 @@ class FriendApplyModel extends Model{
 
 	//自动填充
 	protected $_auto=array(
-			array("createTime","dateTime",3,'callback'),
+			array("createTime","dateTime",1,'callback'),
 			array("updateTime","dateTime",3,'callback'),
 	);
 

@@ -9,26 +9,212 @@
 <body>  
 	<script type="text/javascript">
 	$(document).ready(function(){
-		$('.tab').mouseover(function(){
-			 
-			$(this).addClass("current").siblings().removeClass(); 
-		 
-			$("."+$(this).attr("id")).show().siblings().hide(); 
-		 
+		
+		$.get($.URL.friend.applyingUntreated,null,applyingUntreatedCallback,"json");
+		$.get($.URL.friend.applyingUntreat,null,applyingUntreatCallback,"json");
+		
+		$("#untreatedTab").unbind("mouseover");
+		$("#untreatedTab").mouseover(function(){
+			$.get($.URL.friend.applyingUntreated,null,applyingUntreatedCallback,"json");
 		});
+		
+		$("#passedTab").unbind("mouseover");
+		$("#passedTab").mouseover(function(){
+			$.get($.URL.friend.applyingPassed,null,applyingPassedCallback,"json");
+		});
+		
+		$("#refusedTab").unbind("mouseover");
+		$("#refusedTab").mouseover(function(){
+			$.get($.URL.friend.applyingRefused,null,applyingRefusedCallback,"json");
+		});
+		
+		$("#untreatTab").unbind("mouseover");
+		$("#untreatTab").mouseover(function(){
+			$.get($.URL.friend.applyingUntreat,null,applyingUntreatCallback,"json");
+		});
+		
+		$("#passTab").unbind("mouseover");
+		$("#passTab").mouseover(function(){
+			$.get($.URL.friend.applyingPassed,null,applyingPassCallback,"json");
+		});
+		
+		$("#refuseTab").unbind("mouseover");
+		$("#refuseTab").mouseover(function(){
+			$.get($.URL.friend.applyingRefuse,null,applyingRefuseCallback,"json");
+		});
+		
 	});
+	
+	//未处理申请
+	function applyingUntreatedCallback(result)
+	{
+		$("#untreatedTabBody").html("");
+		if(result.data.list && result.data.list.length>=1)
+			{
+				var listHead = $("<div class='applyingRowHeadDiv'><div class='realNameDiv'>好友</div><div class='authInfoDiv'>申请信息</div><div class='createTimeDiv'>申请时间</div></div>");
+				$("#untreatedTabBody").append(listHead);
+				$(result.data.list).each(function(index,item){
+					var realNameDiv = $("<div class='realNameDiv'></div>").html(item.toRealName);
+					var authInfoDiv = $("<div class='authInfoDiv'></div>").html(item.authInfo);
+					var createTimeDiv = $("<div class='createTimeDiv'></div>").html(item.createTime);
+					var rowDiv = $("<div class='applyingRowDiv'></div>").append(realNameDiv).append(authInfoDiv).append(createTimeDiv);
+					$("#untreatedTabBody").append(rowDiv);
+				});
+			}
+		else
+			{
+				$("#untreatedTabBody").append("亲，没有符合条件的记录！");	
+			}
+		
+		$("#untreatedTab").addClass("current").siblings().removeClass("current"); 
+		$("#untreatedTabBody").show().siblings().hide(); 
+	}
+	
+	//未处理申请
+	function applyingPassedCallback(result)
+	{
+		$("#passedTabBody").html("");
+		if(result.data.list && result.data.list.length>=1)
+			{
+				var listHead = $("<div class='applyingRowHeadDiv'><div class='realNameDiv'>好友</div><div class='authInfoDiv'>申请信息</div><div class='createTimeDiv'>申请时间</div></div>");
+				$("#passedTabBody").append(listHead);
+				$(result.data.list).each(function(index,item){
+					var realNameDiv = $("<div class='realNameDiv'></div>").html(item.toRealName);
+					var authInfoDiv = $("<div class='authInfoDiv'></div>").html(item.authInfo);
+					var createTimeDiv = $("<div class='createTimeDiv'></div>").html(item.createTime);
+					var rowDiv = $("<div class='applyingRowDiv'></div>").append(realNameDiv).append(authInfoDiv).append(createTimeDiv);
+					$("#passedTabBody").append(rowDiv);
+				});
+			}
+		else
+			{
+				$("#passedTabBody").append("亲，没有符合条件的记录！");	
+			}
+		$("#passedTab").addClass("current").siblings().removeClass("current"); 
+		$("#passsedTabBody").show().siblings().hide(); 
+	}
+	
+	//未处理申请
+	function applyingRefusedCallback(result)
+	{
+		$("#refusedTabBody").html("");
+		if(result.data.list && result.data.list.length>=1)
+			{
+				var listHead = $("<div class='applyingRowHeadDiv'><div class='realNameDiv'>好友</div><div class='authInfoDiv'>申请信息</div><div class='createTimeDiv'>申请时间</div></div>");
+				$("#refusedTabBody").append(listHead);
+				$(result.data.list).each(function(index,item){
+					var realNameDiv = $("<div class='realNameDiv'></div>").html(item.toRealName);
+					var authInfoDiv = $("<div class='authInfoDiv'></div>").html(item.authInfo);
+					var createTimeDiv = $("<div class='createTimeDiv'></div>").html(item.createTime);
+					var rowDiv = $("<div class='applyingRowDiv'></div>").append(realNameDiv).append(authInfoDiv).append(createTimeDiv);
+					$("#refusedTabBody").append(rowDiv);
+				});
+			}
+		else
+			{
+				$("#refusedTabBody").append("亲，没有符合条件的记录！");	
+			}
+		$("#refusedTab").addClass("current").siblings().removeClass("current"); 
+		$("#refusedTabBody").show().siblings().hide(); 
+	}
+	
+	//未处理申请
+	function applyingUntreatCallback(result)
+	{
+		$("#untreatTabBody").html("");
+		if(result.data.list && result.data.list.length>=1)
+			{
+				var listHead = $("<div class='applyingRowHeadDiv'><div class='realNameDiv'>好友</div><div class='authInfoDiv'>申请信息</div><div class='createTimeDiv'>申请时间</div><div class='applyActionDiv'>操作</div></div>");
+				$("#untreatTabBody").append(listHead);
+				$(result.data.list).each(function(index,item){
+					var realNameDiv = $("<div class='realNameDiv'></div>").html(item.toRealName);
+					var authInfoDiv = $("<div class='authInfoDiv'></div>").html(item.authInfo);
+					var createTimeDiv = $("<div class='createTimeDiv'></div>").html('&nbsp;' + item.createTime);
+					var actionDiv = $("<div class='applyActionDiv'><a href='/Friend/passApply'>通过</a>&nbsp;<a href='/Friend/refuseApply'>拒绝</a></div>");
+					var rowDiv = $("<div class='applyingRowDiv'></div>").append(realNameDiv).append(authInfoDiv).append(createTimeDiv).append(actionDiv);
+					$("#untreatTabBody").append(rowDiv);
+				});
+			}
+		else
+			{
+				$("#untreatTabBody").append("亲，没有符合条件的记录！");	
+			}
+		$("#untreatTab").addClass("current").siblings().removeClass("current"); 
+		$("#untreatTabBody").show().siblings().hide(); 
+	}
+	
+	//未处理申请
+	function applyingPassCallback(result)
+	{
+		$("#passTabBody").html("");
+		if(result.data.list && result.data.list.length>=1)
+			{
+				var listHead = $("<div class='applyingRowHeadDiv'><div class='realNameDiv'>好友</div><div class='authInfoDiv'>申请信息</div><div class='createTimeDiv'>申请时间</div></div>");
+				$("#passTabBody").append(listHead);
+				$(result.data.list).each(function(index,item){
+					var realNameDiv = $("<div class='realNameDiv'></div>").html(item.toRealName);
+					var authInfoDiv = $("<div class='authInfoDiv'></div>").html(item.authInfo);
+					var createTimeDiv = $("<div class='createTimeDiv'></div>").html(item.createTime);
+					var rowDiv = $("<div class='applyingRowDiv'></div>").append(realNameDiv).append(authInfoDiv).append(createTimeDiv);
+					$("#passTabBody").append(rowDiv);
+				});
+			}
+		else
+			{
+				$("#passTabBody").append("亲，没有符合条件的记录！");	
+			}
+		$("#passTab").addClass("current").siblings().removeClass("current"); 
+		$("#passTabBody").show().siblings().hide(); 
+		
+	}
+	
+	//未处理申请
+	function applyingRefuseCallback(result)
+	{
+		$("#refuseTabBody").html("");
+		if(result.data.list && result.data.list.length>=1)
+			{
+				var listHead = $("<div class='applyingRowHeadDiv'><div class='realNameDiv'>好友</div><div class='authInfoDiv'>申请信息</div><div class='createTimeDiv'>申请时间</div></div>");
+				$("#refuseTabBody").append(listHead);
+				$(result.data.list).each(function(index,item){
+					var realNameDiv = $("<div class='realNameDiv'></div>").html(item.toRealName);
+					var authInfoDiv = $("<div class='authInfoDiv'></div>").html(item.authInfo);
+					var createTimeDiv = $("<div class='createTimeDiv'></div>").html(item.createTime);
+					var rowDiv = $("<div class='applyingRowDiv'></div>").append(realNameDiv).append(authInfoDiv).append('&nbsp;' + createTimeDiv);
+					$("#refuseTabBody").append(rowDiv);
+				});
+			}
+		else
+			{
+				$("#refuseTabBody").append("亲，没有符合条件的记录！");	
+			}
+		$("#refuseTab").addClass("current").siblings().removeClass("current"); 
+		$("#refuseTabBody").show().siblings().hide(); 
+	}
+	
 	</script>
-	<div class='modContainer'>
-		<div id="sidebar-tab">
-			<div id="tab-1" class="tab current">未处理</div>
-			<div class="tab" id="tab-2">已通过</div>
-			<div class="tab" id="tab-3">被忽略</div>
-			<div class="tab" id="tab-3">被拒绝</div> 
-			<div id="tab-content">
-				<div class="tab-1">hello1</div>
-				<div class="tab-2">hello2</div>
-				<div class="tab-3">hello3</div>
-				<div class="tab-4">hello4</div>
+	<div id="applyingListBody" class='modContainer'>
+		<div id="toFriendApplyTitle" class="tabTitle">发给好友的申请：</div>
+		<div  class="sidebar-tab">
+			<div id="untreatedTab" class="tab current">未处理</div>
+			<div id="passedTab" class="tab">已通过</div>
+			<div id="refusedTab" class="tab">被拒绝</div> 
+			<div class="tab-content">
+				<div id="untreatedTabBody" class="tab-body"></div>
+				<div id='passedTabBody' class="tab-body"></div>
+				<div id='refusedTabBody' class="tab-body"></div>
+			</div> 
+		</div>
+		
+		<div id="fromFriendApplyTitle" class="tabTitle">来自好友的申请：</div>
+		<div  class="sidebar-tab">
+			<div id="untreatTab" class="tab current">未处理</div>
+			<div id="passTab"  class="tab">已通过</div>
+			<div id="refuseTab" class="tab">被拒绝</div> 
+			<div class="tab-content">
+				<div id="untreatTabBody" class="tab-body"></div>
+				<div id='passTabBody' class="tab-body"></div>
+				<div id='refuseTabBody' class="tab-body"></div>
 			</div> 
 		</div>
 	</div>

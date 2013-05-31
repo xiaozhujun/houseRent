@@ -12,6 +12,12 @@
 		},
 		"friend":{
 			"applyFriend":"/Friend/applyFriend",
+			"applyingUntreated":"/Friend/applyingUntreated",
+			"applyingPassed":"/Friend/applyingPassed",
+			"applyingRefused":"/Friend/applyingRefused",
+			"applyingUntreat":"/Friend/applyingUntreat",
+			"applyingPass":"/Friend/applyingPass",
+			"applyingRefuse":"/Friend/applyingRefuse",
 		}
 			
 	}

@@ -1,4 +1,4 @@
-#sidebar-tab{
+.sidebar-tab{
 	width:95%;
 	float:left;
 	height: auto;
@@ -8,15 +8,8 @@
 	font-size: 14px;
 	
 }
-
-#tab-title{
-	position:relative;
-	width: 100%;
-	float: left;
-	margin-bottom:-2px;
-}
  
-#sidebar-tab .current{
+#applyingListBody .current{
 	color:#356aa0;
 	border-bottom:0px;
 	padding-bottom: 6px;
@@ -25,7 +18,7 @@
 	
 }
 
-#tab-1,#tab-2,#tab-3,#tab-4{
+.tab{
 	position:relative;
 	float:left;
 	padding:5px 7px;
@@ -34,23 +27,100 @@
 	width: auto;
 	
 	z-index: 3;
-	margin-bottom: -1px;
+	margin-bottom: -2px;
 	margin-right: -1px;
 	
 	background-color: #eee;
 }
  
-.tab-2,.tab-3,.tab-4{
+.tab-body{
 	display:none;
 }
 
-#tab-content{
+.tab-content{
 	position:relative;
 	width: 100%;
 	float:left;
 	
 	border:1px solid #ccf;
 	z-index: 1;
-	padding: 5px;
 	
+}
+
+.realNameDiv
+{
+	width: 100px;
+	float:left;
+	border-style:solid;
+	border-color:#ccc;
+	border-width: 1px;
+	
+	margin-right:-1px;
+	margin-bottom:-1px;
+}
+
+.authInfoDiv
+{
+	width:250px;
+	float:left;
+	border-style:solid;
+	border-color:#ccc;
+	border-width: 1px;
+	
+	margin-right:-1px;
+	margin-bottom:-1px;
+}
+
+.createTimeDiv
+{
+	width:150px;
+	float:left;
+	border-style:solid;
+	border-color:#ccc;
+	border-width: 1px;
+	
+	margin-right:-1px;
+	margin-bottom:-1px;
+}
+
+.applyActionDiv
+{
+	width:200px;
+	float:left;
+	border-style:solid;
+	border-color:#ccc;
+	border-width: 1px;
+	
+	margin-right:-1px;
+	margin-bottom:-1px;	
+}
+
+.applyingRowDiv
+{
+	width:100%;
+	float:left;
+	text-align:center;
+}
+
+.applyingRowHeadDiv
+{
+	width:100%;
+	float:left;
+	font-weight:bold;
+	text-align: center;
+}
+
+.tab-body
+{
+	margin:10px;
+	float:left;
+}
+
+.tabTitle
+{
+	width:100%;
+	float:left;
+	font-size:12px;
+	padding-top:10px;
+	padding-left:10px;
 }
