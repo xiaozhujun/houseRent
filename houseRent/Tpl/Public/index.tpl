@@ -59,41 +59,27 @@
 	    			<div class='menuItem' page='/mod/user/resetPwd.html'><div class='menuNameDiv'>修改密码</div></div>
 	    		</div>
 	    	</div>
-
+	    	
 	    	<div class='menuModule'>
-	    		<div class='moduleTitle'>我的申请</div>
+	    		<div class='moduleTitle'>房源管理</div>
 	    		<div class='menuItems'>
-	    			<div class='menuItem' page='/mod/friend/applyingList.html'><div class='menuNameDiv'>好友申请</div></div>
+	    			<div class='menuItem'><div class='menuNameDiv'>房源推荐</div></div>
+	    			<div class='menuItem'><div class='menuNameDiv'>我的房源</div></div>
+	    			<div class='menuItem'><div class='menuNameDiv'>关注房源</div></div>
 	    			<div class='menuItem' page='/mod/friend/addFriend.html'><div class='menuNameDiv'>房源申请</div></div>
 	    		</div>
 	    	</div>
-    	
+
 	    	<div class='menuModule'>
-	    		<div class='moduleTitle'>我的好友</div>
+	    		<div class='moduleTitle'>好友管理</div>
 	    		<div class='menuItems'>
-	    			<div class='menuItem' page='/mod/user/invite.html'><div class='menuNameDiv'>邀请好友</div></div>
+	    			<div class='menuItem'><div class='menuNameDiv'>好友列表</div></div>
 	    			<div class='menuItem' page='/mod/friend/addFriend.html'><div class='menuNameDiv'>添加好友</div></div>
-	    			<div class='menuItem'><div class='menuNameDiv'>其它好友</div></div>
+	    			<div class='menuItem' page='/mod/friend/applyingList.html'><div class='menuNameDiv'>好友申请</div></div>
+	    			<div class='menuItem' page='/mod/user/invite.html'><div class='menuNameDiv'>邀请好友</div></div>
 	    		</div>
 	    	</div>
 	    	
-	    	<div class='menuModule'>
-	    		<div class='moduleTitle'>我的房源</div>
-	    		<div class='menuItems'>
-	    			<div class='menuItem'><div class='menuNameDiv'>我的房源</div></div>
-	    			<div class='menuItem'><div class='menuNameDiv'>我关注的房源</div></div>
-	    			<div class='menuItem'><div class='menuNameDiv'>谁关注的房源</div></div>
-	    		</div>
-	    	</div>
-	    	
-	    	<div class='menuModule'>
-	    		<div class='moduleTitle'>我的圈子</div>
-	    		<div class='menuItems'>
-	    			<div class='menuItem'><div class='menuNameDiv'>我的圈子</div></div>
-	    			<div class='menuItem'><div class='menuNameDiv'>圈内好友</div></div>
-	    			<div class='menuItem'><div class='menuNameDiv'>圈内房源</div></div>
-	    		</div>
-	    	</div>
     	</div>
     	<div id='mainContentDiv'>
     		我是主界面哦！

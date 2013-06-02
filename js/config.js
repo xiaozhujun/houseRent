@@ -18,6 +18,7 @@
 			"applyingUntreat":"/Friend/applyingUntreat",
 			"applyingPass":"/Friend/applyingPass",
 			"applyingRefuse":"/Friend/applyingRefuse",
+			"refuseApply":"/Friend/refuseApply",
 		}
 			
 	}

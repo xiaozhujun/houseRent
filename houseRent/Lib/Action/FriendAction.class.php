@@ -1,9 +1,12 @@
 <?php
 
+define("UNTREAT",0);
+define("PASS",1);
+define("REFUSE",2);
+
 import('Common.Misc',APP_PATH,'.php');
 class FriendAction extends Action
 {
-	
 	//返回申请好友页面
 	function applyFriendPage()
 	{
@@ -67,7 +70,7 @@ class FriendAction extends Action
 			"toUser"=>$_POST['toUser'],
 			"toRealName"=>$toUser['realName'],
 			"authInfo"=>$_POST['authInfo'],
-			"status"=>0,
+			"status"=>UNTREAT,
 		);
 		
 		if($friendApply->create($friendApplyData))
@@ -106,7 +109,7 @@ class FriendAction extends Action
 		session_start();
 		$userId = $_SESSION['userId'];
 		$friendApply = M('FriendApply');
-		$applyList = $friendApply->where('status=0 and fromUser='.$userId)->field("toUser,fromUser,fromRealName,toRealName,authInfo,createTime")->order("createTime desc")->limit(1,10)->select();
+		$applyList = $friendApply->where("fromUser={$userId} and status=".UNTREAT)->field("toUser,fromUser,fromRealName,toRealName,authInfo,createTime")->order("createTime desc")->limit(1,10)->select();
 		$data['success'] = true;
 		$data['list'] = $applyList;
 		$this->ajaxReturn($data);
@@ -129,7 +132,7 @@ class FriendAction extends Action
 		session_start();
 		$userId = $_SESSION['userId'];
 		$friendApply = M('FriendApply');
-		$applyList = $friendApply->where('status=1 and fromUser='.$userId)->field("toUser,fromUser,fromRealName,toRealName,authInfo,createTime")->order("createTime desc")->limit(1,10)->select();
+		$applyList = $friendApply->where("fromUser={$userId} and status=".PASS)->field("toUser,fromUser,fromRealName,toRealName,authInfo,createTime")->order("createTime desc")->limit(1,10)->select();
 		$data['success'] = true;
 		$data['list'] = $applyList;
 		$this->ajaxReturn($data);
@@ -150,7 +153,7 @@ class FriendAction extends Action
 		session_start();
 		$userId = $_SESSION['userId'];
 		$friendApply = M('FriendApply');
-		$applyList = $friendApply->where('status=2 and fromUser='.$userId)->field("toUser,fromUser,fromRealName,toRealName,authInfo,createTime")->order("createTime desc")->limit(1,10)->select();
+		$applyList = $friendApply->where("fromUser={$userId} and status=".REFUSE)->field("toUser,fromUser,fromRealName,toRealName,replyInfo,createTime")->order("createTime desc")->limit(1,10)->select();
 		$data['success'] = true;
 		$data['list'] = $applyList;
 		$this->ajaxReturn($data);
@@ -171,7 +174,7 @@ class FriendAction extends Action
 		session_start();
 		$userId = $_SESSION['userId'];
 		$friendApply = M('FriendApply');
-		$applyList = $friendApply->where('status=0 and toUser='.$userId)->field("toUser,fromUser,fromRealName,toRealName,authInfo,createTime")->order("createTime desc")->limit(1,10)->select();
+		$applyList = $friendApply->where("toUser={$userId} and status=".UNTREAT)->field("toUser,fromUser,fromRealName,toRealName,authInfo,createTime")->order("createTime desc")->limit(1,10)->select();
 		$data['success'] = true;
 		$data['list'] = $applyList;
 		$this->ajaxReturn($data);
@@ -194,7 +197,7 @@ class FriendAction extends Action
 		session_start();
 		$userId = $_SESSION['userId'];
 		$friendApply = M('FriendApply');
-		$applyList = $friendApply->where('status=1 and toUser='.$userId)->field("toUser,fromUser,fromRealName,toRealName,authInfo,createTime")->order("createTime desc")->limit(1,10)->select();
+		$applyList = $friendApply->where("toUser={$userId} and status=".PASS)->field("toUser,fromUser,fromRealName,toRealName,authInfo,createTime")->order("createTime desc")->limit(1,10)->select();
 		$data['success'] = true;
 		$data['list'] = $applyList;
 		$this->ajaxReturn($data);
@@ -215,9 +218,65 @@ class FriendAction extends Action
 		session_start();
 		$userId = $_SESSION['userId'];
 		$friendApply = M('FriendApply');
-		$applyList = $friendApply->where('status=2 and toUser='.$userId)->field("toUser,fromUser,fromRealName,toRealName,authInfo,createTime")->order("createTime desc")->limit(1,10)->select();
+		$applyList = $friendApply->where("toUser={$userId} and status=".REFUSE)->field("toUser,fromUser,fromRealName,toRealName,replyInfo,createTime")->order("createTime desc")->limit(1,10)->select();
 		$data['success'] = true;
 		$data['list'] = $applyList;
 		$this->ajaxReturn($data);
+	}
+	
+	//返回拒绝好友申请页面
+	function refuseApplyPage()
+	{
+		$result_msg = '';
+		if(!isset($_GET[fromUser]) || empty($_GET['fromUser']))
+		{
+			$result_msg = '操作失败！';
+		}
+		else
+		{
+			$user = M('User');
+			$appliedFriend = $user->find($_GET['fromUser']);
+			$this->assign('realName',$appliedFriend['realName']);
+			$this->assign('fromUser',$appliedFriend['id']);
+		}
+		$this->assign('result_msg',$result_msg);
+		$this->display('refuseApply');
+	}
+	
+	//拒绝好友申请
+	function refuseApply()
+	{
+		if(!isLogin())
+		{
+			redirect("/login.html");
+			return;
+		}
+		
+		$data = array();
+		$data['success'] = false;
+		if(!isset($_POST['fromUser']) || empty($_POST['fromUser']))
+		{
+			$data['msg'] = '申请人未设置，操作失败！';
+			$this->ajaxReturn($data);
+			return;
+		}
+		
+		$friendApply = M('FriendApply');
+		session_start();
+		$data = array(
+				"status"=>REFUSE,
+		);
+		$result = $friendApply->where("fromUser={$_POST['fromUser']} and toUser={$_SESSION['userId']} and status=".UNTREAT)->save($data);
+		if($result)
+		{
+			$data['msg'] = '操作成功！';
+			$data['success'] = true;
+		}
+		else 
+		{
+			$data['msg'] = '操作失败';
+		}
+		$this->ajaxReturn($data);
+		
 	}
 }
