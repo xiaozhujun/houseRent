@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">  
+<html>  
+<head>  
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
+<script type="text/javascript" src="/js/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+<script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+<link rel="stylesheet" type="text/css" href="/js/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+<link href="/css/common.css" type="text/css" rel="stylesheet">
+<link href="/css/friend/friendList.css" type="text/css" rel="stylesheet">
+<title>查找好友</title>  
+</head>  
+<body>  
+	<script type="text/javascript">
+	$(document).ready(function(){
+		
+		$.get($.URL.friend.myFriend,null,myFriendCallback,"json");
+		
+		$("#myFriendTab").unbind("mouseover");
+		$("#myFriendTab").mouseover(function(){
+			$.get($.URL.friend.myFriend,null,myFriendCallback,"json");
+		});
+		
+		$("#invitedFriendTab").unbind("mouseover");
+		$("#invitedFriendTab").mouseover(function(){
+			$.get($.URL.friend.invitedFriend,null,invitedFriendCallback,"json");
+		});
+		
+	});
+	
+	//未处理申请
+	function myFriendCallback(result)
+	{
+		$("#myFriendTabBody").html("");
+		if(result.data && result.data.list && result.data.list.length>=1)
+			{
+				var listHead = $("<div class='friendRowHeadDiv'><div class='idDiv'>编号</div><div class='realNameDiv'>中文名</div><div class='myHouseDiv'>提供房源</div><div class='destHouseDiv'>寻找房源</div></div>");
+				$("#myFriendTabBody").append(listHead);
+				$(result.data.list).each(function(index,item){
+					var idDiv = $("<div class='idDiv'></div>").html(item.id);
+					var realNameDiv = $("<div class='realNameDiv'>&nbsp;</div>").append(item.realName);
+					var myHouseDiv = $("<div class='myHouseDiv'>&nbsp;</div>").append(item.myHouse);
+					var destHouseDiv = $("<div class='destHouseDiv'>&nbsp;</div>").append(item.destHouse);
+					var rowDiv = $("<div class='friendRowDiv'></div>").append(idDiv).append(realNameDiv).append(myHouseDiv).append(destHouseDiv);
+					$("#myFriendTabBody").append(rowDiv);
+				});
+			}
+		else
+			{
+				$("#myFriendTabBody").append("亲，您还没有添加朋友哦！");	
+			}
+		
+		$("#myFriendTab").addClass("current").siblings().removeClass("current"); 
+		$("#myFriendTabBody").show().siblings().hide(); 
+	}
+	
+	//未处理申请
+	function invitedFriendCallback(result)
+	{
+		$("#invitedFriendTabBody").html("");
+		if(result.data && result.data.list && result.data.list.length>=1)
+			{
+				var listHead = $("<div class='friendRowHeadDiv'><div class='idDiv'>编号</div><div class='realNameDiv'>中文名</div><div class='myHouseDiv'>提供房源</div><div class='destHouseDiv'>寻找房源</div></div>");
+				$("#invitedFriendTabBody").append(listHead);
+				$(result.data.list).each(function(index,item){
+					var idDiv = $("<div class='idDiv'></div>").html(item.id);
+					var realNameDiv = $("<div class='realNameDiv'>&nbsp;</div>").append(item.realName);
+					var myHouseDiv = $("<div class='myHouseDiv'>&nbsp;</div>").append(item.myHouse);
+					var destHouseDiv = $("<div class='destHouseDiv'>&nbsp;</div>").append(item.destHouse);
+					var rowDiv = $("<div class='friendRowDiv'></div>").append(idDiv).append(realNameDiv).append(myHouseDiv).append(destHouseDiv);
+					$("#invitedFriendTabBody").append(rowDiv);
+				});
+			}
+		else
+			{
+				$("#invitedFriendTabBody").append("亲，你还没有邀请好友哦！");	
+			}
+		$("#invitedFriendTab").addClass("current").siblings().removeClass("current"); 
+		$("#invitedFriendTabBody").show().siblings().hide(); 
+	}
+	
+</script>
+	<div id="friendListBody" class='modContainer'>
+		<div  class="sidebar-tab">
+			<div id="myFriendTab" class="tab current">我的好友</div>
+			<div id="invitedFriendTab" class="tab">邀请的好友</div>
+			<div class="tab-content">
+				<div id="myFriendTabBody" class="tab-body"></div>
+				<div id='invitedFriendTabBody' class="tab-body"></div>
+			</div> 
+		</div>
+		
+	</div>
+</body>  
+</html>  
+ 

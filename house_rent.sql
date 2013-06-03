@@ -77,3 +77,15 @@ CREATE TABLE `friend_apply` (
   `toRealName` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Table structure for `friend`
+-- ----------------------------
+DROP TABLE IF EXISTS `friend`;
+CREATE TABLE `friend` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `fromUser` bigint(20) DEFAULT NULL,
+  `toUser` bigint(20) DEFAULT NULL,
+  `createTime` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;

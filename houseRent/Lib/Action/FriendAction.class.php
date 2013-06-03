@@ -5,6 +5,7 @@ define("PASS",1);
 define("REFUSE",2);
 
 import('Common.Misc',APP_PATH,'.php');
+import('Common.DateUtil',APP_PATH,'.php');
 class FriendAction extends Action
 {
 	//返回申请好友页面
@@ -197,7 +198,7 @@ class FriendAction extends Action
 		session_start();
 		$userId = $_SESSION['userId'];
 		$friendApply = M('FriendApply');
-		$applyList = $friendApply->where("toUser={$userId} and status=".PASS)->field("toUser,fromUser,fromRealName,toRealName,authInfo,createTime")->order("createTime desc")->limit(1,10)->select();
+		$applyList = $friendApply->where("toUser={$userId} and status=".PASS)->field("toUser,fromUser,fromRealName,toRealName,authInfo,createTime")->order("createTime desc")->select();
 		$data['success'] = true;
 		$data['list'] = $applyList;
 		$this->ajaxReturn($data);
@@ -262,9 +263,18 @@ class FriendAction extends Action
 		}
 		
 		$friendApply = M('FriendApply');
+		$count = $friendApply->where("fromUser={$_GET['fromUser']} and toUser={$_SESSION['userId']} and status=".UNTREAT)->count();
+		if(!$count)
+		{
+			$data['msg'] = '没有符合条件的记录！';
+			$this->ajaxReturn($data);
+			return;
+		}
+		
 		session_start();
 		$data = array(
 				"status"=>REFUSE,
+				"replyInfo"=>$_POST['replyInfo'],
 		);
 		$result = $friendApply->where("fromUser={$_POST['fromUser']} and toUser={$_SESSION['userId']} and status=".UNTREAT)->save($data);
 		if($result)
@@ -278,5 +288,114 @@ class FriendAction extends Action
 		}
 		$this->ajaxReturn($data);
 		
+	}
+	
+	//拒绝好友申请
+	function passApply()
+	{
+		if(!isLogin())
+		{
+			redirect("/login.html");
+			return;
+		}
+	
+		$data = array();
+		$data['success'] = false;
+		if(!isset($_GET['fromUser']) || empty($_GET['fromUser']))
+		{
+			$data['msg'] = '申请人未设置，操作失败！';
+			$this->ajaxReturn($data);
+			return;
+		}
+		
+		$friendApply = M('FriendApply');
+		$count = $friendApply->where("fromUser={$_GET['fromUser']} and toUser={$_SESSION['userId']} and status=".UNTREAT)->count();
+		if(!$count)
+		{
+			$data['msg'] = '没有符合条件的记录！';
+			$this->ajaxReturn($data);
+			return;
+		}
+		
+		session_start();
+		$data = array(
+				"status"=>PASS,
+		);
+		
+		$result = $friendApply->where("fromUser={$_GET['fromUser']} and toUser={$_SESSION['userId']} and status=".UNTREAT)->save($data);
+		$friend = M('Friend');
+		$friendData = array(
+				"fromUser"=>$_GET['fromUser'],
+				"toUser"=>$_SESSION['userId'],
+				"createTime"=>dateTime(),
+		);
+		if($friend->create($friendData))
+		{
+			$friend->add();	
+		}
+		$friendData = array(
+				"fromUser"=>$_SESSION['userId'],
+				"toUser"=>$_GET['fromUser'],
+				"createTime"=>dateTime(),
+		);
+		$friend = M('Friend');
+		if($friend->create($friendData))
+		{
+			$friend->add($friendData);
+		}
+		if($result)
+		{
+			$data['msg'] = '操作成功！';
+			$data['success'] = true;
+		}
+		else
+		{
+			$data['msg'] = "操作失败";
+		}
+		$this->ajaxReturn($data);
+	}
+	
+	//我的好友列表
+	function myFriend()
+	{
+		if(!isLogin())
+		{
+			redirect("/login.html");
+			return;
+		}
+	
+		$data = array();
+		$data['success'] = false;
+			
+		$friend = M('Friend');
+		session_start();
+		$userId = $_SESSION['userId'];
+		$friendListId = $friend->join("user ON friend.toUser=user.id")->where("friend.fromUser={$_SESSION['userId']}")->field("user.id,user.name,user.realName")->select();
+		
+		$data['list'] = $friendListId;
+		$data['msg'] = '操作成功！';
+		$data['success'] = true;
+		$this->ajaxReturn($data);
+	}
+	
+	//邀请的好友列表
+	function invitedFriend()
+	{
+		if(!isLogin())
+		{
+			redirect("/login.html");
+			return;
+		}
+		
+		$data = array();
+		$data['success'] = false;
+		session_start();
+		$userModel = M("User");
+		$friendList = $userModel->where("invitor={$_SESSION['userId']}")->field("id,name,realName")->select();
+		
+		$data['list'] = $friendList;
+		$data['msg'] = '操作成功！';
+		$data['success'] = true;
+		$this->ajaxReturn($data);
 	}
 }

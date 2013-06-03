@@ -1,0 +1,121 @@
+#friendListBody
+{
+	text-align:center;
+}
+
+.sidebar-tab{
+	width:95%;
+	float:left;
+	height: auto;
+	
+	margin: 10px;
+	
+	font-size: 14px;
+	
+}
+ 
+#friendListBody .current{
+	color:#356aa0;
+	border-bottom:0px;
+	padding-bottom: 6px;
+	background-color: white;
+}
+
+.tab{
+	position:relative;
+	float:left;
+	padding:5px 7px;
+	border:1px solid #ccf;
+	cursor:pointer;
+	width: auto;
+	
+	z-index: 3;
+	margin-bottom: -2px;
+	margin-right: -1px;
+	
+	background-color: #eee;
+}
+ 
+.tab-body{
+	display:none;
+}
+
+.tab-content{
+	position:relative;
+	width: 100%;
+	float:left;
+	
+	border:1px solid #ccf;
+	z-index: 1;
+	
+	min-height:350px;
+}
+
+.realNameDiv
+{
+	width: 100px;
+	float:left;
+	border-style:solid;
+	border-color:#ccc;
+	border-width: 1px;
+	
+	margin-right:-1px;
+	margin-bottom:-1px;
+}
+
+.idDiv
+{
+	width:150px;
+	float:left;
+	border-style:solid;
+	border-color:#ccc;
+	border-width: 1px;
+	
+	margin-right:-1px;
+	margin-bottom:-1px;
+}
+
+.myHouseDiv
+{
+	width:350px;
+	float:left;
+	border-style:solid;
+	border-color:#ccc;
+	border-width: 1px;
+	
+	margin-right:-1px;
+	margin-bottom:-1px;
+}
+
+.destHouseDiv
+{
+	width:350px;
+	float:left;
+	border-style:solid;
+	border-color:#ccc;
+	border-width: 1px;
+	
+	margin-right:-1px;
+	margin-bottom:-1px;
+}
+
+.tab-body
+{
+	margin:10px;
+	float:left;
+}
+
+.tabTitle
+{
+	width:100%;
+	float:left;
+	font-size:12px;
+	padding-top:10px;
+	padding-left:10px;
+}
+
+.friendRowHeadDiv
+{
+	width:100%;
+	float:left;
+}

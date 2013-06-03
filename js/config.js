@@ -19,6 +19,9 @@
 			"applyingPass":"/Friend/applyingPass",
 			"applyingRefuse":"/Friend/applyingRefuse",
 			"refuseApply":"/Friend/refuseApply",
+			"passApply":"/Friend/passApply",
+			"myFriend":"/Friend/myFriend",
+			"invitedFriend":"/Friend/invitedFriend",
 		}
 			
 	}

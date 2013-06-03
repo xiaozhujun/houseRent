@@ -38,7 +38,7 @@
 		
 		$("#passTab").unbind("mouseover");
 		$("#passTab").mouseover(function(){
-			$.get($.URL.friend.applyingPassed,null,applyingPassCallback,"json");
+			$.get($.URL.friend.applyingPass,null,applyingPassCallback,"json");
 		});
 		
 		$("#refuseTab").unbind("mouseover");
@@ -59,7 +59,7 @@
 				$(result.data.list).each(function(index,item){
 					var realNameDiv = $("<div class='realNameDiv'></div>").html(item.toRealName);
 					var authInfoDiv = $("<div class='authInfoDiv'></div>").html(item.authInfo);
-					var createTimeDiv = $("<div class='createTimeDiv'></div>").html(item.createTime);
+					var createTimeDiv = $("<div class='createTimeDiv'>&nbsp;</div>").append(item.createTime);
 					var rowDiv = $("<div class='applyingRowDiv'></div>").append(realNameDiv).append(authInfoDiv).append(createTimeDiv);
 					$("#untreatedTabBody").append(rowDiv);
 				});
@@ -84,7 +84,7 @@
 				$(result.data.list).each(function(index,item){
 					var realNameDiv = $("<div class='realNameDiv'></div>").html(item.toRealName);
 					var authInfoDiv = $("<div class='authInfoDiv'></div>").html(item.authInfo);
-					var createTimeDiv = $("<div class='createTimeDiv'></div>").html(item.createTime);
+					var createTimeDiv = $("<div class='createTimeDiv'>&nbsp;</div>").append(item.createTime);
 					var rowDiv = $("<div class='applyingRowDiv'></div>").append(realNameDiv).append(authInfoDiv).append(createTimeDiv);
 					$("#passedTabBody").append(rowDiv);
 				});
@@ -94,7 +94,7 @@
 				$("#passedTabBody").append("亲，没有符合条件的记录！");	
 			}
 		$("#passedTab").addClass("current").siblings().removeClass("current"); 
-		$("#passsedTabBody").show().siblings().hide(); 
+		$("#passedTabBody").show().siblings().hide(); 
 	}
 	
 	//未处理申请
@@ -132,17 +132,10 @@
 				$(result.data.list).each(function(index,item){
 					var realNameDiv = $("<div class='realNameDiv'></div>").html(item.toRealName);
 					var authInfoDiv = $("<div class='authInfoDiv'></div>").html(item.authInfo);
-					var createTimeDiv = $("<div class='createTimeDiv'></div>").html('&nbsp;' + item.createTime);
-					var actionDiv = $("<div class='applyActionDiv'><a href='/Friend/passApply?fromUser=" + item.fromUser + "'>通过</a>&nbsp;<a class='refuseApplyLink' href='/Friend/refuseApplyPage?fromUser="+item.fromUser +"''>拒绝</a></div>");
+					var createTimeDiv = $("<div class='createTimeDiv'>&nbsp;</div>").append(item.createTime);
+					var actionDiv = $("<div class='applyActionDiv'><a class='passApplyLink' href='/Friend/passApply?fromUser=" + item.fromUser + "'>通过</a>&nbsp;<a class='refuseApplyLink' href='/Friend/refuseApplyPage?fromUser="+item.fromUser +"''>拒绝</a></div>");
 					var rowDiv = $("<div class='applyingRowDiv'></div>").append(realNameDiv).append(authInfoDiv).append(createTimeDiv).append(actionDiv);
 					$("#untreatTabBody").append(rowDiv);
-				});
-				$("a.refuseApplyLink").fancybox({
-					'transitionIn'	:	'elastic',
-					'transitionOut'	:	'elastic',
-					'speedIn'		:	200, 
-					'speedOut'		:	200, 
-					'overlayShow'	:	false
 				});
 			}
 		else
@@ -151,6 +144,31 @@
 			}
 		$("#untreatTab").addClass("current").siblings().removeClass("current"); 
 		$("#untreatTabBody").show().siblings().hide(); 
+		
+		$("a.refuseApplyLink").fancybox({
+			'transitionIn'	:	'elastic',
+			'transitionOut'	:	'elastic',
+			'speedIn'		:	200, 
+			'speedOut'		:	200, 
+			'overlayShow'	:	false
+		});
+		$("A.passApplyLink").click(function(){
+			$.get($(this).attr('href'),null,passApplyCallback,"json");
+			return false;
+		});
+	}
+	
+	//通过好友申请
+	function passApplyCallback(result)
+	{
+		if(result.data.success)
+			{
+				alert("操作成功");
+			}
+		else
+			{
+				alert("对不起，操作失败哦！"+result.data.msg);
+			}
 	}
 	
 	//未处理申请
@@ -164,7 +182,7 @@
 				$(result.data.list).each(function(index,item){
 					var realNameDiv = $("<div class='realNameDiv'></div>").html(item.toRealName);
 					var authInfoDiv = $("<div class='authInfoDiv'></div>").html(item.authInfo);
-					var createTimeDiv = $("<div class='createTimeDiv'></div>").html(item.createTime);
+					var createTimeDiv = $("<div class='createTimeDiv'>&nbsp;</div>").append(item.createTime);
 					var rowDiv = $("<div class='applyingRowDiv'></div>").append(realNameDiv).append(authInfoDiv).append(createTimeDiv);
 					$("#passTabBody").append(rowDiv);
 				});
