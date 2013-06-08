@@ -147,7 +147,7 @@ class UserAction extends Action {
 		session_start ();
 		session_destroy();
 		header ( "Content-Type:text/html; charset=utf-8" );
-		redirect ( C('LOGIN_URL'));
+		redirect ('/');
 	}
 	
 	// 生成图片验证码

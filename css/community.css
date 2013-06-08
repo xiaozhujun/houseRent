@@ -1,0 +1,72 @@
+@CHARSET "utf-8";
+
+#distributionDiv
+{
+	width:100%;
+	float:left;
+	
+	margin-top:20px;
+}
+
+.distributionTitleDiv
+{
+	width:100%;
+	float:left;
+	
+	color: #333333;
+    float: left;
+    font-family: Arial;
+    font-size: 18px;
+    font-weight: bold;
+    width: 100%;
+}
+
+.communityTitleListDiv
+{
+	width:100%;
+	float:left;
+	
+	margin-top:10px;
+}
+
+.communityTitleDiv
+{
+	border:solid 1px #ccc;
+	margin-right:-1px;
+	float:left;
+	
+	padding:10px 30px;
+	
+	color: #333333;
+    font-family: Arial;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: bold;
+}
+
+.communityItemDiv
+{
+	width:100%;
+	float:left;
+	boder:solid 1px #ccc;
+}
+
+.communityNameDiv
+{
+	float:left;
+	padding:10px 40px;
+	margin-left:2px;
+	margin-top:2px;
+	
+	background-color: #ccc;
+	
+}
+
+.communityContainerDiv
+{
+	width:100%;
+	float:left;
+	border:solid 1px #ccc;
+	margin-top:-1px;
+	padding-bottom:2px;
+}
