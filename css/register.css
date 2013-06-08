@@ -1,0 +1,60 @@
+@CHARSET "utf-8";
+.mainTopDiv
+{
+	width:100%;
+}
+
+.valueDiv
+{
+	width:60%;
+	float:left;
+}
+
+.valueLeftDiv
+{
+	width:50%;
+	float:left;
+}
+
+.valueRight
+{
+	width:50%;
+	float:left;
+}
+
+.valueTitleDiv
+{
+	width:100%;
+	float:left;
+}
+
+.valueRowDiv
+{
+	width:100%;
+	float:left;
+}
+
+.achievementRowDiv
+{
+	width:100%;
+	float:left;
+}
+
+.registerDiv
+{
+	width:40%;
+	float:left;
+}
+
+.registerTitle
+{
+	width:100%;
+	float:left;
+}
+
+.registerRow
+{
+	width:100%;
+	float:left;
+}
+

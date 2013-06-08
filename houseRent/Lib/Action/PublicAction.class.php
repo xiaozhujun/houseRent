@@ -8,13 +8,17 @@ class PublicAction extends Action
 	{
 		if(!isLogin())
 		{
-			redirect(C('LOGIN_URL'));
-			return;
+			header ( "Content-Type:text/html; charset=utf-8" );
+			$this->display ( "loginIndex" );
+			//redirect(C('LOGIN_URL'));
+			//return;
 		}
-		
-		session_start();
-		$this->assign('user',$_SESSION ['user']);
-		header ( "Content-Type:text/html; charset=utf-8" );
-		$this->display ( "index" );
+		else 
+		{
+			session_start();
+			$this->assign('user',$_SESSION ['user']);
+			header ( "Content-Type:text/html; charset=utf-8" );
+			$this->display ( "index" );
+		}
 	}
 }
