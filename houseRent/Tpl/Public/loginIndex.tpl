@@ -9,6 +9,7 @@
 <link href="/css/community.css" type="text/css" rel="stylesheet">
 <script src="/js/jquery-1.7.2.min.js" type="text/javascript"></script>
 <script src="/js/config.js" type="text/javascript"></script>
+<script src="/js/emptyNote.js" type="text/javascript"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
 <title>首页</title>  
 </head>  
@@ -17,16 +18,43 @@
 	$(document).ready(function(){
 		$('#loginBtn').click(function(){
 				var data = {};
-				data.name = $('#nameInput').val();
-				data.password = $('#passwordInput').val();
-				$.post($.URL.user.login,data,callback,"json");
+				data.email = $('#emailLoginInput').val();
+				data.password = $('#pwdLoginInput').val();
+				$.post($.URL.user.login,data,loginCallback,"json");
 			});
 			
+			
+			$('#regitserBtn').click(function(){
+				var data = {};
+				data.realName = $('#realNameInput').val();
+				data.sex = $('#sexInput').val();
+				data.password = $('#passwordInput').val();
+				data.repassword = $('#repasswordInput').val();
+				data.email = $('#emailInput').val();
+				data.verify = $('#verifyInput').val();
+				$.post($.URL.user.register,data,registerCallback,"json");
+			});
+			
+			$('#verify').attr('src',$.URL.user.verify);
+			
+			$("input").emptyValue();
 				
 	});
 	
-	//回调函数
-	function callback(result)
+	function reloadVerifyCode(){  
+	        document.getElementById("verify").src=$.URL.user.verify +'/' +Math.random();  
+	          
+	}
+	
+	//注册回调函数
+	function registerCallback(result)
+	{
+		$("#msgDiv").html(result.data.msg);
+			
+	}
+	
+	//登录回调函数
+	function loginCallback(result)
 	{
 		if(result.data.success)
 		{
@@ -56,12 +84,12 @@
     			</div>
     			
     			<div class='pwdInputDiv'>
-    				<div class='loginColumnDiv'><input id='passwordInput' type='text' value='密码'/></div>
+    				<div class='loginColumnDiv'><input type='text' data-empty='密码'  pass-empty='true'/><input id='pwdLoginInput' type='password' data-empty='密码'  pass-empty='true'/></div>
     				<div class='loginColumnDiv'><a href='#'>忘记密码</a></div>
     			</div>
     			
     			<div class='nameInputDiv'>
-    				<div class='loginColumnDiv'><input id='nameInput' type='text' value='账号'/></div>
+    				<div class='loginColumnDiv'><input id='emailLoginInput' type='text' data-empty='账号'/></div>
     				<div class='loginColumnDiv'><input type='checkbox'/>下次自动登录</div>
     			</div>
     		</div>
@@ -88,12 +116,14 @@
     	</div>
     	<div class='registerDiv'>
     		<div class='registerTitle'>没有账号？赶快加入吧</div>
-    		<div class='registerRow'><input class='registerInput' id='emalInput' type='text' value='邮箱'></div>
-    		<div class='registerRow'><input class='registerInput' id='passwordInput' type='text' value='密码'></div>
-    		<div class='registerRow'><input class='registerInput' id='repasswordInput' type='text' value='确认密码'></div>
-    		<div class='registerRow'><input class='registerInput' type='text' value='姓名'></div>
-    		<div class='registerRow'>性别 <input type='radio' name='sex' value='男' checked/>男 <input type='radio' name='sex' value='女'/>女</div>
-    		<div class='registerRow'><div id='regitserSubmitBtn' >立即注册</div></div>
+    		<div class='registerRow'><input class='registerInput' id='emailInput' type='text' data-empty='邮箱'/></div>
+    		<div class='registerRow'><input class='registerInput' type='text' data-empty='密码'  pass-empty='true'/><input class='registerInput' id='passwordInput' type='password' pass-empty='true' data-empty='密码'/><input type='hidden'/></div>
+    		<div class='registerRow'><input class='registerInput' type='text' data-empty='确认密码'  pass-empty='true'/><input class='registerInput' id='repasswordInput' type='password' pass-empty='true' data-empty='确认密码'/></div>
+    		<div class='registerRow'><input class='registerInput' id='realNameInput' type='text' data-empty='姓名'/></div>
+    		<div class='registerRow'>性别 <input type='radio' name='sex' id='sexInput' value='男' checked/>男 <input type='radio' name='sex' value='女'/>女</div>
+			<div class='registerRow'><input id='verifyInput' type="text" name="verify" data-empty='验证码' /><img id="verify" alt="验证码" onClick="reloadVerifyCode()" src=""><a href="javascript:reloadVerifyCode()">看不清楚</a></div>
+    		<div class='registerRow'><div id='msgDiv' >&nbsp;</div></div>
+    		<div class='registerRow'><div id='regitserBtn' >立即注册</div></div>
     	</div>	
       	</div>
    </div>

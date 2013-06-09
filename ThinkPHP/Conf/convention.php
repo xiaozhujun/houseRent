@@ -148,4 +148,6 @@ return  array(
 	'REGISTER_URL'=>'/register.html',//登录页
 	'EMAIL_QUEUE'=>'b346bf8c750c4c95dd0eb164dc47dfc9',//使用的百度云消息服务队列名
 	'USE_INVITATION'=>false,//是否使用邀请方可注册
+	'IS_TEST'=>false,//是否测试开发，所有注册邮件都会发送到TEST_EMAIL指定的邮箱
+	'TEST_EMAIL'=>'346012526@qq.com',
 );
