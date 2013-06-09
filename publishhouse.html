@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">  
+<html>  
+<head>  
+<link href="/css/common.css" type="text/css" rel="stylesheet">
+<link href="/css/house/publishhouse.css" type="text/css" rel="stylesheet">
+<script src="/js/jquery-1.7.2.min.js" type="text/javascript"></script>
+<script src="/js/config.js" type="text/javascript"></script>
+<script src="/js/resouce.js" type="text/javascript"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
+<title>发布房源</title> 
+<script type="text/javascript">
+
+		$(document).ready(function(){
+			  var selObj = document.getElementById("region");
+			  for(var region in region_array){
+				  var Option=document.createElement("OPTION");
+				  Option.value=region_array[region][0];
+				  Option.text=region_array[region][1];
+				  selObj.options.add(Option);
+			  }
+				$('#publishHouserActionDiv').click(function(){
+					if(checkform()){
+						var data = {};
+						data.title = $('#title').val();
+						data.room = $('#room').val();
+						data.parlor = $('#parlor').val();
+						data.washroom = $('#washroom').val();
+						data.price = $('#price').val();
+						data.area = $('#area').val();
+						data.currentfloor = $('#currentfloor').val();
+						data.maxfloor = $('#maxfloor').val();
+						data.address_info = $('#address_info').val();
+						data.contact_person = $('#contact_person').val();
+						data.contact_phone = $('#contact_phone').val();
+						data.contact_qq = $('#contact_qq').val();
+						
+						data.contact_weixin = $('#contact_weixin').val();
+						data.contact_email = $('#contact_email').val();
+						data.decoration = $('#decoration').val();
+						data.furniture = $('#furniture').val();
+						data.build_year = $('#build_year').val();
+						data.request = $('#request').val();
+						data.remark = $('#remark').val();
+						data.detail_description = $('#detail_description').val();
+						$.post($.URL.house.publishhouse,data,callback,"json");
+					}
+
+				});
+
+		});
+		function callback(result){
+			if(result.data.code==0){
+				$('.resultshow').html("房源发布成功！");
+			}else if(result.data.code==-1){
+				alert("请先登陆！");
+				location="/login.html";
+			}else{
+				$('.resultshow').html("房源发布失败！");
+			}
+		}
+	function checkdigital(param){
+		if(/\d/.test(param.value)){
+			return;
+		}else{
+			alert("请输入数字！");
+			param.value='';
+		}
+	}
+	function checkform(){
+		if($('#title').val()==""){
+			alert("请输入标题！");
+			$("#title").focus();
+			return false;
+		}
+		if($('#room').val()==""&&$('#parlor').val()==""&&$('#washroom').val()==""){
+			alert("请正确输入房屋类型！");
+			$('#room').focus();
+			return false;
+		}
+		if($('#price').val==""){
+			alert("请输入价格！");
+			$('#price').focus();
+			return false;
+		}
+		if($('#area').val==""){
+			alert("请输入房屋面积！");
+			$('#area').focus();
+			return false;
+		}
+		if($('#currentfloor').val==""||$('#maxfloor').val==""){
+			alert("请输入楼层信息！");
+			$('#currentfloor').focus();
+			return false;
+		}
+		if($('#address_info').val==""){
+			alert("请输入详细地址！");
+			$('#address_info').focus();
+			return false;
+		}
+		if($('#contact_person').val==""){
+			alert("请输入联系人！");
+			$('#contact_person').focus();
+			return false;
+		}
+		if($('#contact_phone').val==""){
+			alert("请输入联系人电话！");
+			$('#contact_phone').focus();
+			return false;
+		}
+		if($('#contact_email').val==""){
+			alert("请输入联系人邮箱！");
+			$('#contact_email').focus();
+			return false;
+		}
+		return true;
+	}
+</script>  
+</head>  
+<body >  
+<div id='mainContainer'>
+    <div class='titleDiv'>请认真填写发布房源信息</div> 
+    <div class="resultshow">
+    </div> 
+    <div class='rowDiv'>  
+    	<div class='labelDiv'>发布标题：</div>  
+        <div class='inputDiv'><input type="text" id="title">*(长度的要求小于100)</div>  
+    </div> 
+    <div class='rowDiv'>  
+    	<div class='labelDiv'>房屋类型：</div>  
+        <div class='inputDiv'><input type="text" id="room" onchange="checkdigital(this)">室</div><div class='inputDiv'><input type="text" id="parlor" onchange="checkdigital(this)">厅</div> <div class='inputDiv'><input type="text" id="washroom" onchange="checkdigital(this)">卫</div>   
+    </div>  
+    <div class='rowDiv'>  
+    	<div class='labelDiv'>租入/租出价格：</div>  
+  		<div class='inputDiv'><input type="text" id="price" onchange="checkdigital(this)"></div>  
+    </div>
+    <div class='rowDiv'>  
+    	<div class='labelDiv'>面积：</div>  
+  		<div class='inputDiv'><input type="text" id="area" onchange="checkdigital(this)"></div>  
+    </div> 
+    <div class='rowDiv'>  
+    	<div class='labelDiv'>楼层：</div>  
+  		<div class='inputDiv'>当前<input type="text" id="currentfloor" onchange="checkdigital(this)">层</div><div class='inputDiv'>最高<input type="text" id="maxfloor" onchange="checkdigital(this)">层</div>  
+    </div>
+    <div class='rowDiv'>
+    	<div class='labelDiv'>区域：</div>   
+    	<select class='inputDiv' id="region"></select>
+    </div>
+    <div class='rowDiv'>  
+    	<div class='labelDiv'>详细地址：</div>  
+  		<div class='inputDiv'><input type="text" id="address_info"></div>
+    </div>
+    <div class='rowDiv'>  
+    	<div class='labelDiv'>联系人：</div>  
+  		<div class='inputDiv'><input type="text" id="contact_person"></div>
+    </div>
+    <div class='rowDiv'>  
+    	<div class='labelDiv'>联系电话：</div>  
+  		<div class='inputDiv'><input type="text" id="contact_phone"></div>
+    </div>
+    <div class='rowDiv'>  
+    	<div class='labelDiv'>联系qq：</div>  
+  		<div class='inputDiv'><input type="text" id="contact_qq" onchange="checkdigital(this)"></div>
+    </div>
+    <div class='rowDiv'>  
+    	<div class='labelDiv'>联系微信：</div>  
+  		<div class='inputDiv'><input type="text" id="contact_weixin"></div>
+    </div>
+    <div class='rowDiv'>  
+    	<div class='labelDiv'>联系邮箱：</div>  
+        <div class='inputDiv'><input type="text" id="contact_email"></div>  
+    </div>  
+    <div class='rowDiv'>  
+    	<div class='labelDiv'>装修情况：</div>  
+  		<div class='inputDiv'><input type="text" id="decoration"></div>
+    </div>
+    <div class='rowDiv'>  
+    	<div class='labelDiv'>家具家电配置：</div>  
+  		<div class='inputDiv'><input type="text" id="furniture"></div>
+    </div>
+    <div class='rowDiv'>  
+    	<div class='labelDiv'>房屋建造年份：</div>  
+  		<div class='inputDiv'><input type="text" id="build_year" onchange="checkdigital(this)"></div>
+    </div>
+    <div class='rowDiv'>  
+    	<div class='labelDiv'>对租户要求：</div>  
+  		<div class='inputDiv'><input type="text" id="request"></div>
+    </div>
+    <div class='rowDiv'>  
+    	<div class='labelDiv'>备注：</div>  
+  		<div class='inputDiv'><input type="text" id="remark"></div>
+    </div>
+<!--    <div class='htmlEditorDiv'>-->
+<!--        <div class='labelDiv'>房屋详细描述：</div> -->
+<!--    	<div class='inputDiv' id="detail_description"></div>  -->
+<!--  		<div class='labelDiv'><input type='hidden' name='detail_description'/></div>-->
+<!--    </div>     -->
+	<div class='htmlEditorDiv'>
+    	<div class='labelDiv'>房屋详细描述：</div>  
+  		<div class='inputDiv'><input type="text" id="detail_description"></div>
+	</div>
+    <div class='actionDiv'>  
+    	<div id='publishHouserActionDiv'><input type="submit" value="发布房源"></div>  
+    </div>    
+</div>
+</body>  
+</html> 
+
+ 
+  

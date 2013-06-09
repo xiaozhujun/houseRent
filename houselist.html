@@ -1,0 +1,237 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">  
+<html>  
+<head>  
+<script src="/js/jquery-1.7.2.min.js" type="text/javascript"></script>
+<script src="/js/config.js" type="text/javascript"></script>
+<script src="/js/urlUtil.js" type="text/javascript"></script>
+<script src="/js/resouce.js" type="text/javascript"></script>
+<link href="/css/common.css" type="text/css" rel="stylesheet">
+<link href="/css/house/houselist.css" type="text/css" rel="stylesheet">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
+<title>注册</title>
+
+</head>  
+<!-- <body onload='loadregion()'>   -->
+<body>
+ <script type="text/javascript">
+	var hrefstr=window.location.href;
+    var key=test("key");
+    var price=test("price");
+    var region=test("region");
+    var room=test("room");
+    var type=test("type");
+ 	$(document).ready(function(){
+    	for(var i=0;i<region_array.length;i++){
+            var newNode = document.createElement("a");
+            newNode.href=getretionlink(key,price,region,room,type,region_array[i][0],1);
+            newNode.class="region_"+region_array[i][0];
+            newNode.innerHTML=region_array[i][1];
+            var parent = $("#region").append(newNode);
+    	}
+    	for(var i=0;i<price_array.length;i++){
+            var newNode = document.createElement("a");
+            newNode.href=getretionlink(key,price,region,room,type,price_array[i][0],2);
+            newNode.class="price_"+price_array[i][0];
+            newNode.innerHTML=price_array[i][1];
+            var parent = $("#price").append(newNode);
+    	}
+    	for(var i=0;i<room_array.length;i++){
+            var newNode = document.createElement("a");
+            newNode.href=getretionlink(key,price,region,room,type,room_array[i][0],3);
+            newNode.class="room_"+room_array[i][0];
+            newNode.innerHTML=room_array[i][1];
+            var parent = $("#room").append(newNode);
+    	}
+    	for(var i=0;i<type_array.length;i++){
+            var newNode = document.createElement("a");
+            newNode.href=getretionlink(key,price,region,room,type,type_array[i][0],4);
+            newNode.class="type_"+type_array[i][0];
+            newNode.innerHTML=type_array[i][1];
+            var parent = $("#type").append(newNode);
+            
+    	}
+    	var data = {};
+    	$.post($.URL.house.houselist,data,callback,"json");
+		//回调函数
+		function callback(result)
+		{
+			if(result.data.current_count==0){
+				$('#result').html("对不起没有查询到结果！");
+			}else{
+				renderingPage(result.data);
+			}
+		}
+    	
+ 	});
+	function renderingPage(data){
+		var htmlstr="";
+		for(var i=0;i<data.current_count;i++){
+			htmlstr+="<div class='table_row'>";
+				htmlstr+="<div class='table_cell'>"+"<a href='http://sh.58.com/zufang/12561126238593x.shtml' target='_blank' ><img src='http://4.pic.58control.cn/p1/tiny/n_1570546758288410.jpg' /></a>"+"</div>";
+				htmlstr+="<div class='table_cell'>";
+					htmlstr+="<div class='titleinfo'>"+"标题："+data.houseinfo_list[i].title+"</div>";
+					htmlstr+="<div class='regioninfo'>"+"区域："+data.houseinfo_list[i].region+"</div>";
+				htmlstr+="</div>";
+			htmlstr+="</div>";
+		}
+		
+		$('#result').html(htmlstr);
+	}
+	function getretionlink(key,price,region,room,type,value,category){
+		var link="/houselist.html";
+		if(category==1){
+			link+="?region="+value;
+			if(key!=""){
+				link+="&key="+key;
+			}
+			if(price!=""){
+				link+="&price="+price;
+			}
+			if(room!=""){
+				link+="&room="+room;
+			}
+			if(type!=""){
+				link+="&type="+type;
+			}
+		}
+		if(category==2){
+			link+="?price="+value;
+			if(key!=""){
+				link+="&key="+key;
+			}
+			if(region!=""){
+				link+="&region="+region;
+			}
+			if(room!=""){
+				link+="&room="+room;
+			}
+			if(type!=""){
+				link+="&type="+type;
+			}
+		}
+		if(category==3){
+			link+="?room="+value;
+			if(key!=""){
+				link+="&key="+key;
+			}
+			
+			if(region!=""){
+				link+="&region="+region;
+			}
+			if(price!=""){
+				link+="&price="+price;
+			}
+			if(type!=""){
+				link+="&type="+type;
+			}
+		}
+		if(category==4){
+			link+="?type="+value;
+			if(key!=""){
+				link+="&key="+key;
+			}
+			
+			if(region!=""){
+				link+="&region="+region;
+			}
+			if(price!=""){
+				link+="&price="+price;
+			}
+			if(room!=""){
+				link+="&room="+room;
+			}
+		}
+		return link;
+	}
+	function test(paramName)  
+	{  
+	    var reg = new RegExp("(^|\\?|&)"+ paramName+"=([^&]*)(\\s|&|$)", "i");
+	  
+	    if (reg.test(hrefstr)) //test为script ID 
+	        return RegExp.$2; 
+	    else
+	        return "";
+	}
+
+
+</script>
+<div id='mainContainer'>
+
+	<div id="keysearch">
+			<input type="text"  maxlength="100" >
+			<input type="submit" value="搜索一下">
+	</div>
+
+    <div id="choise">
+		<dl class="secitem" id="filter_quyu"> 
+		<dt>区域：</dt> 
+		<dd id="region">
+	    <!--   <a   id="region_0" href="/zufang/" class='select'>全北京</a> 
+		<a   id="region_1" href="/huangpu/zufang/">东城</a> 
+		<a   id="region_2" href="/luwan/zufang/">西城</a> 
+		<a   id="region_3" href="/jingan/zufang/">崇文</a> 
+		<a   id="region_0" href="/xuhui/zufang/">宣武</a> 
+		<a   id="region_0" href="/pudongxinqu/zufang/">朝阳</a> 
+		<a   id="region_0" href="/changning/zufang/">丰台</a> 
+		<a   id="region_0" href="/hongkou/zufang/">石景山</a> 
+		<a   id="region_0" href="/yangpu/zufang/">海淀</a> 
+		<a   id="region_0" href="/putuo/zufang/">门头沟</a> 
+		<a   id="region_0" href="/zhabei/zufang/">房山</a> 
+		<a   id="region_0" href="/minxing/zufang/">通州</a> 
+		<a   id="region_0" href="/baoshan/zufang/">顺义</a> 
+		<a   id="region_0" href="/jiading/zufang/">昌平</a> 
+		<a   id="region_0" href="/qingpu/zufang/">大兴</a> 
+		<a   id="region_0" href="/fengxiansh/zufang/">平谷</a> 
+		<a   id="region_0" href="/nanhui/zufang/">怀柔</a> 
+		<a   id="region_0" href="/chongming/zufang/">密云</a> 
+		<a   id="region_0" href="/jinshan/zufang/">延庆</a> -->
+		</dd> 
+		</dl> 
+		
+		<dl class="secitem" id="filter_price"><dt>租金：</dt>
+		<dd id="price">
+		<!--  <a href="http://sh.58.com/zufang/" class='select'>不限</a> 
+		<a href='/zufang/b8/' >600元以下</a> 
+		<a href='/zufang/b9/' >600-1000元</a> 
+		<a href='/zufang/b10/' >1000-1500元</a> 
+		<a href='/zufang/b11/' >1500-2000元</a> 
+		<a href='/zufang/b12/' >2000-3000元</a> 
+		<a href='/zufang/b13/' >3000-5000元</a> 
+		<a href='/zufang/b14/' >5000-8000元</a> 
+		<a href='/zufang/b15/' >8000元以上</a> -->
+		</dd>
+		</dl>
+		
+		<dl class="secitem" id="filter_tingshi"><dt>厅室：</dt>
+		<dd id="room">
+		<!--<a href="http://sh.58.com/zufang/" class='select'>不限</a> 
+		<a href='/zufang/i1/' >一室</a> 
+		<a href='/zufang/i2/' >两室</a> 
+		<a href='/zufang/i3/' >三室</a> 
+		<a href='/zufang/i4/' >四室</a> 
+		<a href='/zufang/i5/' >四室以上</a> -->
+		</dd></dl>
+		
+		<dl class="secitem" id="filter_fangshi"> 
+		<dt>方式：</dt> 
+		<dd id="type"> 
+		<!--<a class="select">整套出租</a> 
+		<a href="/hezu/">单间出租</a> 
+		<a href="/hezu/g2/">床位出租</a> -->
+		</dd> 
+		</dl>
+    </div>
+    
+    <div id="result"> 
+
+    </div>
+</div>
+</body>  
+</html>  
+
+
+
+
+
+
+
