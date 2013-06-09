@@ -58,7 +58,7 @@ return  array(
 	'DB_HOST'               => IS_BAE?getenv('HTTP_BAE_ENV_ADDR_SQL_IP'):'localhost', // 服务器地址
 	'DB_NAME'               => IS_BAE?'wZPhzsANmcCRTnWQdRqe':'house_rent',          // 数据库名
 	'DB_USER'               => IS_BAE?getenv('HTTP_BAE_ENV_AK'):'root',      // 用户名
-	'DB_PWD'                => IS_BAE?getenv('HTTP_BAE_ENV_SK'):'root',          // 密码
+	'DB_PWD'                => IS_BAE?getenv('HTTP_BAE_ENV_SK'):'',          // 密码
 	'DB_PORT'               => IS_BAE?getenv('HTTP_BAE_ENV_ADDR_SQL_PORT'):'3306',        // 端口
 	'DB_PREFIX'             => '',    // 数据库表前缀
     'DB_FIELDTYPE_CHECK'    => false,       // 是否进行字段类型检查

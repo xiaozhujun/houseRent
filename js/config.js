@@ -22,6 +22,11 @@
 			"passApply":"/Friend/passApply",
 			"myFriend":"/Friend/myFriend",
 			"invitedFriend":"/Friend/invitedFriend",
+		},
+		"house":{
+			"houselist":"/House/houseList",
+			"publishhouse":"/House/publishHouseAction",
+			
 		}
 			
 	}
