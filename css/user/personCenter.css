@@ -1,0 +1,104 @@
+@CHARSET "UTF-8";
+
+#headContainer
+{
+	border: solid 1px #ccc;
+}
+
+#loginRegDiv
+{
+	float: right;
+	height: 100%;
+	padding-left: 10px;	
+	padding-right: 10px;
+}
+
+#contactDiv
+{
+	float:right;
+	height: 100%;
+	padding-left: 10px;	
+}
+
+#inviteDiv
+{
+	float:right;
+	height: 100%;
+	padding-left: 10px;
+}
+
+#mainBodyDiv
+{
+	width: 100%;
+	margin-top:5px;
+	padding:0;
+}
+
+#menuDiv
+{
+	float: left;
+	
+	border-color: gray;
+	border-style: solid;
+	border-width: 1px;
+	padding: 0;
+	
+	width:auto;
+	min-width: 200px;
+	min-height:550px;
+}
+
+.menuModule
+{
+	width: 100%;
+	margin-bottom:2px;
+}
+
+.moduleTitle
+{
+	width:100%;
+	text-align: center;
+	background-color: #ccc;
+	
+	padding-top: 5px;
+	padding-bottom: 5px;
+	
+	cursor: pointer;
+}
+
+.moduleTitle:HOVER
+{
+	background-color: #999;
+}
+
+.menuItem
+{
+	width: 100%;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	
+	cursor: pointer;
+}
+
+.menuNameDiv
+{
+	margin-left:5px;
+}
+
+.menuItem:HOVER
+{
+	background-color: #eee;	
+}
+
+#mainContentDiv
+{
+	margin-left:200px;
+	min-height:550px;
+	width:auto;
+	
+	border-color: gray;
+	border-style: solid;
+	border-width: 1px;
+	
+	margin-left:208px;
+}

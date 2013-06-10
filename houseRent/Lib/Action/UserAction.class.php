@@ -371,4 +371,21 @@ class UserAction extends Action {
 		$this->ajaxReturn($data);
 	}
 	
+	//个人中心
+	function personCenter()
+	{
+		if(!isLogin())
+		{
+			header ( "Content-Type:text/html; charset=utf-8" );
+			$this->display ( "loginIndex" );
+		}
+		else
+		{
+			session_start();
+			$this->assign('user',$_SESSION ['user']);
+			header ( "Content-Type:text/html; charset=utf-8" );
+			$this->display ( "personCenter" );
+		}
+	}
+	
 }

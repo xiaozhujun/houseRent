@@ -2,27 +2,34 @@
 <html>  
 <head>  
 <link href="/css/common.css" type="text/css" rel="stylesheet">
+<link href="/css/header.css" type="text/css" rel="stylesheet">
 <link href="/css/index.css" type="text/css" rel="stylesheet">
+<link href="/css/house.css" type="text/css" rel="stylesheet">
+<link href="/css/intention.css" type="text/css" rel="stylesheet">
 <script src="/js/jquery-1.7.2.min.js" type="text/javascript"></script>
 <script src="/js/config.js" type="text/javascript"></script>
+<script src="/js/emptyNote.js" type="text/javascript"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
 <title>首页</title>  
 </head>  
 <body>  
 <script type="text/javascript">
 	$(document).ready(function(){
-		$('.moduleTitle').click(function(){
-			$(this).next().toggle(500);
-		});
-		
-		$('.menuItem').click(function(){
-			$('#mainContentDiv').load($(this).attr('page'));
-		});
-		
 		$("#inviteLink").click(function(){
 			$("#mainContentDiv").load($(this).attr("href"));
 			return false;
 		});
+		
+		$('.houseType').click(function(){
+			$(this).addClass('houseTypeSelected');
+			$(this).siblings().removeClass('houseTypeSelected');
+			
+			$('#'+$(this).attr('body')).show();
+			$('#'+$(this).attr('body')).siblings().hide();
+			
+		});
+		
+		$("input").emptyValue();
 	});
 </script>
 <div id='mainContainer'>
@@ -37,7 +44,7 @@
     		<div id='headBottomDiv'>
     			<div id='loginRegDiv'>
     			{if isset($user)}
-    				hi,{$user}&nbsp;<a href='/User/logout'>安全退出</a>
+    				hi,<a href='/User/personCenter'>{$user}</a>&nbsp;<a href='/User/logout'>安全退出</a>
     			{else}
     				<a href='/User/login'>登陆</a>/<a href='/User/register'>注册</a>
     			{/if}
@@ -51,38 +58,159 @@
     </div>
     
     <div id='mainBodyDiv'>
-    	<div id='menuDiv'>
-    		<div class='menuModule'>
-	    		<div class='moduleTitle'>个人信息</div>
-	    		<div class='menuItems'>
-	    			<div class='menuItem' page='/mod/user/update.html'><div class='menuNameDiv'>维护信息</div></div>
-	    			<div class='menuItem' page='/mod/user/resetPwd.html'><div class='menuNameDiv'>修改密码</div></div>
-	    		</div>
-	    	</div>
-	    	
-	    	<div class='menuModule'>
-	    		<div class='moduleTitle'>房源管理</div>
-	    		<div class='menuItems'>
-	    			<div class='menuItem'><div class='menuNameDiv'>房源推荐</div></div>
-	    			<div class='menuItem'><div class='menuNameDiv'>我的房源</div></div>
-	    			<div class='menuItem'><div class='menuNameDiv'>关注房源</div></div>
-	    			<div class='menuItem' page='/mod/friend/addFriend.html'><div class='menuNameDiv'>房源申请</div></div>
-	    		</div>
-	    	</div>
-
-	    	<div class='menuModule'>
-	    		<div class='moduleTitle'>好友管理</div>
-	    		<div class='menuItems'>
-	    			<div class='menuItem' page='/mod/friend/friendList.html'><div class='menuNameDiv'>好友列表</div></div>
-	    			<div class='menuItem' page='/mod/friend/addFriend.html'><div class='menuNameDiv'>添加好友</div></div>
-	    			<div class='menuItem' page='/mod/friend/applyingList.html'><div class='menuNameDiv'>好友申请</div></div>
-	    			<div class='menuItem' page='/mod/user/invite.html'><div class='menuNameDiv'>邀请好友</div></div>
-	    		</div>
-	    	</div>
-	    	
+    	<div id='searchDiv'>
+    		<input id='searchInput' type='text' data-empty='请输入地点或小区名'>
+    		<div id='searchBtn'>搜索</div>
     	</div>
-    	<div id='mainContentDiv'>
-    		我是主界面哦！
+    	
+    	<div id='houseTypeDiv'>
+    		<div id='typeHead'>
+    			<div body='friendHouse' class='houseType houseTypeSelected'>好友房源</div>
+    			<div body='intentionHouse' class='houseType'>推荐房源</div>
+    		</div>
+    		<div id='houseList'>
+    			<div id='friendHouse'>
+    				<div id='oneDegree'>
+    					<div class='degreeTitle'>一度房源</div>
+    					<div class='houseListDiv'>
+				   			<div class='houseItem'>
+				   				<div class='houseItemColumn'>海淀区 和平里和平街十四区 2室1厅65平米</div>
+				   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
+				   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
+				   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
+				   			</div>
+				   			
+				   			<div class='houseItem'>
+				   				<div class='houseItemColumn'>和平里和平街十四区 2室1厅65平米</div>
+				   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
+				   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
+				   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
+				   			</div>
+				   			
+				   			<div class='houseItem'>
+				   				<div class='houseItemColumn'>和平里和平街十四区 2室1厅65平米</div>
+				   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
+				   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
+				   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
+				   			</div>
+				   			
+				   			<div class='houseItem'>
+				   				<div class='houseItemColumn'>和平里和平街十四区 2室1厅65平米</div>
+				   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
+				   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
+				   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
+				   			</div>
+				   			
+				   			<div class='houseItem'>
+				   				<div class='houseItemColumn'>和平里和平街十四区 2室1厅65平米</div>
+				   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
+				   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
+				   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
+				   			</div>
+				   		</div>
+    				</div>
+    				<div id='twoDegree'>
+    					<div class='degreeTitle'>二度房源</div>
+    					<div class='houseListDiv'>
+				   			<div class='houseItem'>
+				   				<div class='houseItemColumn'>海淀区 和平里和平街十四区 2室1厅65平米</div>
+				   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
+				   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
+				   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
+				   			</div>
+				   			
+				   			<div class='houseItem'>
+				   				<div class='houseItemColumn'>和平里和平街十四区 2室1厅65平米</div>
+				   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
+				   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
+				   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
+				   			</div>
+				   			
+				   			<div class='houseItem'>
+				   				<div class='houseItemColumn'>和平里和平街十四区 2室1厅65平米</div>
+				   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
+				   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
+				   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
+				   			</div>
+				   			
+				   			<div class='houseItem'>
+				   				<div class='houseItemColumn'>和平里和平街十四区 2室1厅65平米</div>
+				   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
+				   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
+				   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
+				   			</div>
+				   			
+				   			<div class='houseItem'>
+				   				<div class='houseItemColumn'>和平里和平街十四区 2室1厅65平米</div>
+				   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
+				   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
+				   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
+				   			</div>
+				   		</div>
+    				</div>
+    			</div>
+    			<div id='intentionHouse'>
+    				<div id='intention'>
+    					<div class='intentionRowDiv'>
+    						<div class='intentionLableDiv'>您所在的公司：</div>
+    						<div class='intentionInputDiv'>
+    							<input class='intentionInput' type='text' data-empty='推荐你同事的房源信息' id=''>
+    						</div>
+    					</div>
+    					<div class='intentionRowDiv'>
+    						<div class='intentionLableDiv'>您所在的学校：</div>
+    						<div class='intentionInputDiv'>
+    							<input class='intentionInput' type='text' data-empty='推荐你校友的房源' id=''>
+    						</div>
+    					</div>
+    					<div class='intentionRowDiv'>
+    						<div class='intentionLableDiv'>您中意的小区：</div>
+    						<div class='intentionInputDiv'>
+    							<input class='intentionInput' type='text' data-empty='推荐意向居住地的房源' id=''>
+    						</div>
+    					</div>
+    				</div>
+    				
+    				<div id='intentionHouseList'>
+    					<div class='houseListDiv'>
+				   			<div class='houseItem'>
+				   				<div class='houseItemColumn'>海淀区 和平里和平街十四区 2室1厅65平米</div>
+				   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
+				   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
+				   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
+				   			</div>
+				   			
+				   			<div class='houseItem'>
+				   				<div class='houseItemColumn'>和平里和平街十四区 2室1厅65平米</div>
+				   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
+				   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
+				   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
+				   			</div>
+				   			
+				   			<div class='houseItem'>
+				   				<div class='houseItemColumn'>和平里和平街十四区 2室1厅65平米</div>
+				   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
+				   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
+				   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
+				   			</div>
+				   			
+				   			<div class='houseItem'>
+				   				<div class='houseItemColumn'>和平里和平街十四区 2室1厅65平米</div>
+				   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
+				   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
+				   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
+				   			</div>
+				   			
+				   			<div class='houseItem'>
+				   				<div class='houseItemColumn'>和平里和平街十四区 2室1厅65平米</div>
+				   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
+				   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
+				   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
+				   			</div>
+				   		</div>
+    				</div>
+    			</div>
+    		</div>
     	</div>
    </div>
 </div>

@@ -2,10 +2,10 @@
 <html>  
 <head>  
 <link href="/css/common.css" type="text/css" rel="stylesheet">
-<link href="/css/index.css" type="text/css" rel="stylesheet">
+<link href="/css/header.css" type="text/css" rel="stylesheet">
 <link href="/css/headLogin.css" type="text/css" rel="stylesheet">
 <link href="/css/register.css" type="text/css" rel="stylesheet">
-<link href="/css/recommend.css" type="text/css" rel="stylesheet">
+<link href="/css/house.css" type="text/css" rel="stylesheet">
 <link href="/css/community.css" type="text/css" rel="stylesheet">
 <script src="/js/jquery-1.7.2.min.js" type="text/javascript"></script>
 <script src="/js/config.js" type="text/javascript"></script>
@@ -132,40 +132,40 @@
    <!--推荐房源 -->
    <div id='recommendDiv'>
    		<div class='recommendTitle'>优质房源</div>
-   		<div class='recommendListDiv'>
-   			<div class='recommendItem'>
-   				<div class='recommendItemColumn'>海淀区 和平里和平街十四区 2室1厅65平米</div>
-   				<div class='recommendItemColumn'>租金价格：3100 元/月 </div>
-   				<div class='recommendItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
-   				<div class='recommendItemColumn'>出租时间：2013-6-15</div>
+   		<div class='houseListDiv'>
+   			<div class='houseItem'>
+   				<div class='houseItemColumn'>海淀区 和平里和平街十四区 2室1厅65平米</div>
+   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
+   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
+   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
    			</div>
    			
-   			<div class='recommendItem'>
-   				<div class='recommendItemColumn'>和平里和平街十四区 2室1厅65平米</div>
-   				<div class='recommendItemColumn'>租金价格：3100 元/月 </div>
-   				<div class='recommendItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
-   				<div class='recommendItemColumn'>出租时间：2013-6-15</div>
+   			<div class='houseItem'>
+   				<div class='houseItemColumn'>和平里和平街十四区 2室1厅65平米</div>
+   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
+   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
+   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
    			</div>
    			
-   			<div class='recommendItem'>
-   				<div class='recommendItemColumn'>和平里和平街十四区 2室1厅65平米</div>
-   				<div class='recommendItemColumn'>租金价格：3100 元/月 </div>
-   				<div class='recommendItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
-   				<div class='recommendItemColumn'>出租时间：2013-6-15</div>
+   			<div class='houseItem'>
+   				<div class='houseItemColumn'>和平里和平街十四区 2室1厅65平米</div>
+   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
+   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
+   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
    			</div>
    			
-   			<div class='recommendItem'>
-   				<div class='recommendItemColumn'>和平里和平街十四区 2室1厅65平米</div>
-   				<div class='recommendItemColumn'>租金价格：3100 元/月 </div>
-   				<div class='recommendItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
-   				<div class='recommendItemColumn'>出租时间：2013-6-15</div>
+   			<div class='houseItem'>
+   				<div class='houseItemColumn'>和平里和平街十四区 2室1厅65平米</div>
+   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
+   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
+   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
    			</div>
    			
-   			<div class='recommendItem'>
-   				<div class='recommendItemColumn'>和平里和平街十四区 2室1厅65平米</div>
-   				<div class='recommendItemColumn'>租金价格：3100 元/月 </div>
-   				<div class='recommendItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
-   				<div class='recommendItemColumn'>出租时间：2013-6-15</div>
+   			<div class='houseItem'>
+   				<div class='houseItemColumn'>和平里和平街十四区 2室1厅65平米</div>
+   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
+   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
+   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
    			</div>
    		</div>
    		

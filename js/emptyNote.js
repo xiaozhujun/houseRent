@@ -11,11 +11,6 @@
                 empty: input.attr("data-empty")||"",
                 className: "gray"
             }, options);
-            //input.attr("data-empty",options.empty);
-//            if($(this).attr('pass-empty')=="true" && input.next().attr('pass-empty')=='true')
-//        	{
-//            	$(this).next().hide();
-//        	}
             
             return input.focus(function(){
                 $(this).removeClass(options.className);
