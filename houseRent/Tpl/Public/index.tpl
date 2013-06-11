@@ -74,7 +74,7 @@
     		<div id='typeHead'>
     			<div body='friendHouse' class='houseType houseTypeSelected'>好友房源</div>
     			<div body='intentionHouse' class='houseType'>推荐房源</div>
-    			<div body='publishHouse' url='/publishHouse.html' class='houseType'>发布房源</div>
+    			<div body='publishHouse' url='/publishhouse.html' class='houseType'>发布房源</div>
     		</div>
     		<div id='houseList'>
     			<div id='friendHouse'>
