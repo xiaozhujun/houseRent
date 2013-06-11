@@ -22,11 +22,17 @@
 		});
 		
 		$('.houseType').click(function(){
+			var body = $(this).attr('body'); 
 			$(this).addClass('houseTypeSelected');
 			$(this).siblings().removeClass('houseTypeSelected');
 			
-			$('#'+$(this).attr('body')).show();
-			$('#'+$(this).attr('body')).siblings().hide();
+			$('#'+body).show();
+			$('#'+body).siblings().hide();
+			
+			if(body=='publishHouse')
+			{
+				$('#'+body).load($(this).attr('url'));
+			}
 			
 		});
 		
@@ -68,7 +74,7 @@
     		<div id='typeHead'>
     			<div body='friendHouse' class='houseType houseTypeSelected'>好友房源</div>
     			<div body='intentionHouse' class='houseType'>推荐房源</div>
-    			<div body='publishHouse' class='houseType'>发布房源</div>
+    			<div body='publishHouse' url='/publishHouse.html' class='houseType'>发布房源</div>
     		</div>
     		<div id='houseList'>
     			<div id='friendHouse'>

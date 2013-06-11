@@ -1,7 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">  
 <html>  
 <head>  
-<link href="/css/common.css" type="text/css" rel="stylesheet">
 <link href="/css/house/publishhouse.css" type="text/css" rel="stylesheet">
 <script src="/js/jquery-1.7.2.min.js" type="text/javascript"></script>
 <script src="/js/config.js" type="text/javascript"></script>
@@ -18,7 +17,7 @@
 				  Option.text=region_array[region][1];
 				  selObj.options.add(Option);
 			  }
-				$('#publishHouserActionDiv').click(function(){
+				$('#publishHouseBtn').click(function(){
 					if(checkform()){
 						var data = {};
 						data.title = $('#title').val();
@@ -117,7 +116,7 @@
 </script>  
 </head>  
 <body >  
-<div id='mainContainer'>
+<div id='publishHouseContainer'>
     <div class='titleDiv'>请认真填写发布房源信息</div> 
     <div class="resultshow">
     </div> 
@@ -196,12 +195,16 @@
 <!--    </div>     -->
 	<div class='htmlEditorDiv'>
     	<div class='labelDiv'>房屋详细描述：</div>  
-  		<div class='inputDiv'><input type="text" id="detail_description"></div>
+  		<div class='inputDiv'>
+  		<textarea id='detail_description' rows="8" cols="60">
+			请填写房源描述！
+		</textarea>
+		<!-- <input type="text" id="detail_description"></div> -->
 	</div>
     <div class='actionDiv'>  
-    	<div id='publishHouserActionDiv'><input type="submit" value="发布房源"></div>  
-    </div>    
-</div>
+    	<div class='labelDiv'>&nbsp;</div>
+    	<div id='publishHouseBtn'>发布房源</div>
+	</div>
 </body>  
 </html> 
 
