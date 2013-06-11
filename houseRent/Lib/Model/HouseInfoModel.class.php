@@ -54,7 +54,6 @@ class HouseInfoModel extends Model{
     		$wheresql=" where ".$wheresql;
     	}
     	$querySQL = "select * from house_info ".$wheresql;
-    	echo $querySQL;
     	$countSQL="select count(*) count  from house_info ".$wheresql;
     	$list["list"]= $this->query($querySQL);
     	$count=$this->query($countSQL);
