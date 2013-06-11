@@ -4,20 +4,21 @@ class UserModel extends Model{
     //自动验证  
     protected $_validate=array(  
             //每个字段的详细验证内容  
-            array("name","require","用户名不能为空"),  
-            array("name","checkLength","用户名长度不符合要求",0,'callback'), 
-    		array("name","isUserExist","账号已经使用",0,"callback"),
+//             array("name","require","用户名不能为空"),  
+//             array("name","checkLength","用户名长度不符合要求",0,'callback'), 
+//     		array("name","isUserExist","账号已经使用",0,"callback"),
     		array("realName","require","真实姓名不能为空"),
             array("password","require","密码不能为空"),  
             array("password","checkLength","密码长度的要求是5~15位之间",0,'callback'),  
             array("password","repassword","两次密码输入不一致",0,'confirm'),  
             array("email","require","邮箱必须填写"),  
     		array("email","email","邮箱格式不正确",2),
-    		array("phone","require","手机号必须填写"),
-    		array("phone","isPhone","手机号不正确",0,"callback"),
-    		array("identifyNum","require","身份证号必须填写"),
-    		array("identifyNum","isIdentifyNum","身份证号不正确",0,"callback"),
-    		//array('email','isEmailExist','邮箱已经使用',0,'callback'),
+    		array("email",'isEmailExist','邮箱已经使用',0,'callback'),
+    		array("sex","require","性别不能为空"),
+//     		array("phone","require","手机号必须填写"),
+//     		array("phone","isPhone","手机号不正确",0,"callback"),
+//     		array("identifyNum","require","身份证号必须填写"),
+//     		array("identifyNum","isIdentifyNum","身份证号不正确",0,"callback"),
             );  
       
     //自动填充  
@@ -88,17 +89,17 @@ class UserModel extends Model{
         }
 
         //用户登录
-        function login($name,$password)
+        function login($email,$password)
         {
         	$md5_pass = md5($password);
-        	$result=$this->query("select name from user where name='$name' and password='$md5_pass' and status=1");
+        	$result=$this->query("select id from user where email='{$email}' and password='{$md5_pass}' and status=1");
         	if(sizeof($result)==1)
         	{
         		return true;
         	}
         	else
         	{
-        		$result=$this->query("select name from user where name='$name' and status=0");
+        		$result=$this->query("select id from user where email='{$email}' and status=0");
         		if(sizeof($result)==1)
         		{
         			$this->error='您的用户需要激活哦！';
@@ -110,23 +111,23 @@ class UserModel extends Model{
         }
         
         //更新用户激活码及事件信息
-        function updateActivateInfo($name)
+        function updateActivateInfo($email)
         {
         	//判断用户是否存在
-        	if(!$this->isUserExist($name))
+        	if(!$this->isEmailExist($email))
         	{
         		$this->error = '账号不存在';
         		return false;
         	}
         	//判断用户是否激活
-        	if($this->isUserActivated($name))
+        	if($this->isUserActivated($email))
         	{
         		$this->error = '账号已经激活';
         		return false;
         	}
         	
         	$date = date('Y-m-d H:i:s');
-        	$querySQL = "select id from user where status=0 and name='{$name}'";
+        	$querySQL = "select id from user where status=0 and email='{$email}'";
         	$result = $this->query($querySQL);
         	if(sizeof($result)>=1)
         	{
@@ -167,9 +168,9 @@ class UserModel extends Model{
         }
         
         //判断用户是否已经激活
-        function isUserActivated($name)
+        function isUserActivated($email)
         {
-        	$querySQL = "select id from user where name='{$name}' and status=1";
+        	$querySQL = "select id from user where email='{email}' and status=1";
         	$result = $this->query($querySQL);
         	if(sizeof($result)==1)
         	{
@@ -188,10 +189,10 @@ class UserModel extends Model{
         }
         
         //激活用户
-        function regActivate($name,$activateCode)
+        function regActivate($email,$activateCode)
         {
         	$date = date('Y-m-d H:i:s');
-        	$querySQL = "select id from user where name='{$name}' and activateCode='{$activateCode}' and  codeEffectTime >='{$date}' and codeEffectTime IS NOT NULL and status=0";
+        	$querySQL = "select id from user where email='{$email}' and activateCode='{$activateCode}' and  codeEffectTime >='{$date}' and codeEffectTime IS NOT NULL and status=0";
         	$result = $this->query($querySQL);
         	if(sizeof($result)==1)
         	{
@@ -206,13 +207,13 @@ class UserModel extends Model{
         	}
         	else 
         	{
-        		if($this->isUserActivated($name))
+        		if($this->isUserActivated($email))
         		{
         			$this->error = '用户已经激活，您可以正常登陆哦！';
         			return false;
         		}
         		
-        		$querySQL = "select id from user where status=0 and name='{$name}' and codeEffectTime < '{$date}'";
+        		$querySQL = "select id from user where status=0 and email='{$email}' and codeEffectTime < '{$date}'";
         		$result = $this->query($querySQL);
         		if(sizeof($result)==1)
         		{
@@ -225,11 +226,11 @@ class UserModel extends Model{
         }
         
         //通过用户名查找
-        function findByName($name)
+        function findByEmail($email)
         {
-        	if($name!=null && $name!='')
+        	if($email!=null && $email!='')
         	{
-        		$querySQL = "select * from user where name='{$name}'";
+        		$querySQL = "select * from user where email='{$email}'";
         		$list= $this->query($querySQL);
         		if(sizeof($list)>=1)
         		{

@@ -24,8 +24,8 @@ class UserAction extends Action {
 		$error_msg = '';
 		// $_GET $_POST
 		$verify = $_POST ['verify'];
-		$name = $_POST ['name'];
 		$email = $_POST ['email'];
+		$realName = $_POST['realName'];
 		if (! isset ( $verify ) || $verify == '') {
 			$data['msg'] =  '验证码不能为空';
 			$this->ajaxReturn($data);
@@ -45,14 +45,17 @@ class UserAction extends Action {
 			$vo = $user->data;
 			// 执行插入操作，执行成功后，返回新插入的数据库的ID
 			if ($user->add ()) {
-				$vo = $user->findByName ( $name );
+				$vo = $user->findByEmail ( $email );
 				// 发送欢迎邮件
-				$activateAddress = C ( 'DOMAIN' ) . C ( 'BASE_URL' ) . '?m=User&a=regActivate&name=' . $name . '&activateCode=' . $vo ['activateCode'];
+				$activateAddress = C ( 'DOMAIN' ) . C ( 'BASE_URL' ) . '?m=User&a=regActivate&email=' . $email . '&activateCode=' . $vo ['activateCode'];
 				$subject = '租客团，感谢您的支持！';
-				$email_content = "亲爱的，{$name}:<br>感谢您的支持并使用租客团，我们将竭尽所能与您分担租房、住房过程中的烦扰哦！\n\t请您点击激活链接，开始使用我们为精心打造的服务吧！\n\t{$activateAddress}";
-				
+				$email_content = "亲爱的，{$realName}:<br>感谢您的支持并使用租客团，我们将竭尽所能与您分担租房、住房过程中的烦扰哦！\n\t请您点击激活链接，开始使用我们为精心打造的服务吧！\n\t{$activateAddress}";
+				if(C('IS_TEST'))
+				{
+					$email = C('TEST_EMAIL');
+				}
 				// 发送邮件
-				$email_result = sendMail ( $email, $name, $subject, $email_content );
+				$email_result = sendMail ( $email, $realName, $subject, $email_content );
 				
 				$data['msg'] =  '恭喜您，注册成功！已发送激活邮件，请您注意查收账户激活邮件！';
 				$data['success'] = true;
@@ -73,19 +76,19 @@ class UserAction extends Action {
 	
 	// 用户注册激活
 	function regActivate() {
-		if (! isset ( $_GET ['name'] ) || ! isset ( $_GET ['activateCode'] )) {
+		if (! isset ( $_GET ['email'] ) || ! isset ( $_GET ['activateCode'] )) {
 			$this->assign ( 'result_msg', '请求出错，请您重新申请激活！' );
 			$this->display ( 'regActivateFail' );
 			return;
 		}
 		
-		$name = $_GET ['name'];
+		$email = $_GET ['email'];
 		$activateCode = $_GET ['activateCode'];
 		// 执行登录
 		$userModel = new UserModel ();
-		if ($userModel->regActivate ( $name, $activateCode )) {
+		if ($userModel->regActivate ( $email, $activateCode )) {
 			header ( "Content-Type:text/html; charset=utf-8" );
-			redirect(C('LOGIN_URL'),3,'恭喜您，激活成功！系统3秒内将自动跳转到登陆页！感谢您的支持！');
+			redirect('/',3,'恭喜您，激活成功！系统3秒内将自动跳转到首页登录！感谢您的支持！');
 		} else {
 			header ( "Content-Type:text/html; charset=utf-8" );
 			redirect('/User/resendActivate',5,'对不起，激活失败！系统5秒内将自动跳转到重新发送激活邮件申请页！感谢您的支持！');
@@ -103,9 +106,9 @@ class UserAction extends Action {
 		$data = array();
 		$data['success'] = false;
 		// 判断有无参数
-		if (! isset ( $_POST ['name']) )
+		if (! isset ( $_POST ['email']) )
 		{
-			$data['msg'] = '请填写用户名！';
+			$data['msg'] = '请填写登陆邮箱！';
 			$this->ajaxReturn($data);
 			return;
 		}
@@ -117,23 +120,20 @@ class UserAction extends Action {
 		}
 		else {
 			// 获取参数
-			$name = $_POST ['name'];
+			$email = $_POST ['email'];
 			$password = $_POST ['password'];
 			
 			// 执行登录
 			$userModel = new UserModel ();
 			
-			if ($userModel->login ( $name, $password )) {
+			if ($userModel->login ( $email, $password )) {
 				session_start ();
-				$_SESSION ['user'] = $name;
-				$vo = $userModel->findByName($name);
+				$vo = $userModel->findByEmail($email);
+				$_SESSION ['user'] = $vo['realName'];
 				$_SESSION ['userId'] = $vo['id'];
 				
 				$data['success'] = true;
 				$this->ajaxReturn($data);
-				//header ( "Content-Type:text/html; charset=utf-8" );
-				//redirect ( '/Public/index', 0, '页面跳转中...' );
-				// $this->display ( 'loginSuccess' );
 			} else {
 				$data['msg'] = $userModel->getError ();
 				$this->ajaxReturn($data);
@@ -147,7 +147,7 @@ class UserAction extends Action {
 		session_start ();
 		session_destroy();
 		header ( "Content-Type:text/html; charset=utf-8" );
-		redirect ( C('LOGIN_URL'));
+		redirect ('/');
 	}
 	
 	// 生成图片验证码
@@ -198,8 +198,8 @@ class UserAction extends Action {
 	// 重新发送激活信息
 	function resendActivateAction() {
 		// $_GET $_POST
-		$name = $_POST ['name'];
-		if (! isset ( $name )) {
+		$email = $_POST ['email'];
+		if (! isset ( $email )) {
 			$this->assign ( 'result_msg', '用户名不能为空' );
 			$this->display ( 'resendActivate' );
 			return;
@@ -207,17 +207,16 @@ class UserAction extends Action {
 		
 		$user = new UserModel ();
 		
-		$update_result = $user->updateActivateInfo ( $name );
+		$update_result = $user->updateActivateInfo ( $email );
 		$email_result = false;
 		$result_msg = '';
 		if ($update_result) {
-			$vo = $user->findByName ( $name );
-			$email = $vo ['email'];
+			$vo = $user->findByEmail ( $email );
 			
 			// 发送欢迎邮件
-			$activateAddress = C ( 'DOMAIN' ) . C ( 'BASE_URL' ) . '?m=User&a=regActivate&name=' . $name . '&activateCode=' . $vo ['activateCode'];
+			$activateAddress = C ( 'DOMAIN' ) . C ( 'BASE_URL' ) . '?m=User&a=regActivate&email=' . $email . '&activateCode=' . $vo ['activateCode'];
 			$subject = '租客团，账号激活！';
-			$email_content = "亲爱的，{$name}:<br>感谢您的支持并使用租客团，我们将竭尽所能与您分担租房、住房过程中的烦扰哦！\n\t请您点击激活链接，开始使用我们为精心打造的服务吧！\n\t{$activateAddress}";
+			$email_content = "亲爱的，{$vo['realName']}:<br>感谢您的支持并使用租客团，我们将竭尽所能与您分担租房、住房过程中的烦扰哦！\n\t请您点击激活链接，开始使用我们为精心打造的服务吧！\n\t{$activateAddress}";
 			
 			if (IS_BAE) {
 				import ( "COM.BAIDU.Bcms" );
@@ -229,7 +228,7 @@ class UserAction extends Action {
 						Bcms::MAIL_SUBJECT => $subject 
 				) );
 			} else {
-				$email_result = think_send_mail ( $email, $name, $subject, $email_content );
+				$email_result = think_send_mail ( $email, $vo['realName'], $subject, $email_content );
 			}
 			
 			if ($email_result) {
@@ -276,9 +275,9 @@ class UserAction extends Action {
 		}
 		
 		session_start ();
-		$userName = $_SESSION['user'];
+		$userId = $_SESSION['userId'];
 		$userModel = new UserModel();
-		$user = $userModel->findByName($userName);
+		$user = $userModel->find($userId);
 		
 		if(md5($_POST['oldPwd']) != $user['password'])
 		{
@@ -341,7 +340,7 @@ class UserAction extends Action {
 		
 		session_start();
 		$userModel =M('User');
-		$vo = $userModel->where('id='.$_SESSION['userId'])->getField('id,name,realName,phone,identifyNum');
+		$vo = $userModel->where('id='.$_SESSION['userId'])->getField('id,email,realName,phone,identifyNum');
 		$this->ajaxReturn($vo[$_SESSION['userId']]);
 	}
 	
@@ -366,10 +365,27 @@ class UserAction extends Action {
 		}
 		
 		$userModel = M('User');
-		$list = $userModel->where("name ='{$condition}' or email='{$condition}' or realName='{$condition}'")->limit(12)->getField('id,id,name,realName');
+		$list = $userModel->where("email='{$condition}' or realName='{$condition}'")->limit(12)->getField('id,id,realName');
 		$data['list'] = array_values($list);
 		$data['success'] = true;
 		$this->ajaxReturn($data);
+	}
+	
+	//个人中心
+	function personCenter()
+	{
+		if(!isLogin())
+		{
+			header ( "Content-Type:text/html; charset=utf-8" );
+			$this->display ( "loginIndex" );
+		}
+		else
+		{
+			session_start();
+			$this->assign('user',$_SESSION ['user']);
+			header ( "Content-Type:text/html; charset=utf-8" );
+			$this->display ( "personCenter" );
+		}
 	}
 	
 }

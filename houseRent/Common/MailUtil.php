@@ -44,7 +44,7 @@ function sendMail($to, $name, $subject = '', $body = '', $attachment = null)
 	$email_result = false;
 	if(IS_BAE)
 	{
-		import ( "COM.BAIDU.Bcms" );
+		import ( "COM.BAIDU.BCMS.Bcms" );
 		global $accessKey, $secretKey, $host;
 		$bcms = new Bcms ( $accessKey, $secretKey, $host ) ;
 		$email_result = $bcms->mail ( C('EMAIL_QUEUE'), $body, array(0=>$to) , array( Bcms::MAIL_SUBJECT => $subject)) ;

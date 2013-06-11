@@ -1,0 +1,177 @@
+@CHARSET "utf-8";
+#loginIndexContainer
+{
+	width:100%;
+	float:left;
+	border:solid 1px #ccc;
+}
+
+#registerMainBodyDiv
+{
+	width:100%;
+	float:left;
+	margin-bottom:20px;
+}
+	
+
+.mainTopDiv
+{
+	width:100%;
+	float:left;
+	
+	margin-top:20px;
+}
+
+.valueDiv
+{
+	width:60%;
+	float:left;
+	color: #333333;
+    font-family: Arial;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+}
+
+.valueLeftDiv
+{
+	width:50%;
+	float:left;
+	
+	font-size:18px;
+	font-weight:bold;
+	padding-left:20px;
+}
+
+.valueRightDiv
+{
+	width:280px;
+	
+	float:right;
+	border-style:solid;
+	border-color:#ccc;
+	border-width:1px;
+	margin-right:20px;
+	
+	font-size:18px;
+	padding-left:20px;
+	padding-bottom:20px;
+}
+
+.valueTitleDiv
+{
+	width:100%;
+	float:left;
+}
+
+.valueRowDiv
+{
+	width:100%;
+	float:left;
+	
+	margin-top:15px;
+	padding-left:20px;
+}
+
+.achievementRowDiv
+{
+	width:100%;
+	float:left;
+	margin-top:25px;
+}
+
+.registerDiv
+{
+	float:left;
+	width:400px;
+	
+	color: #000000;
+    font-family: 'Arial';
+    font-size: 13px;
+    font-style: normal;
+    font-weight: normal;
+    text-align: left;
+    text-decoration: none;
+	
+	border:solid 1px #ccc;
+	padding:30px;
+	
+}
+
+.registerTitle
+{
+	width:100%;
+	float:left;
+	
+	font-size:18px;
+}
+
+.registerRow
+{
+	width:100%;
+	float:left;
+	margin-top:5px;
+}
+
+.registerInput
+{
+	width:330px;
+	height:25px;
+	
+    font-family: 'Arial';
+    font-size: 13px;
+    font-style: normal;
+    font-weight: normal;
+    text-align: left;
+    text-decoration: none;
+}
+
+#regitserBtn
+{
+	width:330px;
+	padding-top:10px;
+	padding-bottom:10px;
+	color: #000000;
+    font-family: 'Arial';
+    font-size: 15px;
+	text-align:center;
+	border:solid 1px #999;
+	cursor:pointer;
+	
+	border-radius:5px;
+	-webkit-border-radius: 5px;
+    -moz-border-radius:5px;
+}
+
+#regitserBtn:HOVER
+{
+	background-color:#ccc;
+}
+
+#verifyInput
+{
+	width:100px;
+	height:25px;
+	float:left;
+	
+    font-family: 'Arial';
+    font-size: 13px;
+    font-style: normal;
+    font-weight: normal;
+    text-align: left;
+    text-decoration: none;
+}
+
+#verify
+{
+	height:30px;
+	float:left; 	
+	margin-left:5px;
+	cursor:pointer;
+}
+
+#msgDiv
+{
+	color:red;
+}

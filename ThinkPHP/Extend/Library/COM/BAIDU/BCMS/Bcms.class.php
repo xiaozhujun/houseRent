@@ -17,9 +17,9 @@ if ( ! defined ( 'API_ROOT_PATH' ) )
 //require_once ( API_ROOT_PATH . '/lib/BcmsException.class.php' );
 //require_once ( API_ROOT_PATH . '/lib/BaeBase.class.php' );
 
-import ( "COM.BAIDU.RequestCore" );
-import ( "COM.BAIDU.BcmsException" );
-import ( "COM.BAIDU.BaeBase" );
+import ( "COM.BAIDU.BCMS.RequestCore" );
+import ( "COM.BAIDU.BCMS.BcmsException" );
+import ( "COM.BAIDU.BCMS.BaeBase" );
 
 /**
  * 

@@ -1,0 +1,31 @@
+@CHARSET "utf-8";
+.headRightRow
+{
+	padding-top:10px;
+}
+
+.nameInputDiv
+{
+	float:right;
+	width:200px;
+}
+
+.pwdInputDiv
+{
+	float:right;
+	width:200px;
+}
+
+.loginBtnDiv
+{
+	float:right;
+	width:50px;
+}
+
+.loginColumnDiv
+{
+	width:100%;
+	float:left;
+	margin-top:5px;
+}
+

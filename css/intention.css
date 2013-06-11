@@ -1,0 +1,54 @@
+@CHARSET "utf-8";
+#intentionHouse
+{
+	width:100%;
+	float:left;
+	display: none;
+}
+
+#intention
+{
+	width:100%;
+	float:left;
+	margin-left:10px;
+}
+
+.intentionRowDiv
+{
+	margin-top:20px;
+	width:100%;
+	float:left;
+}
+
+.intentionLableDiv
+{
+	float:left;
+	text-align:right;
+	
+	color: #333333;
+    font-family: Arial;
+    font-size: 18px;
+}
+	
+.intentionInputDiv
+{
+	float:left;
+	text-align:left;
+}
+
+.intentionInput
+{
+    font-family: 'Arial';
+    font-size: 13px;
+    height: 30px;
+    width: 350px;
+	float:left;
+}
+
+#intentionHouseList
+{
+	width:100%;
+	float:left;
+	margin-top:30px;
+}
+
