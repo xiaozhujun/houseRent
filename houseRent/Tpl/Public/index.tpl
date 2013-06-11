@@ -5,6 +5,7 @@
 <link href="/css/header.css" type="text/css" rel="stylesheet">
 <link href="/css/index.css" type="text/css" rel="stylesheet">
 <link href="/css/house.css" type="text/css" rel="stylesheet">
+<link href="/css/publishHouse.css" type="text/css" rel="stylesheet">
 <link href="/css/intention.css" type="text/css" rel="stylesheet">
 <script src="/js/jquery-1.7.2.min.js" type="text/javascript"></script>
 <script src="/js/config.js" type="text/javascript"></script>
@@ -67,6 +68,7 @@
     		<div id='typeHead'>
     			<div body='friendHouse' class='houseType houseTypeSelected'>好友房源</div>
     			<div body='intentionHouse' class='houseType'>推荐房源</div>
+    			<div body='publishHouse' class='houseType'>发布房源</div>
     		</div>
     		<div id='houseList'>
     			<div id='friendHouse'>
@@ -209,6 +211,10 @@
 				   			</div>
 				   		</div>
     				</div>
+    			</div>
+    			
+    			<div id='publishHouse'>
+    				您还没有发布房源哦！
     			</div>
     		</div>
     	</div>
