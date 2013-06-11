@@ -58,19 +58,26 @@ class HouseAction extends Action {
 		}
 		session_start();
 		$user = D ("HouseInfo");
-		$user->create ();
-		$user["user_id"]=$_SESSION['userId'];
-		houseType($user,$_POST['room'],$_POST['parlor'],$_POST['washroom']);
-		floorInfo($user,$_POST['currentfloor'],$_POST['maxfloor']);
-		$user->input_time=intNow();
-		
-		if($user->add()){
-			$data['code']=0;
-			$data['msg']="";
-		}else{
-			$data['code']=1;
-			$data['msg']="publish fail!";
+		if($user->create ())
+		{
+			$user->user_id=$_SESSION['userId'];
+			houseType($user,$_POST['room'],$_POST['parlor'],$_POST['washroom']);
+			floorInfo($user,$_POST['currentfloor'],$_POST['maxfloor']);
+			$user->input_time=intNow();
+			if($user->add()){
+				$data['code']=0;
+				$data['msg']="";
+			}else{
+				$data['code']=1;
+				$data['msg']="publish fail!";
+			}	
 		}
+		else
+		{
+			$data['code']=1;
+			$data['msg']=$user->getError();
+		}
+		
 		$this->ajaxReturn($data);
 
 	}
