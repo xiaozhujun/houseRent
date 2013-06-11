@@ -6,19 +6,19 @@
 
 .nameInputDiv
 {
-	float:right;
-	width:200px;
+	float:left;
+	width:180px;
 }
 
 .pwdInputDiv
 {
-	float:right;
-	width:200px;
+	float:left;
+	width:180px;
 }
 
 .loginBtnDiv
 {
-	float:right;
+	float:left;
 	width:50px;
 }
 
@@ -29,3 +29,32 @@
 	margin-top:5px;
 }
 
+#topRow
+{
+	width:450px;
+	float:right;
+}
+
+#bottomRow
+{
+	width:450px;
+	float:right;
+	margin-top:2px;
+}
+
+#autoLogin
+{
+	width:180px;
+	float:left;
+}
+
+#forgotPassword
+{
+	width:80px;
+	float:left;
+}
+
+#loginMsg
+{
+	color:red;
+}
