@@ -64,5 +64,24 @@ class HouseInfoModel extends Model{
     	}
     	return $list;
     }
+    /*
+     * 根据houseId查询房屋详情页
+     */
+    function getHouseInfo($houseId){
+
+    	if($houseId<=0){
+			$data=null;
+			return data;
+    	}
+    		 
+    	$querySQL = "select * from house_info where house_id=".$houseId;
+    	$houseinfo= $this->query($querySQL);
+		if($houseinfo){
+			$data=$houseinfo[0];
+		}else{
+			$data=null;
+		}
+    	
+    } 
 
 }

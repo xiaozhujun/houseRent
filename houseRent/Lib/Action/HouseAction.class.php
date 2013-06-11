@@ -74,6 +74,23 @@ class HouseAction extends Action {
 		$this->ajaxReturn($data);
 
 	}
+	/*
+	 * 根据房屋id查询房屋详情页
+	 * 
+	 */
+	function houseInfoAction(){
+		if(!isLogin())
+		{
+			$data['code']=-1;
+			$data['msg']="not login!";
+			$this->ajaxReturn($data);
+		}
+		$houseId=$_POST['houseId'];
+		$data = array();
+		$houseinfo = new HouseInfoModel();
+		$data["houseinfo"]=$houseinfo->getHouseInfo($houseId);
+		$this->ajaxReturn($data);
+	}
 	
 	
 }
