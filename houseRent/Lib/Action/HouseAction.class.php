@@ -56,9 +56,10 @@ class HouseAction extends Action {
 			$data['msg']="not login!";
 			$this->ajaxReturn($data);
 		}
-		
+		session_start();
 		$user = D ("HouseInfo");
 		$user->create ();
+		$user["user_id"]=$_SESSION['userId'];
 		houseType($user,$_POST['room'],$_POST['parlor'],$_POST['washroom']);
 		floorInfo($user,$_POST['currentfloor'],$_POST['maxfloor']);
 		$user->input_time=intNow();
