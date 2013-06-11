@@ -93,6 +93,7 @@ CREATE TABLE `apply_house` (
   `house_id` bigint(20 NOT NULL  COMMENT '房子id',
   `input_time` int(11) unsigned NOT NULL default '0' COMMENT '录入时间',
   `status` int(4) NOT NULL default '1' COMMENT '1：applying，2：cancel，3：finish',
+  `change_wish` varchar(1024)  NOT NULL default '' COMMENT '交换意愿',
   PRIMARY KEY  (`apply_id`),
   KEY `idx_apply_userid` (`apply_id`,`user_id`),
   KEY `idx_apply_house_userid` (`apply_id`,`user_id`,`house_id`)

@@ -79,17 +79,21 @@ class HouseAction extends Action {
 	 * 
 	 */
 	function houseInfoAction(){
+		header ( "Content-Type:text/html; charset=utf-8" );
 		if(!isLogin())
 		{
 			$data['code']=-1;
 			$data['msg']="not login!";
-			$this->ajaxReturn($data);
+			$this->assign ( 'data', $data);
+			$this->display ( "houseinfo" );
+			return ;
 		}
 		$houseId=$_POST['houseId'];
 		$data = array();
 		$houseinfo = new HouseInfoModel();
 		$data["houseinfo"]=$houseinfo->getHouseInfo($houseId);
-		$this->ajaxReturn($data);
+		$this->assign ( 'data', $data);
+		$this->display ("houseinfo");
 	}
 	
 	

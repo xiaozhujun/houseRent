@@ -114,7 +114,7 @@
     			<div class='achievementRowDiv'>100多个企业</div>
     			<div class='achievementRowDiv'>50多所高校</div>
     		</div>
-    	</div>
+    		</div>
     	<div class='registerDiv'>
     		<div class='registerTitle'>没有账号？赶快加入吧</div>
     		<div class='registerRow'><input class='registerInput' id='emailInput' type='text' data-empty='邮箱'/></div>
