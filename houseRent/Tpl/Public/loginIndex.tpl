@@ -62,7 +62,7 @@
 		}
 		else
 		{
-			alert(result.data.msg);
+			$('#loginMsg').html(result.data.msg);
 		}
 			
 	}
@@ -77,20 +77,21 @@
     	</div>
     	<div id='headRightDiv'>
     		<div class='headRightRow'>
-    			
-    			<div class='loginBtnDiv'>
-    				<div class='loginColumnDiv'><input id='loginBtn' type='submit' value='登录'/></div>
-    				<div class='loginColumnDiv'>&nbsp;</div>
+    			<div id='topRow'>
+	    			<div class='nameInputDiv'>
+	    				<div class='loginColumnDiv'><input id='emailLoginInput' type='text' data-empty='账号'/></div>
+	    			</div>
+	    			<div class='pwdInputDiv'>
+	    				<div class='loginColumnDiv'><input type='text' data-empty='密码'  pass-empty='true'/><input id='pwdLoginInput' type='password' data-empty='密码'  pass-empty='true'/></div>
+	    			</div>
+	    			<div class='loginBtnDiv'>
+	    				<div class='loginColumnDiv'><input id='loginBtn' type='submit' value='登录'/></div>
+	    			</div>
     			</div>
-    			
-    			<div class='pwdInputDiv'>
-    				<div class='loginColumnDiv'><input type='text' data-empty='密码'  pass-empty='true'/><input id='pwdLoginInput' type='password' data-empty='密码'  pass-empty='true'/></div>
-    				<div class='loginColumnDiv'><a href='#'>忘记密码</a></div>
-    			</div>
-    			
-    			<div class='nameInputDiv'>
-    				<div class='loginColumnDiv'><input id='emailLoginInput' type='text' data-empty='账号'/></div>
-    				<div class='loginColumnDiv'><input type='checkbox'/>下次自动登录</div>
+    			<div id='bottomRow'>
+    				<div id='autoLogin'><input type='checkbox'/>下次自动登录</div>
+    				<div id='forgotPassword'><a href='#'>忘记密码</a></div>
+    				<div id='loginMsg'></div>
     			</div>
     		</div>
     		
