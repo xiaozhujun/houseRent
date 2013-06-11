@@ -6,7 +6,7 @@ CREATE TABLE `province` (
   PRIMARY KEY  (`id`),
   KEY `idx_province_provinceid` (`provinceid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-insert into province values(1,1,'±±¾©');
+insert into province values(1,1,'åŒ—äº¬');
 
 CREATE TABLE `city` (
   `id` int(11) NOT NULL auto_increment,
@@ -18,7 +18,7 @@ CREATE TABLE `city` (
   KEY `idx_city_cityid` (`cityid`),
   KEY `idx_city_pidctid` (`provinceid`,`cityid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-insert into city values(1,1,'±±¾©','1','±±¾©');
+insert into city values(1,1,'åŒ—äº¬','1','åŒ—äº¬');
 CREATE TABLE `region` (
   `id` int(11) NOT NULL auto_increment,
   `provinceid` varchar(100) NOT NULL default '',
@@ -32,52 +32,52 @@ CREATE TABLE `region` (
   KEY `idx_city_pidctid` (`provinceid`,`cityid`),
   KEY `idx_city_areaid` (`provinceid`,`cityid`,`areaid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-insert into region values(1,1,'±±¾©','1','±±¾©','1','¶«³Ç');
-insert into region values(2,1,'±±¾©','1','±±¾©','2','Î÷³Ç');
-insert into region values(3,1,'±±¾©','1','±±¾©','3','³çÎÄ');
-insert into region values(4,1,'±±¾©','1','±±¾©','4','ĞûÎä');
-insert into region values(5,1,'±±¾©','1','±±¾©','5','³¯Ñô');
-insert into region values(6,1,'±±¾©','1','±±¾©','6','·áÌ¨');
-insert into region values(7,1,'±±¾©','1','±±¾©','7','Ê¯¾°É½');
-insert into region values(8,1,'±±¾©','1','±±¾©','8','º£µí');
-insert into region values(9,1,'±±¾©','1','±±¾©','9','ÃÅÍ·¹µ');
-insert into region values(10,1,'±±¾©','1','±±¾©','10','·¿É½');
-insert into region values(11,1,'±±¾©','1','±±¾©','11','Í¨Öİ');
-insert into region values(12,1,'±±¾©','1','±±¾©','12','Ë³Òå');
-insert into region values(13,1,'±±¾©','1','±±¾©','13','²ıÆ½');
-insert into region values(14,1,'±±¾©','1','±±¾©','14','´óĞË');
-insert into region values(15,1,'±±¾©','1','±±¾©','15','Æ½¹È');
-insert into region values(16,1,'±±¾©','1','±±¾©','16','»³Èá');
-insert into region values(17,1,'±±¾©','1','±±¾©','17','ÃÜÔÆ');
-insert into region values(18,1,'±±¾©','1','±±¾©','18','ÑÓÇì');
+insert into region values(1,1,'åŒ—äº¬','1','åŒ—äº¬','1','ä¸œåŸ');
+insert into region values(2,1,'åŒ—äº¬','1','åŒ—äº¬','2','è¥¿åŸ');
+insert into region values(3,1,'åŒ—äº¬','1','åŒ—äº¬','3','å´‡æ–‡');
+insert into region values(4,1,'åŒ—äº¬','1','åŒ—äº¬','4','å®£æ­¦');
+insert into region values(5,1,'åŒ—äº¬','1','åŒ—äº¬','5','æœé˜³');
+insert into region values(6,1,'åŒ—äº¬','1','åŒ—äº¬','6','ä¸°å°');
+insert into region values(7,1,'åŒ—äº¬','1','åŒ—äº¬','7','çŸ³æ™¯å±±');
+insert into region values(8,1,'åŒ—äº¬','1','åŒ—äº¬','8','æµ·æ·€');
+insert into region values(9,1,'åŒ—äº¬','1','åŒ—äº¬','9','é—¨å¤´æ²Ÿ');
+insert into region values(10,1,'åŒ—äº¬','1','åŒ—äº¬','10','æˆ¿å±±');
+insert into region values(11,1,'åŒ—äº¬','1','åŒ—äº¬','11','é€šå·');
+insert into region values(12,1,'åŒ—äº¬','1','åŒ—äº¬','12','é¡ºä¹‰');
+insert into region values(13,1,'åŒ—äº¬','1','åŒ—äº¬','13','æ˜Œå¹³');
+insert into region values(14,1,'åŒ—äº¬','1','åŒ—äº¬','14','å¤§å…´');
+insert into region values(15,1,'åŒ—äº¬','1','åŒ—äº¬','15','å¹³è°·');
+insert into region values(16,1,'åŒ—äº¬','1','åŒ—äº¬','16','æ€€æŸ”');
+insert into region values(17,1,'åŒ—äº¬','1','åŒ—äº¬','17','å¯†äº‘');
+insert into region values(18,1,'åŒ—äº¬','1','åŒ—äº¬','18','å»¶åº†');
 
 /*
-*·¿Ô´ĞÅÏ¢±í£¬Ö÷ÒªÊÇ·¢²¼µÄ·¿Ô´ĞÅÏ¢
+*æˆ¿æºä¿¡æ¯è¡¨ï¼Œä¸»è¦æ˜¯å‘å¸ƒçš„æˆ¿æºä¿¡æ¯
 */
 CREATE TABLE `house_info` (
   `house_id` bigint(20) NOT NULL auto_increment,
-  `user_id` bigint(20) NOT NULL  COMMENT 'ÓÃ»§id',
-  `title` varchar(256) NOT NULL default '' COMMENT '±êÌâ',
+  `user_id` bigint(20) NOT NULL  COMMENT 'ç”¨æˆ·id',
+  `title` varchar(256) NOT NULL default '' COMMENT 'æ ‡é¢˜',
   `purpose` int(4) NOT NULL default '1' COMMENT 'rent_in:1;rent_out:2',
-  `house_type` int(4) NOT NULL default '0' COMMENT '111:Ò»ÊÒÒ»ÌüÒ»ÎÀ£»311:ÈıÊÒÒ»ÌüÒ»ÎÀ...',
+  `house_type` int(4) NOT NULL default '0' COMMENT '111:ä¸€å®¤ä¸€å…ä¸€å«ï¼›311:ä¸‰å®¤ä¸€å…ä¸€å«...',
   `price` int(4) NOT NULL default '0' ,
-  `area` int(4) NOT NULL default '0' COMMENT 'Ãæ»ı',
-  `flor_info` int(4) NOT NULL default '0' COMMENT '100010 Ç°ÈıÎ»±íÊ¾×î¸ß²ã£¬ºóÈıÎ»±íÊ¾µ±Ç°²ãÊı',
-  `remark` varchar(1024) NOT NULL default '' COMMENT 'ÓÃ»§±¸×¢ÃèÊö',
-  `detail_description` text NOT NULL  COMMENT 'ÏêÏ¸ÃèÊö£¬ÀàËÆÓëÎïÆ·ÏêÇéÒ³',
-  `region` int(4) NOT NULL default '1' COMMENT 'ÓÃ»§´óµØÖ·£¬µ½³ÇÊĞÏÂÃæµÄÇø',
-  `address_info` varchar(512) NOT NULL default '' COMMENT 'ÏêÏ¸µØÖ·',
-  `contact_person` varchar(256) NOT NULL default '' COMMENT 'ÁªÏµÈËĞÕÃû',
-  `contact_phone` varchar(50) NOT NULL default '' COMMENT 'ÁªÏµÈËµç»°',
-  `contact_qq` varchar(50) NOT NULL default '' COMMENT 'ÁªÏµÈËqq',
-  `contact_weixin` varchar(50) NOT NULL default '' COMMENT 'ÁªÏµÈËweixin',
-  `contact_email` varchar(50) NOT NULL default '' COMMENT 'ÁªÏµÈËemail',
-  `decoration` varchar(512) NOT NULL default '' COMMENT '×°ĞŞÇé¿ö',
-  `furniture` varchar(512) NOT NULL default '' COMMENT '¼Ò¾ß£¬¼ÒµçÅäÖÃÇé¿ö',
-  `build_year` varchar(50) NOT NULL default '' COMMENT '·¿×ÓÄê·İ',
-  `request` varchar(512) NOT NULL default '' COMMENT '¶Ô¶Ô·½µÄÒªÇó',
-  `input_time` int(11) unsigned NOT NULL default '0' COMMENT 'Â¼ÈëÊ±¼ä',
-  `attention_count` int(11) unsigned NOT NULL default '0' COMMENT '¹Ø×¢ÊıÁ¿',
+  `area` int(4) NOT NULL default '0' COMMENT 'é¢ç§¯',
+  `flor_info` int(4) NOT NULL default '0' COMMENT '100010 å‰ä¸‰ä½è¡¨ç¤ºæœ€é«˜å±‚ï¼Œåä¸‰ä½è¡¨ç¤ºå½“å‰å±‚æ•°',
+  `remark` varchar(1024) NOT NULL default '' COMMENT 'ç”¨æˆ·å¤‡æ³¨æè¿°',
+  `detail_description` text NOT NULL  COMMENT 'è¯¦ç»†æè¿°ï¼Œç±»ä¼¼ä¸ç‰©å“è¯¦æƒ…é¡µ',
+  `region` int(4) NOT NULL default '1' COMMENT 'ç”¨æˆ·å¤§åœ°å€ï¼Œåˆ°åŸå¸‚ä¸‹é¢çš„åŒº',
+  `address_info` varchar(512) NOT NULL default '' COMMENT 'è¯¦ç»†åœ°å€',
+  `contact_person` varchar(256) NOT NULL default '' COMMENT 'è”ç³»äººå§“å',
+  `contact_phone` varchar(50) NOT NULL default '' COMMENT 'è”ç³»äººç”µè¯',
+  `contact_qq` varchar(50) NOT NULL default '' COMMENT 'è”ç³»äººqq',
+  `contact_weixin` varchar(50) NOT NULL default '' COMMENT 'è”ç³»äººweixin',
+  `contact_email` varchar(50) NOT NULL default '' COMMENT 'è”ç³»äººemail',
+  `decoration` varchar(512) NOT NULL default '' COMMENT 'è£…ä¿®æƒ…å†µ',
+  `furniture` varchar(512) NOT NULL default '' COMMENT 'å®¶å…·ï¼Œå®¶ç”µé…ç½®æƒ…å†µ',
+  `build_year` varchar(50) NOT NULL default '' COMMENT 'æˆ¿å­å¹´ä»½',
+  `request` varchar(512) NOT NULL default '' COMMENT 'å¯¹å¯¹æ–¹çš„è¦æ±‚',
+  `input_time` int(11) unsigned NOT NULL default '0' COMMENT 'å½•å…¥æ—¶é—´',
+  `attention_count` int(11) unsigned NOT NULL default '0' COMMENT 'å…³æ³¨æ•°é‡',
   PRIMARY KEY  (`house_id`),
   KEY `idx_house` (`house_id`),
   KEY `idx_inputtime` (`input_time`),
@@ -85,32 +85,32 @@ CREATE TABLE `house_info` (
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 /*
-*·¿Ô´ÉêÇë±í  ¼ÇÂ¼ÓÃ»§ÉêÇë·¿Ô´±í
+*æˆ¿æºç”³è¯·è¡¨  è®°å½•ç”¨æˆ·ç”³è¯·æˆ¿æºè¡¨
 */
 CREATE TABLE `apply_house` (
   `apply_id` bigint(20) NOT NULL auto_increment,
-  `user_id` bigint(20) NOT NULL  COMMENT 'ÓÃ»§id',
-  `house_id` bigint(20 NOT NULL  COMMENT '·¿×Óid',
-  `input_time` int(11) unsigned NOT NULL default '0' COMMENT 'Â¼ÈëÊ±¼ä',
-  `status` int(4) NOT NULL default '1' COMMENT '1£ºapplying£¬2£ºcancel£¬3£ºfinish',
+  `user_id` bigint(20) NOT NULL  COMMENT 'ç”¨æˆ·id',
+  `house_id` bigint(20 NOT NULL  COMMENT 'æˆ¿å­id',
+  `input_time` int(11) unsigned NOT NULL default '0' COMMENT 'å½•å…¥æ—¶é—´',
+  `status` int(4) NOT NULL default '1' COMMENT '1ï¼šapplyingï¼Œ2ï¼šcancelï¼Œ3ï¼šfinish',
   PRIMARY KEY  (`apply_id`),
   KEY `idx_apply_userid` (`apply_id`,`user_id`),
   KEY `idx_apply_house_userid` (`apply_id`,`user_id`,`house_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 /*
-*·¿Ô´¹Ø×¢±í  ¼ÇÂ¼·¿Ô´±»¹Ø×¢µÄ¼ÇÂ¼
+*æˆ¿æºå…³æ³¨è¡¨  è®°å½•æˆ¿æºè¢«å…³æ³¨çš„è®°å½•
 */
 CREATE TABLE `apply_house` (
   `attention_id` bigint(20) NOT NULL auto_increment,
-  `user_id` bigint(20) NOT NULL  COMMENT 'ÓÃ»§id',
-  `house_id` bigint(20 NOT NULL  COMMENT '·¿×Óid',
-  `input_time` int(11) unsigned NOT NULL default '0' COMMENT 'Â¼ÈëÊ±¼ä',
+  `user_id` bigint(20) NOT NULL  COMMENT 'ç”¨æˆ·id',
+  `house_id` bigint(20 NOT NULL  COMMENT 'æˆ¿å­id',
+  `input_time` int(11) unsigned NOT NULL default '0' COMMENT 'å½•å…¥æ—¶é—´',
   PRIMARY KEY  (`attention_id`),
   KEY `idx_apply_userid` (`attention_id`,`user_id`),
   KEY `idx_apply_house_userid` (`attention_id`,`user_id`,`house_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
-
+xiaozhujun/xiao654321
 
