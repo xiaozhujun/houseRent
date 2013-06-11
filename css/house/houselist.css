@@ -57,7 +57,7 @@ width:400px;
 	border-width: 1px;
 }
 dt { 
-        /*float: left;*/ 
+        float: left;
         width: 60px; 
 
         margin: 0px; 
@@ -65,16 +65,17 @@ dt {
 } 
 dd { 
         
-		/*float: left;*/ 
+		float: left; 
         clear: none; 
         width: 700px; 
         
 		margin: 0px; 
         padding: 0px; 
-} 
+}
+
 dl { 
         width: 800px; 
-
+		clear:left;
         font-size: 9pt; 
         line-height: 2em; 
         
