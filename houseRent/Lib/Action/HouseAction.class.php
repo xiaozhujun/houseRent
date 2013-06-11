@@ -24,11 +24,25 @@ class HouseAction extends Action {
 		header ( "Content-Type:text/html; charset=utf-8" );
 		$data = array();
 		$houseinfo = new HouseInfoModel();
-		$houseinfolist=$houseinfo->findHouse(null,null,null);
-		$count=count($houseinfolist["list"]);
-		$data['houseinfo_list']=$houseinfolist["list"];
-		$data['current_count']=$count;
+		
+		$houseinfolist=$houseinfo->findHouse($_POST);
 		$data['all_count']=$houseinfolist["allcount"];
+
+		if($data['all_count']==0){
+			$data['current_count']=0;
+		}
+		if($houseinfolist["list"]){
+			$data['current_count']=count($houseinfolist["list"]);
+			$data['houseinfo_list']=$houseinfolist["list"];
+		}else{
+			$data['current_count']=0;
+			$data['houseinfo_list']=null;
+			
+		}
+		
+		$data['houseinfo_list']=$houseinfolist["list"];
+		
+		
 		$this->ajaxReturn($data);
 	}
 	/*

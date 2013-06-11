@@ -26,3 +26,28 @@ function floorInfo($user,$currentfloor,$maxfloor){
 		$user->flor_info+=$maxfloor*1000;
 	}
 }
+/*
+* 根据价格获取房价具体参数
+* [[0,'不限'],[1,'600元以下'],[2,'600-1000元'],[3,'1000-1500元'],[4,'1500-2000元'],[5,'2000-3000元'],[6,'3000-5000元'],[7,'5000-8000元'],[8,'8000元以上']];
+*/
+function getPriceInfo($pricetype){
+	$price_array = array('0' => '','1' => ' price<600','2' => ' price>600 and price<1000','3' => ' price>1000 and price<1500','4' => ' price>1500 and price<2000','5' => ' price>2000 and price<3000','6' => ' price>3000 and price<5000','7' => ' price>5000 and price<8000','8' => ' price>8000');
+	return $price_array[$pricetype];	
+}
+/*
+* 根据room获取具体参数
+* room_array=[[0,'不限'],[1,'一室'],[2,'两室'],[3,'三室'],[4,'四室'],[5,'四室以上']];;
+*/
+function getRoomInfo($pricetype){
+	$price_array = array('0' => '','1' => ' house_type&100=100','2' => ' house_type&200=200','3' => ' house_type&300=300','4' => ' house_type&400=400','5' => ' (house_type>500 or house_type=500)');
+	return $price_array[$pricetype];	
+}
+/*
+* 根据关键词获取具体参数
+* 
+*/
+function getKeyWordInfo($key){
+	$keyword="";
+	$keyword.=" title like '%".$key."%'"." and remark like '%".$key."%' and decoration like '%".$key."%'";
+	return 	$keyword;
+}

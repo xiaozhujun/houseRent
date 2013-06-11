@@ -51,7 +51,9 @@
             
     	}
     	var data = {};
+    	getPramsFromUrl(data,key,price,region,room,type);
     	$.post($.URL.house.houselist,data,callback,"json");
+    	//$.post($.URL.house.houselist,data,callback,"json");
 		//回调函数
 		function callback(result)
 		{
@@ -63,6 +65,23 @@
 		}
     	
  	});
+ 	function getPramsFromUrl(data,key,price,region,room,type){
+		if(key!=""){
+			data['key']=key;
+		}
+		if(price!=""){
+			data['price']=price;
+		}
+		if(region!=""){
+			data['region']=region;
+		}
+		if(room!=""){
+			data['room']=room;
+		}
+		if(type!=""){
+			data['type']=type;
+		}
+ 	}
 	function renderingPage(data){
 		var htmlstr="";
 		for(var i=0;i<data.current_count;i++){
