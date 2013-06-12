@@ -15,7 +15,7 @@
 <link href="/css/header.css" type="text/css" rel="stylesheet">
 <link href="/css/house/search.css" type="text/css" rel="stylesheet">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
-<title>注册</title>
+<title>租客团-房源检索</title>
 
 </head>  
 <!-- <body onload='loadregion()'>   -->
@@ -37,16 +37,22 @@
 			});
  		{/if}
  		
+ 		
  		$("input").emptyValue();
  		
  		$('#searchBtn').click(function(){
- 			var newKey = $('#searchInput').val();
- 			location = getretionlink(key,price,region,room,type,newKey,5);
+ 			key = $('#searchInput').val();
+ 			
+ 			var data = {};
+    		getPramsFromUrl(data,key,price,region,room,type);
+    		$.post($.URL.house.houselist,data,callback,"json");
  		});
  		
     	for(var i=0;i<region_array.length;i++){
             var newNode = document.createElement("a");
             newNode.href=getretionlink(key,price,region,room,type,region_array[i][0],1);
+            newNode.type='type';
+            newNode.value = region_array[i][0];
             newNode.class="region_"+region_array[i][0];
             newNode.innerHTML=region_array[i][1];
             var parent = $("#region").append(newNode);
@@ -54,6 +60,8 @@
     	for(var i=0;i<price_array.length;i++){
             var newNode = document.createElement("a");
             newNode.href=getretionlink(key,price,region,room,type,price_array[i][0],2);
+            newNode.type='type';
+            newNode.value = price_array[i][0];
             newNode.class="price_"+price_array[i][0];
             newNode.innerHTML=price_array[i][1];
             var parent = $("#price").append(newNode);
@@ -61,6 +69,8 @@
     	for(var i=0;i<room_array.length;i++){
             var newNode = document.createElement("a");
             newNode.href=getretionlink(key,price,region,room,type,room_array[i][0],3);
+            newNode.type='type';
+            newNode.value = room_array[i][0];
             newNode.class="room_"+room_array[i][0];
             newNode.innerHTML=room_array[i][1];
             var parent = $("#room").append(newNode);
@@ -68,6 +78,8 @@
     	for(var i=0;i<type_array.length;i++){
             var newNode = document.createElement("a");
             newNode.href=getretionlink(key,price,region,room,type,type_array[i][0],4);
+            newNode.type='type';
+            newNode.value = type_array[i][0];
             newNode.class="type_"+type_array[i][0];
             newNode.innerHTML=type_array[i][1];
             var parent = $("#type").append(newNode);
@@ -77,6 +89,32 @@
     	getPramsFromUrl(data,key,price,region,room,type);
     	$.post($.URL.house.houselist,data,callback,"json");
     	//$.post($.URL.house.houselist,data,callback,"json");
+    	
+    	$("dd a").click(function(){
+    		$(this).addClass('selected').siblings().removeClass('selected');
+    		linkType = $(this).attr("type");
+    		if(linkType='region')
+    		{
+    			region = $(this).attr("value");
+    		}
+    		else if(linkType='type')
+    		{
+    			type = $(this).attr("value");
+    		}
+    		else if(linkType='price')
+    		{
+    			price = $(this).attr("value");
+    		}
+    		else if(linkType='room')
+    		{
+    			value = $(this).attr("value");
+    		}
+    		var data = {};
+    		getPramsFromUrl(data,key,price,region,room,type);
+    		$.post($.URL.house.houselist,data,callback,"json");
+    	
+    		return false;
+    	});
     	
  	});
  	

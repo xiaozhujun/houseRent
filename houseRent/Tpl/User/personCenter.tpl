@@ -7,7 +7,7 @@
 <script src="/js/jquery-1.7.2.min.js" type="text/javascript"></script>
 <script src="/js/config.js" type="text/javascript"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
-<title>首页</title>  
+<title>个人中心</title>  
 </head>  
 <body>  
 <script type="text/javascript">
