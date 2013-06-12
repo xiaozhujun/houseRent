@@ -5,7 +5,7 @@ CREATE TABLE `province` (
   `provincename` varchar(255) NOT NULL default '',
   PRIMARY KEY  (`id`),
   KEY `idx_province_provinceid` (`provinceid`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 insert into province values(1,1,'北京');
 
 CREATE TABLE `city` (
@@ -17,7 +17,7 @@ CREATE TABLE `city` (
   PRIMARY KEY  (`id`),
   KEY `idx_city_cityid` (`cityid`),
   KEY `idx_city_pidctid` (`provinceid`,`cityid`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 insert into city values(1,1,'北京','1','北京');
 CREATE TABLE `region` (
   `id` int(11) NOT NULL auto_increment,
@@ -31,7 +31,7 @@ CREATE TABLE `region` (
   KEY `idx_city_cityid` (`cityid`),
   KEY `idx_city_pidctid` (`provinceid`,`cityid`),
   KEY `idx_city_areaid` (`provinceid`,`cityid`,`areaid`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 insert into region values(1,1,'北京','1','北京','1','东城');
 insert into region values(2,1,'北京','1','北京','2','西城');
 insert into region values(3,1,'北京','1','北京','3','崇文');
@@ -82,7 +82,7 @@ CREATE TABLE `house_info` (
   KEY `idx_house` (`house_id`),
   KEY `idx_inputtime` (`input_time`),
   KEY `idx_house_userid` (`house_id`,`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 /*
 *房源申请表  记录用户申请房源表
@@ -97,7 +97,7 @@ CREATE TABLE `apply_house` (
   PRIMARY KEY  (`apply_id`),
   KEY `idx_apply_userid` (`apply_id`,`user_id`),
   KEY `idx_apply_house_userid` (`apply_id`,`user_id`,`house_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 /*
 *房源关注表  记录房源被关注的记录
@@ -110,7 +110,7 @@ CREATE TABLE `apply_house` (
   PRIMARY KEY  (`attention_id`),
   KEY `idx_apply_userid` (`attention_id`,`user_id`),
   KEY `idx_apply_house_userid` (`attention_id`,`user_id`,`house_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
 /*svn:   xiaozhujun/xiao654321     
