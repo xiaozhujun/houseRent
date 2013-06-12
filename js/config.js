@@ -26,6 +26,7 @@
 		"house":{
 			"houselist":"/House/houseList",
 			"publishhouse":"/House/publishHouseAction",
+			"search":"/House/search",
 			
 		}
 			

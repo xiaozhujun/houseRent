@@ -1,0 +1,152 @@
+a { 
+	color:black; 
+	text-decoration:none; 
+}
+
+#choise
+{
+	width:100%;
+	float:left;
+	margin-top:10px;
+}
+
+#keysearch
+{
+	width:100%;
+	flaot:left;
+	margin-top:20px;
+}
+
+#searchInput
+{
+	float: left;
+    font-family: 'Arial';
+    font-size: 13px;
+    height: 30px;
+    text-align: left;
+    width: 500px;	
+}
+
+#searchBtn
+{
+	border: 1px solid #999999;
+    color: #000000;
+    cursor: pointer;
+    float: left;
+    font-family: 'Arial';
+    font-size: 15px;
+    margin-left: 10px;
+    padding: 8px 20px;
+    text-align: center;
+	
+	border-radius:5px;
+	-webkit-border-radius: 5px;
+    -moz-border-radius:5px;
+}
+
+#region a
+{
+	padding:5px 10px;
+}
+
+#region a:HOVER
+{
+	background-color: #eee;
+}
+
+#price a
+{
+	padding:5px 10px;
+}
+
+#price a:HOVER
+{
+	background-color: #eee;
+}
+
+#room a
+{
+	padding:5px 10px;
+}
+
+#room a:HOVER
+{
+	background-color: #eee;
+}
+
+#type a
+{
+	padding:5px 10px;
+}
+
+#type a:HOVER
+{
+	background-color: #eee;
+}
+
+#result
+{
+	width:100%;
+	float:left;
+	
+	margin-top:10px;
+	border:solid 1px #ccc;
+}
+.table_row
+{
+	width:100%;
+	float:left;
+	border-bottom:solid 1px #ccc;
+	margin-bottom:-1px;
+	
+}
+
+.table_cell
+{
+	width:100%;
+	float:left;
+	text-align:left;
+	padding-left:10px;
+	
+	padding-top:5px;
+	padding-bottom:5px;	
+}
+
+#houseListContainer
+{
+	width:100%;
+	float:left;
+}
+
+dt
+{ 
+	float: left;
+	width: 6%; 
+	margin: 0px; 
+	padding: 0px; 
+	font-size:18px;
+	font-weight:bold;
+}
+
+dd 
+{ 
+	float: left; 
+	clear: none; 
+	width: 94%; 
+	margin: 0px; 
+	padding: 0px;
+
+	font-size:14px;
+	
+}
+
+dl
+{ 
+	width: 100%;
+	float:left; 
+	font-size: 9pt; 
+	line-height: 2em; 
+	position:relative; 
+	margin: 0px; 
+	padding: 0px; 
+} 

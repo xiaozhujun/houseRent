@@ -37,6 +37,11 @@
 		});
 		
 		$("input").emptyValue();
+		
+		$('#searchBtn').click(function(){
+ 			var newKey = $('#searchInput').val();
+ 			location = $.URL.house.search + "?key="+$("#searchInput").val();
+ 		});
 	});
 </script>
 <div id='mainContainer'>

@@ -7,7 +7,7 @@
 <script src="/js/resouce.js" type="text/javascript"></script>
 <link href="/css/common.css" type="text/css" rel="stylesheet">
 <link href="/css/header.css" type="text/css" rel="stylesheet">
-<link href="/css/house/houselist.css" type="text/css" rel="stylesheet">
+<link href="/css/house/search.css" type="text/css" rel="stylesheet">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
 <title>注册</title>
 
@@ -22,6 +22,20 @@
     var room=test("room");
     var type=test("type");
  	$(document).ready(function(){
+ 		{if isset($user)}
+ 		$('#loginBtn').click(function(){
+				var data = {};
+				data.email = $('#emailLoginInput').val();
+				data.password = $('#pwdLoginInput').val();
+				$.post($.URL.user.login,data,loginCallback,"json");
+			});
+ 		{/if}
+ 		
+ 		$('#searchBtn').click(function(){
+ 			var newKey = $('#searchInput').val();
+ 			location = getretionlink(key,price,region,room,type,newKey,5);
+ 		});
+ 		
     	for(var i=0;i<region_array.length;i++){
             var newNode = document.createElement("a");
             newNode.href=getretionlink(key,price,region,room,type,region_array[i][0],1);
@@ -55,17 +69,19 @@
     	getPramsFromUrl(data,key,price,region,room,type);
     	$.post($.URL.house.houselist,data,callback,"json");
     	//$.post($.URL.house.houselist,data,callback,"json");
-		//回调函数
+    	
+ 	});
+ 	
+ 	//回调函数
 		function callback(result)
 		{
 			if(result.data.current_count==0){
-				$('#result').html("对不起没有查询到结果！");
+				$('#result').html("亲，没有检索到相匹配的房源哦！");
 			}else{
 				renderingPage(result.data);
 			}
 		}
-    	
- 	});
+ 	
  	function getPramsFromUrl(data,key,price,region,room,type){
 		if(key!=""){
 			data['key']=key;
@@ -98,7 +114,7 @@
 		$('#result').html(htmlstr);
 	}
 	function getretionlink(key,price,region,room,type,value,category){
-		var link="/houselist.html";
+		var link=$.URL.house.search;
 		if(category==1){
 			link+="?region="+value;
 			if(key!=""){
@@ -161,6 +177,22 @@
 				link+="&room="+room;
 			}
 		}
+		if(category==5){
+			link+="?key="+value;
+			if(type!=""){
+				link+="&type="+type;
+			}
+			
+			if(region!=""){
+				link+="&region="+region;
+			}
+			if(price!=""){
+				link+="&price="+price;
+			}
+			if(room!=""){
+				link+="&room="+room;
+			}
+		}
 		return link;
 	}
 	function test(paramName)  
@@ -183,27 +215,45 @@
     		<div id='cityDiv'>城市</div>
     	</div>
     	<div id='headRightDiv'>
-    		
+    	
+    	
+    	{if isset($user)}
     		<div id='headBottomDiv'>
     			<div id='loginRegDiv'>
-    			{if isset($user)}
     				hi,<a href='/User/personCenter'>{$user}</a>&nbsp;<a href='/User/logout'>安全退出</a>
-    			{else}
-    				<a href='/User/login'>登陆</a>/<a href='/User/register'>注册</a>
-    			{/if}
     			</div>
     			<div id='contactDiv'>联系我们</div>
-    			{if isset($user)}
     			<div id='inviteDiv'><a id='inviteLink' href='/mod/user/invite.html'>邀请好友</a></div>
-    			{/if}
     		</div>
+   		{else}
+   			<div class='headRightRow'>
+    			<div id='topRow'>
+	    			<div class='nameInputDiv'>
+	    				<div class='loginColumnDiv'><input id='emailLoginInput' type='text' data-empty='账号'/></div>
+	    			</div>
+	    			<div class='pwdInputDiv'>
+	    				<div class='loginColumnDiv'><input type='text' data-empty='密码'  pass-empty='true'/><input id='pwdLoginInput' type='password' data-empty='密码'  pass-empty='true'/></div>
+	    			</div>
+	    			<div class='loginBtnDiv'>
+	    				<div class='loginColumnDiv'><input id='loginBtn' type='submit' value='登录'/></div>
+	    			</div>
+    			</div>
+    			<div id='bottomRow'>
+    				<div id='autoLogin'><input type='checkbox'/>下次自动登录</div>
+    				<div id='forgotPassword'><a href='#'>忘记密码</a></div>
+    				<div id='loginMsg'></div>
+    			</div>
+    		</div>
+    	{/if}
+    		
+    		
     	</div>
     </div>
 	<div id='houseListContainer'>
 
 	<div id="keysearch">
-			<input type="text"  maxlength="100" >
-			<input type="submit" value="搜索一下">
+			<input id='searchInput' type="text"  maxlength="100" >
+			<div id='searchBtn'>搜索一下</div>
 	</div>
 
     <div id="choise">

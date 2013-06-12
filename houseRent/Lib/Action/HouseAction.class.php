@@ -8,6 +8,25 @@ import('Common.Misc',APP_PATH,'.php');
  * 房源相关的操作，发布房源，查询房源
  */
 class HouseAction extends Action {
+	
+	//开始搜索
+	function search()
+	{
+		if(isLogin())
+		{
+			session_start();
+			$this->assign('user',$_SESSION ['user']);
+			header ( "Content-Type:text/html; charset=utf-8" );
+		}
+		$this->display ( "search" );
+	}
+	
+	//关键字查询房源
+	function doSearch()
+	{
+		
+	}
+	
 	/*
 	 * 添加房源页面
 	 */

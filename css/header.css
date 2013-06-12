@@ -1,5 +1,34 @@
 @CHARSET "utf-8";
 
+#headContainer
+{
+	border: solid 1px #ccc;
+}
+
+
+#loginRegDiv
+{
+	float: right;
+	height: 100%;
+	padding-left: 10px;	
+	padding-right: 10px;
+}
+
+#contactDiv
+{
+	float:right;
+	height: 100%;
+	padding-left: 10px;	
+}
+
+#inviteDiv
+{
+	float:right;
+	height: 100%;
+	padding-left: 10px;
+}
+
+
 #mainContainer
 {
 	
