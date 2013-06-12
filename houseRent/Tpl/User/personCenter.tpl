@@ -28,7 +28,7 @@
 </script>
 <div id='mainContainer'>
     <div id='headContainer'>
-    	<div id='logoDiv'><img height=100% src='/assets/logo.jpg'/></div>
+    	<div id='logoDiv'><a href='/'><img height=100% src='/assets/logo.jpg'/></a></div>
     	<div id='headLeftDiv'>
     		<div id='aimDiv'>让您不在为租房烦恼</div>
     		<div id='cityDiv'>城市</div>
