@@ -44,6 +44,11 @@ a {
     -moz-border-radius:5px;
 }
 
+#searchBtn:HOVER
+{
+	background-color:#eee;
+}
+
 #region a
 {
 	padding:5px 10px;
