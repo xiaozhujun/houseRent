@@ -71,7 +71,7 @@
     
     <div id='mainBodyDiv'>
     	<div id='searchDiv'>
-    		<input id='searchInput' type='text' data-empty='请输入地点或小区名'>
+    		<input id='searchInput' type='text' data-empty='按照关键字检索您想要的房源'>
     		<div id='searchBtn'>搜索</div>
     	</div>
     	

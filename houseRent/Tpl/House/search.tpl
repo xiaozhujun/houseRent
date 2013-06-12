@@ -5,6 +5,12 @@
 <script src="/js/config.js" type="text/javascript"></script>
 <script src="/js/urlUtil.js" type="text/javascript"></script>
 <script src="/js/resouce.js" type="text/javascript"></script>
+<script src="/js/emptyNote.js" type="text/javascript"></script>
+
+{if !isset($user)}
+<link href="/css/headLogin.css" type="text/css" rel="stylesheet">
+{/if}
+
 <link href="/css/common.css" type="text/css" rel="stylesheet">
 <link href="/css/header.css" type="text/css" rel="stylesheet">
 <link href="/css/house/search.css" type="text/css" rel="stylesheet">
@@ -22,7 +28,7 @@
     var room=test("room");
     var type=test("type");
  	$(document).ready(function(){
- 		{if isset($user)}
+ 		{if !isset($user)}
  		$('#loginBtn').click(function(){
 				var data = {};
 				data.email = $('#emailLoginInput').val();
@@ -30,6 +36,8 @@
 				$.post($.URL.user.login,data,loginCallback,"json");
 			});
  		{/if}
+ 		
+ 		$("input").emptyValue();
  		
  		$('#searchBtn').click(function(){
  			var newKey = $('#searchInput').val();
@@ -71,6 +79,22 @@
     	//$.post($.URL.house.houselist,data,callback,"json");
     	
  	});
+ 	
+ 	{if !isset($user)}
+ 	//登录回调函数
+	function loginCallback(result)
+	{
+		if(result.data.success)
+		{
+			location.reload();
+		}
+		else
+		{
+			$('#loginMsg').html(result.data.msg);
+		}
+			
+	}
+	{/if}
  	
  	//回调函数
 		function callback(result)
@@ -252,7 +276,7 @@
 	<div id='houseListContainer'>
 
 	<div id="keysearch">
-			<input id='searchInput' type="text"  maxlength="100" >
+			<input id='searchInput' type="text"  maxlength="100" data-empty='按照关键字检索您想要的房源'>
 			<div id='searchBtn'>搜索一下</div>
 	</div>
 
