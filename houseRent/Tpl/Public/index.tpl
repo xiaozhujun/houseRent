@@ -7,7 +7,9 @@
 <link href="/css/house.css" type="text/css" rel="stylesheet">
 <link href="/css/publishHouse.css" type="text/css" rel="stylesheet">
 <link href="/css/intention.css" type="text/css" rel="stylesheet">
-<script src="/js/jquery-1.7.2.min.js" type="text/javascript"></script>
+<link href="/css/jquery/jquery-ui-1.10.3.custom.min.css" type="text/css" rel="stylesheet">
+<script src="/js/jquery-1.9.1.js" type="text/javascript"></script>
+<script src="/js/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
 <script src="/js/config.js" type="text/javascript"></script>
 <script src="/js/emptyNote.js" type="text/javascript"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
@@ -42,7 +44,49 @@
  			var newKey = $('#searchInput').val();
  			location = $.URL.house.search + "?key="+$("#searchInput").val();
  		});
+ 		
+ 		
+ 		$("#companyInput").bind("keyup", function() {
+ 			if($(this).val() != '')
+ 			{
+ 				var data = {};
+ 				data.name = $(this).val();
+ 				$.post($.URL.company.autoComplete,data,companyAutoCompleteCallback,'json');
+ 			}
+    	});
+    	
+    	$('#companyInput').blur(function(){
+    		if($(this).val()!=$(this).attr('oldVal'))
+    		{
+    			var data = {};
+    			data.name = $(this).val();
+    			$.post($.URL.company.add,data,companyAddCallback,'json');
+    		}
+    	});
+    	
+    	
 	});
+	
+	//公司自动完成回调函数
+	function companyAutoCompleteCallback(result)
+	{
+		if(result.data.result)
+		{
+			$('#companyInput').autocomplete({
+				source: result.data.list
+			});
+		}
+		else
+		{
+			$('#companyInputMsg').html(result.data.msg);
+		}
+	}
+	
+	//添加公司回调函数
+	function companyAddCallback(result)
+	{
+		$('#companyInputMsg').html(result.data.msg);
+	}
 </script>
 <div id='mainContainer'>
     <div id='headContainer'>
@@ -167,19 +211,22 @@
     					<div class='intentionRowDiv'>
     						<div class='intentionLableDiv'>您所在的公司：</div>
     						<div class='intentionInputDiv'>
-    							<input class='intentionInput' type='text' data-empty='推荐你同事的房源信息' id=''>
+    							<input id='companyInput' oldVal="{$companyName}" value="{$companyName}" class='intentionInput' type='text' data-empty='推荐你同事的房源信息'>
+    							<div id='companyInputMsg' class='msgDiv'></div>
     						</div>
     					</div>
     					<div class='intentionRowDiv'>
     						<div class='intentionLableDiv'>您所在的学校：</div>
     						<div class='intentionInputDiv'>
-    							<input class='intentionInput' type='text' data-empty='推荐你校友的房源' id=''>
+    							<input id='collegeInput' class='intentionInput' type='text' data-empty='推荐你校友的房源' id=''>
+    							<div id='intentionInputMsg' class='msgDiv'></div>
     						</div>
     					</div>
     					<div class='intentionRowDiv'>
     						<div class='intentionLableDiv'>您中意的小区：</div>
     						<div class='intentionInputDiv'>
-    							<input class='intentionInput' type='text' data-empty='推荐意向居住地的房源' id=''>
+    							<input id='targetHouseInput' class='intentionInput' type='text' data-empty='推荐意向居住地的房源' id=''>
+    							<div id='targetHouseInputMsg' class='msgDiv'></div>
     						</div>
     					</div>
     				</div>

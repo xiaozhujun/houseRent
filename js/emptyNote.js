@@ -36,6 +36,13 @@
 	                    	$(this).prev().val2(options.empty);
                     	}
                 }
+                else
+                {
+                	if(typeof $(this).attr('pass-empty') != "undefined" && $(this).attr('pass-empty')=="true"  && $(this).prev().attr('pass-empty')=='true')
+                	{
+                    	$(this).prev().hide();
+                	}
+               	}
                 $(this).addClass(options.className);
             }).blur();
         });

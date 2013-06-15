@@ -79,10 +79,10 @@
     		<div class='headRightRow'>
     			<div id='topRow'>
 	    			<div class='nameInputDiv'>
-	    				<div class='loginColumnDiv'><input id='emailLoginInput' type='text' data-empty='账号'/></div>
+	    				<div class='loginColumnDiv'><input id='emailLoginInput' type='text' data-empty='账号'  value='346012526@qq.com'/></div>
 	    			</div>
 	    			<div class='pwdInputDiv'>
-	    				<div class='loginColumnDiv'><input type='text' data-empty='密码'  pass-empty='true'/><input id='pwdLoginInput' type='password' data-empty='密码'  pass-empty='true'/></div>
+	    				<div class='loginColumnDiv'><input type='text' data-empty='密码'  pass-empty='true' /><input id='pwdLoginInput' type='password' data-empty='密码'  pass-empty='true'  value='123456'/></div>
 	    			</div>
 	    			<div class='loginBtnDiv'>
 	    				<div class='loginColumnDiv'><input id='loginBtn' type='submit' value='登录'/></div>

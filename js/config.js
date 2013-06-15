@@ -28,6 +28,14 @@
 			"publishhouse":"/House/publishHouseAction",
 			"search":"/House/search",
 			
+		},
+		"company":{
+			"add":"/Company/add",
+			"autoComplete":"/Company/autoComplete",
+		},
+		"college":{
+			"add":"/College/add",
+			"autoComplete":"/College/autoComplete",
 		}
 			
 	}
