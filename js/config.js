@@ -36,7 +36,12 @@
 		"college":{
 			"add":"/College/add",
 			"autoComplete":"/College/autoComplete",
+		},
+		"targetHouse":{
+			"add":"/TargetHouse/add",
+			"autoComplete":"/TargetHouse/autoComplete",
 		}
+		
 			
 	}
 })(jQuery);

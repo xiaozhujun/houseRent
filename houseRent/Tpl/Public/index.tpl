@@ -55,13 +55,20 @@
                 select: updateCollege,
         });
         
+        $('#targetHouseInput').autocomplete({
+                source: doTargetHouseAutoComplete,//获取数据的后台页面
+                select: updateTargetHouse,
+        });
+        
         $('#companyInput').focusout(function(){
         	updateCompany();
         });
         $('#collegeInput').focusout(function(){
         	updateCollege();
         });
-        
+         $('#targetHouseInput').focusout(function(){
+        	updateTargetHouse();
+        });
 	});
 	
 	//向后台请求匹配的公司信息
@@ -128,6 +135,39 @@
 	function collegeAddCallback(result)
 	{
 		$('#collegeInputMsg').html(result.data.msg);
+	}
+	
+	//向后台请求匹配的高校信息
+	function doTargetHouseAutoComplete(request,response)
+	{
+		var data = {};
+ 		data.name = request.term;
+		$.post($.URL.targetHouse.autoComplete,data,function(result){
+			if(result.data.result)
+			{
+				response(result.data.list);
+			}
+			else
+			{
+				$('#targetHouseInputMsg').html(result.data.msg);
+			}
+		},'json');
+	}
+	
+	//更新用户所属目标房源
+	function updateTargetHouse(){
+    		if($('#targetHouseInput').val()!=$('#targetHouseInput').attr('oldVal'))
+    		{
+    			var data = {};
+    			data.name = $('#targetHouseInput').val();
+    			$.post($.URL.targetHouse.add,data,targetHouseAddCallback,'json');
+    		}
+    }
+	
+	//添加目标住房区域回调函数
+	function targetHouseAddCallback(result)
+	{
+		$('#targetHouseInputMsg').html(result.data.msg);
 	}
 </script>
 <div id='mainContainer'>
@@ -267,7 +307,7 @@
     					<div class='intentionRowDiv'>
     						<div class='intentionLableDiv'>您中意的小区：</div>
     						<div class='intentionInputDiv'>
-    							<input id='targetHouseInput' class='intentionInput' type='text' data-empty='推荐意向居住地的房源'>
+    							<input id='targetHouseInput' oldVal="{$targetHouseName}" value="{$targetHouseName}" class='intentionInput' type='text' data-empty='推荐意向居住地的房源'>
     							<div id='targetHouseInputMsg' class='msgDiv'></div>
     						</div>
     					</div>
