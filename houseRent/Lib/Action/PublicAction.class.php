@@ -12,14 +12,13 @@ class PublicAction extends Action
 		{
 			header ( "Content-Type:text/html; charset=utf-8" );
 			$this->display ( "loginIndex" );
-			//redirect(C('LOGIN_URL'));
-			//return;
 		}
 		else 
 		{
 			session_start();
 			$this->assign('user',$_SESSION ['user']);
 			$companyName = "";
+			$collegeName = "";
 			$userCompany = new UserCompanyModel();
 			$userCompanyObj = $userCompany->findByUserId($_SESSION['userId']);
 			if($userCompanyObj)
@@ -30,6 +29,7 @@ class PublicAction extends Action
 			}
 			
 			$this->assign('companyName',$companyName);
+			$this->assign('collegeName',$collegeName);
 			header ( "Content-Type:text/html; charset=utf-8" );
 			$this->display ( "index" );
 		}

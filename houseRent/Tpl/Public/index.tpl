@@ -45,42 +45,40 @@
  			location = $.URL.house.search + "?key="+$("#searchInput").val();
  		});
  		
- 		
- 		$("#companyInput").bind("keyup", function() {
- 			if($(this).val() != '')
- 			{
- 				var data = {};
- 				data.name = $(this).val();
- 				$.post($.URL.company.autoComplete,data,companyAutoCompleteCallback,'json');
- 			}
-    	});
-    	
-    	$('#companyInput').blur(function(){
-    		if($(this).val()!=$(this).attr('oldVal'))
-    		{
-    			var data = {};
-    			data.name = $(this).val();
-    			$.post($.URL.company.add,data,companyAddCallback,'json');
-    		}
-    	});
-    	
-    	
+            
+ 		$('#companyInput').autocomplete({
+                source: doCompanyAutoComplete,//获取数据的后台页面
+                select: updateCompany
+        });
+        
 	});
 	
-	//公司自动完成回调函数
-	function companyAutoCompleteCallback(result)
+	//向后台请求匹配的公司信息
+	function doCompanyAutoComplete(request,response)
 	{
-		if(result.data.result)
-		{
-			$('#companyInput').autocomplete({
-				source: result.data.list
-			});
-		}
-		else
-		{
-			$('#companyInputMsg').html(result.data.msg);
-		}
+		var data = {};
+ 		data.name = request.term;
+		$.post($.URL.company.autoComplete,data,function(result){
+			if(result.data.result)
+			{
+				response(result.data.list);
+			}
+			else
+			{
+				$('#companyInputMsg').html(result.data.msg);
+			}
+		},'json');
 	}
+	
+	//更新用户所属公司
+	function updateCompany(){
+    		if($('#companyInput').val()!=$('#companyInput').attr('oldVal'))
+    		{
+    			var data = {};
+    			data.name = $('#companyInput').val();
+    			$.post($.URL.company.add,data,companyAddCallback,'json');
+    		}
+    }
 	
 	//添加公司回调函数
 	function companyAddCallback(result)

@@ -47,14 +47,14 @@ class CompanyAction extends Action
 	function autoComplete()
 	{
 		$list = array();
-		if(isset($_POST['company']) && !is_null($_POST['company']))
+		if(isset($_POST['name']) && !is_null($_POST['name']))
 		{
 			$company = M('Company');
 			$map = array();
-			$map['name'] = array('like','%'.$_POST['company'].'%');
-			$list = $company->where($map)->limit(10)->getField('name',true);
+			$map['name'] = array('like',"%{$_POST['name']}%");
+			$list = $company->where($map)->getField('id,name');
 		}
-		if(is_null)
+		if(is_null($list))
 		{
 			$list = array();
 		}
