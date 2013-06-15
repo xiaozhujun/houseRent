@@ -89,3 +89,54 @@ CREATE TABLE `friend` (
   `createTime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `college` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `createTime` datetime DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `company` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `createTime` datetime DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `target_house` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `createTime` datetime DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `user_college` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `userId` bigint(20) DEFAULT NULL,
+  `collegeId` bigint(20) DEFAULT NULL,
+  `createTime` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `user_company` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `userId` bigint(20) DEFAULT NULL,
+  `companyId` bigint(20) DEFAULT NULL,
+  `createTime` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `user_target_house` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `userId` bigint(20) DEFAULT NULL,
+  `targetHouseId` bigint(20) DEFAULT NULL,
+  `createTime` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+
