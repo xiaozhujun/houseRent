@@ -45,10 +45,21 @@
  			location = $.URL.house.search + "?key="+$("#searchInput").val();
  		});
  		
-            
  		$('#companyInput').autocomplete({
                 source: doCompanyAutoComplete,//获取数据的后台页面
-                select: updateCompany
+                select: updateCompany,
+        });
+        
+        $('#collegeInput').autocomplete({
+                source: doCollegeAutoComplete,//获取数据的后台页面
+                select: updateCollege,
+        });
+        
+        $('#companyInput').focusout(function(){
+        	updateCompany();
+        });
+        $('#collegeInput').focusout(function(){
+        	updateCollege();
         });
         
 	});
@@ -84,6 +95,39 @@
 	function companyAddCallback(result)
 	{
 		$('#companyInputMsg').html(result.data.msg);
+	}
+	
+	//向后台请求匹配的高校信息
+	function doCollegeAutoComplete(request,response)
+	{
+		var data = {};
+ 		data.name = request.term;
+		$.post($.URL.college.autoComplete,data,function(result){
+			if(result.data.result)
+			{
+				response(result.data.list);
+			}
+			else
+			{
+				$('#collegeInputMsg').html(result.data.msg);
+			}
+		},'json');
+	}
+	
+	//更新用户所属高校
+	function updateCollege(){
+    		if($('#collegeInput').val()!=$('#collegeInput').attr('oldVal'))
+    		{
+    			var data = {};
+    			data.name = $('#collegeInput').val();
+    			$.post($.URL.college.add,data,collegeAddCallback,'json');
+    		}
+    }
+	
+	//添加高校回调函数
+	function collegeAddCallback(result)
+	{
+		$('#collegeInputMsg').html(result.data.msg);
 	}
 </script>
 <div id='mainContainer'>
@@ -216,14 +260,14 @@
     					<div class='intentionRowDiv'>
     						<div class='intentionLableDiv'>您所在的学校：</div>
     						<div class='intentionInputDiv'>
-    							<input id='collegeInput' class='intentionInput' type='text' data-empty='推荐你校友的房源' id=''>
-    							<div id='intentionInputMsg' class='msgDiv'></div>
+    							<input id='collegeInput' oldVal="{$collegeName}" value="{$collegeName}" class='intentionInput' type='text' data-empty='推荐你校友的房源'>
+    							<div id='collegeInputMsg' class='msgDiv'></div>
     						</div>
     					</div>
     					<div class='intentionRowDiv'>
     						<div class='intentionLableDiv'>您中意的小区：</div>
     						<div class='intentionInputDiv'>
-    							<input id='targetHouseInput' class='intentionInput' type='text' data-empty='推荐意向居住地的房源' id=''>
+    							<input id='targetHouseInput' class='intentionInput' type='text' data-empty='推荐意向居住地的房源'>
     							<div id='targetHouseInputMsg' class='msgDiv'></div>
     						</div>
     					</div>

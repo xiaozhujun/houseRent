@@ -18,4 +18,10 @@ class UserCollegeModel extends Model{
 		return date("Y-m-d H:i:s");
 	}
 
+	//根据用户编号查找
+	function findByUserId($userId)
+	{
+		if(is_null($userId)) return null;
+		return $this->where("userId={$userId}")->find();
+	}
 }

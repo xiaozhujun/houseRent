@@ -17,4 +17,21 @@ class CollegeModel extends Model{
 		return date("Y-m-d H:i:s");
 	}
 
+	//通过名称查找公司对象
+	function findByName($name)
+	{
+		if(is_null($name))
+		{
+			return null;
+		}
+		return $this->where("name='{$name}'")->find();
+	}
+	
+	//判断公司是否存在
+	function isExist($name)
+	{
+		$college = $this->findByName($name);
+		if($college) return true;
+		return false;
+	}
 }

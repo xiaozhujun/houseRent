@@ -2,6 +2,8 @@
 import('Common.Misc',APP_PATH,'.php');
 import("@.Model.UserCompanyModel");
 import("@.Model.CompanyModel");
+import("@.Model.UserCollegeModel");
+import("@.Model.CollegeModel");
 
 class PublicAction extends Action
 {
@@ -19,6 +21,8 @@ class PublicAction extends Action
 			$this->assign('user',$_SESSION ['user']);
 			$companyName = "";
 			$collegeName = "";
+			
+			//获得当前用户的公司名称
 			$userCompany = new UserCompanyModel();
 			$userCompanyObj = $userCompany->findByUserId($_SESSION['userId']);
 			if($userCompanyObj)
@@ -26,6 +30,16 @@ class PublicAction extends Action
 				$company = new CompanyModel();
 				$companyObj = $company->find($userCompanyObj['companyId']);
 				$companyName =$companyObj['name'];
+			}
+			
+			//获得当前用户的高校名称
+			$userCollege = new UserCollegeModel();
+			$userCollegeObj = $userCollege->findByUserId($_SESSION['userId']);
+			if($userCollegeObj)
+			{
+				$college = new CollegeModel();
+				$collegeObj = $college->find($userCollegeObj['collegeId']);
+				$collegeName =$collegeObj['name'];
 			}
 			
 			$this->assign('companyName',$companyName);
