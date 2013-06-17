@@ -1,0 +1,295 @@
+@CHARSET "utf-8";
+#houseInfoBody
+{
+	width:100%;
+	float:left;
+	margin-top:10px;
+}
+
+#leftInfo
+{
+	width:850px;
+	float:left;	
+	border:solid 1px #ccc;
+	padding-top:10px;
+	padding-left:10px;
+}
+
+#rightInfo
+{
+	width:300px;
+	float:right;	
+	height:100%;
+	border:solid 1px #ccc;
+	
+	padding-left:20px;	
+	padding-top:10px;
+}
+
+#title
+{
+	width:100%;
+	flaot:left;
+	
+	color: #333333;
+    font-family: Arial;
+    font-size: 18px;
+}
+
+#details
+{
+	width:100%;
+	float:left;
+}
+
+.infoRow
+{
+	width:100%;
+	float:left;
+	margin-bottom: 10px;
+}
+
+.infoLabel
+{
+	width:20%;
+	float:left;
+}
+
+.infoValue
+{
+	width:75%;
+	float:left;
+}
+
+#actions
+{
+	width:100%;
+	float:left;
+}
+
+#applyBtn
+{
+	width:150px;
+}
+
+#collectBtn
+{
+	margin-left:20px;
+}
+
+#description
+{
+	width:100%;
+	float:left;
+	margin-top:20px;
+}
+
+#descriptionTab
+{
+	float:left;
+	padding:10px 20px;
+	border:solid 1px #ccc;
+	border-bottom:none;
+	margin-bottom:-1px;
+	background-color: #999;
+	color: #333333;
+    font-family: Arial;
+    font-size: 16px;
+}
+
+#infoDescription
+{
+	width:100%;
+	float:left;
+}
+
+#comment
+{
+	width:100%;
+	float:left;
+	margin-top:20px;
+	margin-bottom:50px;
+}
+
+#comentTitle
+{
+	color: #333333;
+    font-family: Arial;
+    font-size: 16px;
+	color: #333333;
+    font-family: Arial;
+    font-size: 16px;
+}
+
+#commentContainer
+{
+	width:98%;
+	float:left;
+	border:solid 1px #ccc;
+	margin-top:20px;
+	padding-top:20px;
+	margin-right:10px;
+	padding-bottom:20px;
+}
+
+.comentRow
+{
+	width:100%;
+	float:left;
+}
+
+.commentLabel
+{
+	width:10%;
+	float:left;
+	text-align:right;
+}
+
+.comemntInput
+{
+	width:85%;
+	float:left;
+}
+
+#user
+{
+	width:100%;
+	float:left;
+}
+
+#userInfoRow
+{
+	width:100%;
+	float:left;
+}
+
+#headIcon
+{
+	width:100px;
+	float:left;
+}
+
+#userInfoDetail
+{
+	width:200px;
+	float:left;
+}
+
+#name
+{
+	width:100%;
+	color: #000;
+    font-family: Arial;
+    font-size: 13px;
+	margin-left:15px;	
+}
+
+#company
+{
+	width:100%;
+	color: #0000FF;
+    font-family: Arial;
+    font-size: 13px;
+	margin-top:2px;	
+	margin-left:15px;	
+}
+
+#college
+{
+	width:100%;
+	color: #0000FF;
+    font-family: Arial;
+    font-size: 13px;
+	margin-top:2px;	
+	margin-left:15px;
+}
+
+#addFrinend
+{
+	width:100%;
+	color: #0000FF;
+    font-family: Arial;
+    font-size: 13px;
+	margin-top:2px;	
+	margin-left:15px;	
+}
+
+#relationship
+{
+	width:100%;
+	float:left;
+	color: #333333;
+    font-family: Arial;
+    font-size: 13px;
+	margin-top:2px;
+}
+
+#peopleBetween
+{
+	width:100%;
+	float:left;	
+	color: #333333;
+    font-family: Arial;
+    font-size: 14px;
+	font-weight: bold;	
+}
+
+#relationshipDetail
+{
+	width:100%;
+	float:left;
+}
+
+#relatedHouse
+{
+	width:100%;
+	float:left;
+	margin-top:20px;
+}
+
+#relatedHouseTitle
+{
+	width:100%;
+	float:left;
+	color: #333333;
+    font-family: Arial;
+    font-size: 16px;
+	font-weight: bold;
+}
+
+#houseList
+{
+	width:100%;
+	float:left;
+	padding-bottom:50px;
+}
+
+.houseItem
+{
+	float:left;
+	width:250px;
+	margin-left:15px;
+	margin-top:5px;
+	padding:10px;
+	border:solid 1px #ccc;
+	cursor:pointer;
+}
+
+.houseItem:HOVER
+{
+	background-color: #eee;
+}
+
+.houseItemColumn
+{
+	width:100%;
+	float:left;
+}
+
+.underLine
+{
+	width:95%;
+	float:left;
+	border-bottom: solid 1px #ccc;
+}
+

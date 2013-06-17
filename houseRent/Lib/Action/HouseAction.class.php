@@ -122,5 +122,18 @@ class HouseAction extends Action {
 		$this->display ("houseinfo");
 	}
 	
+	//查看房源信息
+	function info()
+	{
+		if(isLogin())
+		{
+			session_start();
+			$this->assign('user',$_SESSION ['user']);
+			header ( "Content-Type:text/html; charset=utf-8" );
+		}
+		header ( "Content-Type:text/html; charset=utf-8" );
+		$this->display("houseInfo");
+	}
+	
 	
 }

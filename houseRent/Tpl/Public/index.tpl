@@ -12,6 +12,7 @@
 <script src="/js/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
 <script src="/js/config.js" type="text/javascript"></script>
 <script src="/js/emptyNote.js" type="text/javascript"></script>
+<script src="/js/house.js" type="text/javascript"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
 <title>首页</title>  
 </head>  
