@@ -17,6 +17,15 @@
 				  Option.text=region_array[region][1];
 				  selObj.options.add(Option);
 			  }
+			  
+			  var rentObj  = document.getElementById("rentType");
+			  for(var rentType in type_array){
+				  var Option=document.createElement("OPTION");
+				  Option.value=type_array[rentType][0];
+				  Option.text=type_array[rentType][1];
+				  rentObj.options.add(Option);
+			  }
+			  
 				$('#publishHouseBtn').click(function(){
 					if(checkform()){
 						var data = {};
@@ -25,6 +34,8 @@
 						data.parlor = $('#parlor').val();
 						data.washroom = $('#washroom').val();
 						data.price = $('#price').val();
+						data.rentType=$('#rentType').val();
+						data.region = $('#region').val();
 						data.area = $('#area').val();
 						data.currentFloor = $('#currentfloor').val();
 						data.maxFloor = $('#maxfloor').val();
@@ -130,6 +141,10 @@
     <div class='rowDiv'>  
     	<div class='labelDiv'>租入/租出价格：</div>  
   		<div class='inputDiv'><input value='5000' type="text" id="price" onchange="checkdigital(this)"></div>  
+    </div>
+    <div class='rowDiv'>
+    	<div class='labelDiv'>出租方式：</div>   
+    	<select class='inputDiv' id="rentType"></select>
     </div>
     <div class='rowDiv'>  
     	<div class='labelDiv'>面积：</div>  

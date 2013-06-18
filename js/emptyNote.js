@@ -1,5 +1,15 @@
 (function($){
 	$.fn.val2 = $.fn.val;
+	//重写jquery val方法，增加data-empty过滤
+	   $.fn.val = function(){
+	    	var value = $(this).val2.apply(this,arguments);
+	    	var empty = $(this).attr("data-empty");
+	    	if(typeof empty != "undefined"&&empty==value){
+	    		value = "";
+	    	}
+	    	return value;
+	    };
+	    
 	$.fn.emptyValue = function(arg){
         this.each(function(){
             var input = $(this);
@@ -47,14 +57,5 @@
             }).blur();
         });
     };
-    
-    //重写jquery val方法，增加data-empty过滤
-   $.fn.val = function(){
-    	var value = $(this).val2.apply(this,arguments);
-    	var empty = $(this).attr("data-empty");
-    	if(typeof empty != "undefined"&&empty==value){
-    		value = "";
-    	}
-    	return value;
-    };
+  
 })(jQuery);
