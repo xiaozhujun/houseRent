@@ -24,4 +24,16 @@ class UserCollegeModel extends Model{
 		if(is_null($userId)) return null;
 		return $this->where("userId={$userId}")->find();
 	}
+	
+	//根据用户编号查找用户公司
+	function getUserCollege($userId)
+	{
+		if(is_null($userId))
+		{
+			return "";
+		}
+	
+		$result = $this->join("college ON user_college.collegeId=college.id")->where("userId={$userId}")->field("college.name")->find();
+		return $result['name'];
+	}
 }

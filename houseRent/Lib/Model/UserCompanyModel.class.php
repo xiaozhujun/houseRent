@@ -24,5 +24,17 @@ class UserCompanyModel extends Model{
 		if(is_null($userId)) return null;
 		return $this->where("userId={$userId}")->find();
 	}
+	
+	//根据用户编号查找用户公司
+	function getUserCompany($userId)
+	{
+		if(is_null($userId))
+		{
+			return "";
+		}
+		
+		$result = $this->join("company ON user_company.companyId=company.id")->where("userId={$userId}")->field("company.name")->find();
+		return $result['name'];
+	}
 
 }

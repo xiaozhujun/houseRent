@@ -26,21 +26,20 @@
 						data.washroom = $('#washroom').val();
 						data.price = $('#price').val();
 						data.area = $('#area').val();
-						data.currentfloor = $('#currentfloor').val();
-						data.maxfloor = $('#maxfloor').val();
-						data.address_info = $('#address_info').val();
-						data.contact_person = $('#contact_person').val();
-						data.contact_phone = $('#contact_phone').val();
-						data.contact_qq = $('#contact_qq').val();
+						data.currentFloor = $('#currentfloor').val();
+						data.maxFloor = $('#maxfloor').val();
+						data.addressInfo = $('#address_info').val();
+						data.contactPerson = $('#contact_person').val();
+						data.contactPhone = $('#contact_phone').val();
+						data.contactQQ = $('#contact_qq').val();
 						
-						data.contact_weixin = $('#contact_weixin').val();
-						data.contact_email = $('#contact_email').val();
+						data.contactWeixin = $('#contact_weixin').val();
+						data.contactEmail = $('#contact_email').val();
 						data.decoration = $('#decoration').val();
 						data.furniture = $('#furniture').val();
-						data.build_year = $('#build_year').val();
 						data.request = $('#request').val();
 						data.remark = $('#remark').val();
-						data.detail_description = $('#detail_description').val();
+						data.detailDescription = $('#detail_description').val();
 						$.post($.URL.house.publishhouse,data,callback,"json");
 					}
 
@@ -177,10 +176,6 @@
   		<div class='inputDiv'><input value='齐全' type="text" id="furniture"></div>
     </div>
     <div class='rowDiv'>  
-    	<div class='labelDiv'>房屋建造年份：</div>  
-  		<div class='inputDiv'><input value='2000' type="text" id="build_year" onchange="checkdigital(this)"></div>
-    </div>
-    <div class='rowDiv'>  
     	<div class='labelDiv'>对租户要求：</div>  
   		<div class='inputDiv'><input value='无' type="text" id="request"></div>
     </div>
@@ -188,17 +183,10 @@
     	<div class='labelDiv'>备注：</div>  
   		<div class='inputDiv'><input value='无' type="text" id="remark"></div>
     </div>
-<!--    <div class='htmlEditorDiv'>-->
-<!--        <div class='labelDiv'>房屋详细描述：</div> -->
-<!--    	<div class='inputDiv' id="detail_description"></div>  -->
-<!--  		<div class='labelDiv'><input type='hidden' name='detail_description'/></div>-->
-<!--    </div>     -->
 	<div class='htmlEditorDiv'>
     	<div class='labelDiv'>房屋详细描述：</div>  
   		<div class='inputDiv'>
-  		<textarea id='detail_description' rows="8" cols="60">
-			请填写房源描述！
-		</textarea>
+  		<textarea id='detail_description' rows="8" cols="60">请填写房源描述！</textarea>
 		<!-- <input type="text" id="detail_description"></div> -->
 	</div>
     <div class='actionDiv'>  

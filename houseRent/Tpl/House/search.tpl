@@ -6,6 +6,7 @@
 <script src="/js/urlUtil.js" type="text/javascript"></script>
 <script src="/js/resouce.js" type="text/javascript"></script>
 <script src="/js/emptyNote.js" type="text/javascript"></script>
+<script src="/js/house.js" type="text/javascript"></script>
 
 {if !isset($user)}
 <link href="/css/headLogin.css" type="text/css" rel="stylesheet">
@@ -14,6 +15,7 @@
 <link href="/css/common.css" type="text/css" rel="stylesheet">
 <link href="/css/header.css" type="text/css" rel="stylesheet">
 <link href="/css/house/search.css" type="text/css" rel="stylesheet">
+<link href="/css/searchInput.css" type="text/css" rel="stylesheet">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
 <title>租客团-房源检索</title>
 
@@ -42,16 +44,22 @@
  		
  		$('#searchBtn').click(function(){
  			key = $('#searchInput').val();
- 			
- 			var data = {};
-    		getPramsFromUrl(data,key,price,region,room,type);
-    		$.post($.URL.house.houselist,data,callback,"json");
+ 			if(key!="")
+ 			{
+ 				var data = {};
+	    		getPramsFromUrl(data,key,price,region,room,type);
+	    		$.post($.URL.house.houselist,data,callback,"json");
+ 			}
+ 			else
+ 			{
+ 				$("#searchMsg").html("请输入房源搜索关键字！");
+ 			}
  		});
  		
     	for(var i=0;i<region_array.length;i++){
             var newNode = document.createElement("a");
             newNode.href=getretionlink(key,price,region,room,type,region_array[i][0],1);
-            newNode.type='type';
+            newNode.type='region';
             newNode.value = region_array[i][0];
             newNode.class="region_"+region_array[i][0];
             newNode.innerHTML=region_array[i][1];
@@ -60,7 +68,7 @@
     	for(var i=0;i<price_array.length;i++){
             var newNode = document.createElement("a");
             newNode.href=getretionlink(key,price,region,room,type,price_array[i][0],2);
-            newNode.type='type';
+            newNode.type='price';
             newNode.value = price_array[i][0];
             newNode.class="price_"+price_array[i][0];
             newNode.innerHTML=price_array[i][1];
@@ -69,7 +77,7 @@
     	for(var i=0;i<room_array.length;i++){
             var newNode = document.createElement("a");
             newNode.href=getretionlink(key,price,region,room,type,room_array[i][0],3);
-            newNode.type='type';
+            newNode.type='room';
             newNode.value = room_array[i][0];
             newNode.class="room_"+room_array[i][0];
             newNode.innerHTML=room_array[i][1];
@@ -93,21 +101,21 @@
     	$("dd a").click(function(){
     		$(this).addClass('selected').siblings().removeClass('selected');
     		linkType = $(this).attr("type");
-    		if(linkType='region')
+    		if(linkType=='region')
     		{
     			region = $(this).attr("value");
     		}
-    		else if(linkType='type')
+    		else if(linkType=='type')
     		{
     			type = $(this).attr("value");
     		}
-    		else if(linkType='price')
+    		else if(linkType=='price')
     		{
     			price = $(this).attr("value");
     		}
-    		else if(linkType='room')
+    		else if(linkType=='room')
     		{
-    			value = $(this).attr("value");
+    			room = $(this).attr("value");
     		}
     		var data = {};
     		getPramsFromUrl(data,key,price,region,room,type);
@@ -141,6 +149,9 @@
 				$('#result').html("亲，没有检索到相匹配的房源哦！");
 			}else{
 				renderingPage(result.data);
+				$('.houseItem').click(function(){
+					location=$.URL.house.info+"?id="+$(this).attr("houseId");
+				});
 			}
 		}
  	
@@ -164,9 +175,9 @@
 	function renderingPage(data){
 		var htmlstr="";
 		for(var i=0;i<data.current_count;i++){
-			htmlstr+="<div class='table_row'>";
-				htmlstr+="<div class='table_cell'>"+"<a href='http://sh.58.com/zufang/12561126238593x.shtml' target='_blank' ><img src='http://4.pic.58control.cn/p1/tiny/n_1570546758288410.jpg' /></a>"+"</div>";
-				htmlstr+="<div class='table_cell'>";
+			htmlstr+="<div class='houseItem' houseId='" + data.houseinfo_list[i].houseId + "'>";
+				htmlstr+="<div class='houseItemColumn'>"+"<a href='http://sh.58.com/zufang/12561126238593x.shtml' target='_blank' ><img src='http://4.pic.58control.cn/p1/tiny/n_1570546758288410.jpg' /></a>"+"</div>";
+				htmlstr+="<div class='houseItemColumn'>";
 					htmlstr+="<div class='titleinfo'>"+"标题："+data.houseinfo_list[i].title+"</div>";
 					htmlstr+="<div class='regioninfo'>"+"区域："+data.houseinfo_list[i].region+"</div>";
 				htmlstr+="</div>";
@@ -257,12 +268,13 @@
 		}
 		return link;
 	}
+	
 	function test(paramName)  
 	{  
 	    var reg = new RegExp("(^|\\?|&)"+ paramName+"=([^&]*)(\\s|&|$)", "i");
 	  
 	    if (reg.test(hrefstr)) //test为script ID 
-	        return RegExp.$2; 
+	        return URL.decode(RegExp.$2); 
 	    else
 	        return "";
 	}
@@ -315,7 +327,8 @@
 
 	<div id="keysearch">
 			<input id='searchInput' type="text"  maxlength="100" data-empty='按照关键字检索您想要的房源'>
-			<div id='searchBtn'>搜索一下</div>
+			<div id='searchBtn' class='myButton'>搜索一下</div>
+    		<div id='searchMsg'></div>
 	</div>
 
     <div id="choise">

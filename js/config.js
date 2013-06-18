@@ -27,6 +27,7 @@
 			"houselist":"/House/houseList",
 			"publishhouse":"/House/publishHouseAction",
 			"search":"/House/search",
+			"info":"/House/info",
 			
 		},
 		"company":{

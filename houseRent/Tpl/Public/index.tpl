@@ -7,6 +7,7 @@
 <link href="/css/house.css" type="text/css" rel="stylesheet">
 <link href="/css/publishHouse.css" type="text/css" rel="stylesheet">
 <link href="/css/intention.css" type="text/css" rel="stylesheet">
+<link href="/css/searchInput.css" type="text/css" rel="stylesheet">
 <link href="/css/jquery/jquery-ui-1.10.3.custom.min.css" type="text/css" rel="stylesheet">
 <script src="/js/jquery-1.9.1.js" type="text/javascript"></script>
 <script src="/js/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
@@ -43,7 +44,15 @@
 		
 		$('#searchBtn').click(function(){
  			var newKey = $('#searchInput').val();
- 			location = $.URL.house.search + "?key="+$("#searchInput").val();
+ 			if(newKey!="")
+ 			{
+ 				location = $.URL.house.search + "?key="+$("#searchInput").val();
+ 			}
+ 			else
+ 			{
+ 				$("#searchMsg").html("请输入房源关键字！");
+ 			}
+ 			
  		});
  		
  		$('#companyInput').autocomplete({
@@ -199,7 +208,8 @@
     <div id='mainBodyDiv'>
     	<div id='searchDiv'>
     		<input id='searchInput' type='text' data-empty='按照关键字检索您想要的房源'>
-    		<div id='searchBtn'>搜索</div>
+    		<div id='searchBtn' class='myButton'>搜索</div>
+    		<div id='searchMsg'></div>
     	</div>
     	
     	<div id='houseTypeDiv'>

@@ -1,0 +1,30 @@
+@CHARSET "utf-8";
+
+#searchDiv
+{
+	width:100%;
+	float:left;
+	
+	margin-top:10px;
+}
+
+#searchInput
+{
+    font-family: 'Arial';
+    font-size: 13px;
+    height: 30px;
+    text-align: left;
+    width: 500px;
+	float:left;
+}
+
+
+#searchMsg
+{
+	float:left;
+	font-size:16px;
+	color:red;
+	margin-left:10px;
+	padding-top:10px;
+	padding-bottom:10px;
+}

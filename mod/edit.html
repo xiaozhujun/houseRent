@@ -1,16 +1,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">  
 <html>  
 <head>  
-<script src="/js/jquery-1.7.2.min.js" type="text/javascript"></script>
+<script src="/js/jquery-1.9.1.js" type="text/javascript"></script>
 <script src="/js/config.js" type="text/javascript"></script>
 <script src="/js/urlUtil.js" type="text/javascript"></script>
 <script src="/js/resouce.js" type="text/javascript"></script>
 <script src="/js/emptyNote.js" type="text/javascript"></script>
-<script src="/js/house.js" type="text/javascript"></script>
 {if !isset($user)}
 <link href="/css/headLogin.css" type="text/css" rel="stylesheet">
 {/if}
-
 <link href="/css/common.css" type="text/css" rel="stylesheet">
 <link href="/css/header.css" type="text/css" rel="stylesheet">
 <link href="/css/house/houseInfo.css" type="text/css" rel="stylesheet">
@@ -20,12 +18,12 @@
 <body>  
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("input").emptyValue();
+		
 	});
 </script>
 <div id='mainContainer'>
     <div id='headContainer'>
-    	<div id='logoDiv'><a href='/'><img height=100% src='/assets/logo.jpg'/></a></div>
+    	<div id='logoDiv'><img height=100% src='/assets/logo.jpg'/></div>
     	<div id='headLeftDiv'>
     		<div id='aimDiv'>让您不在为租房烦恼</div>
     		<div id='cityDiv'>城市</div>
@@ -65,32 +63,32 @@
     <div id='houseInfoBody'>
     	<div id='leftInfo'>
     		<div id='title'>
-				{$houseInfo['title']}
+				和平里和平街十四区 2室1厅65平米 精装修 押一付三
     		</div>
     		<div id='details'>
     			<div class='infoRow'>
     				<div class='infoLabel'>租金价格：</div>
-    				<div class='infoValue'>{$houseInfo['price']}</div>
+    				<div class='infoValue'></div>
     			</div>
     			<div class='infoRow'>
     				<div class='infoLabel'>房屋户型：</div>
-    				<div class='infoValue'>{$houseInfo['room']}室{$houseInfo['parlor']}厅{$houseInfo['washroom']}卫 &nbsp; {$houseInfo["area"]}平米</div>
+    				<div class='infoValue'></div>
     			</div>
     			<div class='infoRow'>
     				<div class='infoLabel'>房屋情况：</div>
-    				<div class='infoValue'>{$houseInfo['decoration']}</div>
+    				<div class='infoValue'></div>
     			</div>
     			<div class='infoRow'>
     				<div class='infoLabel'>所属楼层：</div>
-    				<div class='infoValue'>{$houseInfo['currentFloor']}层/{$houseInfo['maxFloor']}层</div>
+    				<div class='infoValue'></div>
     			</div>
     			<div class='infoRow'>
     				<div class='infoLabel'>所在区域：</div>
-    				<div class='infoValue'>{$region['areaname']}</div>
+    				<div class='infoValue'></div>
     			</div>
     			<div class='infoRow'>
     				<div class='infoLabel'>所在地址：</div>
-    				<div class='infoValue'>{$houseInfo['addressInfo']}</div>
+    				<div class='infoValue'></div>
     			</div>
     		</div>
     		<div id='actions'>
@@ -98,25 +96,24 @@
     			<div id='collectBtn' class='myButton'>收藏</div>
     		</div>
     		<div id='description'>
-    			<div class='underLine'>
-    				<div id='descriptionTab'>房源详情</div>
-    			</div>
+    			<div id='descriptionTab'>房源详情</div>
     			<div id='infoDescription'>
-					{$houseInfo['detailDescription']}
+					<p>1房屋优势： 购物方便 此房公共交通极其便利！</p>
+					<p>2 房屋内饰：电视，冰箱，洗衣机，空调，床，衣柜，装修非常不错！！！</p>
+					<p>3 房屋配套：水，电，天然气，还有暖气，有线电视，家电全齐，可拎包入住！！！</p>
+					<p>4 出租原因：业主工作调动，离家较远，所以首次出租此房！！！</p>
     			</div>
     		</div>
     		<div id='comment'>
-    			<div id='comentTitle'>房源评价：</div>
+    			<div id='comentTitle'>房源评价</div>
     			<div id='commentContainer'>
     				<div class='comentRow'>
-    					<div class='commentLabel'>内容：</div>
-    					<div class='comemntInput'>
-    						<textarea id='detail_description' rows="8" cols="60">请输入您的评价！</textarea>
-    					</div>
+    					<div class='commentLabel'></div>
+    					<div class='comemntInput'></div>
     				</div>
     				<div class='comentRow'>
     					<div class='commentLabel'>&nbsp;</div>
-    					<div class='comemntInput'><div id='commentBtn' class='myButton'>评论</div></div>
+    					<div class='comemntInput'><div class='commentBtn' class='myButton'>评论</div></div>
     				</div>
     			</div>
     		</div>
@@ -126,28 +123,20 @@
     			<div id='userInfoRow'>
     				<div id='headIcon'><img src='/assets/headIcon.png' height='100%'></div>
     				<div id='userInfoDetail'>
-    					<div id='name'>{$houseUser["realName"]}</div>
-    					<div id='company'>{$company}</div>
-    					<div id='college'>{$college}</div>
-    					<div id='addFrinend'><div id='addFriendBtn' class='myButton'>+ 加为好友</div></div>
+    					<div id='name'>肖竹军</div>
+    					<div id='company'>百度</div>
+    					<div id='college'>武汉理工</div>
     				</div>
     			</div>
     		</div>
-    		
     		<div id='relationship'>
     					<div id='peopleBetween'>通过2个人可以认识她</div>
     					<div id='relationshipDetail'>&nbsp;</div>
-    		</div>
-    		<div class='underLine'></div>
-    		<div id='relatedHouse'>
+    				</div>
+    				<div id='relatedHouse'>
     					<div id='relatedHouseTitle'>相关房源推荐：</div>
     					<div id='houseList'>
     						<div class='houseItem'>
-					   				<div class='houseItemColumn'>和平里和平街十四区 2室1厅65平米</div>
-					   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
-					   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
-					   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
-					   			</div>
     							<div class='houseItem'>
 					   				<div class='houseItemColumn'>和平里和平街十四区 2室1厅65平米</div>
 					   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
@@ -166,8 +155,15 @@
 					   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
 					   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
 					   			</div>
+    							<div class='houseItem'>
+					   				<div class='houseItemColumn'>和平里和平街十四区 2室1厅65平米</div>
+					   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
+					   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
+					   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
+					   			</div>
+    						</div>
     					</div>
-    		</div>
+    				</div>
     	</div>
    </div>
 </div>

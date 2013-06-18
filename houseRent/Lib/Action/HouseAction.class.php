@@ -1,5 +1,9 @@
 <?php
 import("@.Model.HouseInfoModel");
+import("@.Model.RegionModel");
+import("@.Model.UserModel");
+import("@.Model.UserCompanyModel");
+import("@.Model.UserCollegeModel");
 import('Common.HousePublish',APP_PATH,'.php');
 import('Common.Util',APP_PATH,'.php');
 import('Common.Misc',APP_PATH,'.php');
@@ -79,10 +83,10 @@ class HouseAction extends Action {
 		$user = D ("HouseInfo");
 		if($user->create ())
 		{
-			$user->user_id=$_SESSION['userId'];
-			houseType($user,$_POST['room'],$_POST['parlor'],$_POST['washroom']);
-			floorInfo($user,$_POST['currentfloor'],$_POST['maxfloor']);
-			$user->input_time=intNow();
+			$user->userId=$_SESSION['userId'];
+			//houseType($user,$_POST['room'],$_POST['parlor'],$_POST['washroom']);
+			//floorInfo($user,$_POST['currentfloor'],$_POST['maxfloor']);
+			$user->createTime=intNow();
 			if($user->add()){
 				$data['code']=0;
 				$data['msg']="";
@@ -125,12 +129,42 @@ class HouseAction extends Action {
 	//查看房源信息
 	function info()
 	{
+		$houseId = $_GET['id'];
+		if(is_null($houseId))
+		{
+			echo "对不起，您的请求中参数正确！";
+			return;
+		}
+		
 		if(isLogin())
 		{
 			session_start();
 			$this->assign('user',$_SESSION ['user']);
 			header ( "Content-Type:text/html; charset=utf-8" );
 		}
+		
+		$houseInfo = M('HouseInfo');
+		$houseInfoObj = $houseInfo->find($houseId);
+		$this->assign('houseInfo',$houseInfoObj);
+		
+		$region = M('Region');
+		$regionId = $houseInfoObj['region'];
+		$regionObj = $region->find($regionId);
+		$this->assign("region",$regionObj);
+
+		$houseUser = M("User");
+		$houseUserId = $houseInfoObj["userId"];
+		$houseUserObj = $houseUser->find($houseUserId);
+		$this->assign("houseUser",$houseUserObj);
+		
+		$userCompany = new UserCompanyModel();
+		$company = $userCompany->getUserCompany($houseUserId);
+		$this->assign("company",$company);
+		
+		$userCollege = new UserCollegeModel();
+		$college = $userCollege->getUserCollege($houseUserId);
+		$this->assign("college",$college);
+		
 		header ( "Content-Type:text/html; charset=utf-8" );
 		$this->display("houseInfo");
 	}
