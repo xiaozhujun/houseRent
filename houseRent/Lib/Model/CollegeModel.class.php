@@ -3,7 +3,7 @@ class CollegeModel extends Model{
 	//自动验证
 	protected $_validate=array(
 			//每个字段的详细验证内容
-			array("name","require","高效名不能为空"),
+			array("name","require","高校名不能为空"),
 	);
 	
 	//自动填充

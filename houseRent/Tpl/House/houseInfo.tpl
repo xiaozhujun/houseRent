@@ -92,6 +92,10 @@
     				<div class='infoLabel'>所在地址：</div>
     				<div class='infoValue'>{$houseInfo['addressInfo']}</div>
     			</div>
+    			<div class='infoRow'>
+    				<div class='infoLabel'>转让时间：</div>
+    				<div class='infoValue'>{$houseInfo['transferTime']}</div>
+    			</div>
     		</div>
     		<div id='actions'>
     			<div id='applyBtn' class='myButton'>申请房源</div>

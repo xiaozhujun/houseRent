@@ -28,7 +28,7 @@
 			"publishhouse":"/House/publishHouseAction",
 			"search":"/House/search",
 			"info":"/House/info",
-			
+			"popularlist":"/House/popularHouse",
 		},
 		"company":{
 			"add":"/Company/add",

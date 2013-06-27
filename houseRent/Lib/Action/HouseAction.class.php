@@ -4,6 +4,7 @@ import("@.Model.RegionModel");
 import("@.Model.UserModel");
 import("@.Model.UserCompanyModel");
 import("@.Model.UserCollegeModel");
+import("@.Model.HouseViewModel");
 import('Common.HousePublish',APP_PATH,'.php');
 import('Common.Util',APP_PATH,'.php');
 import('Common.Misc',APP_PATH,'.php');
@@ -19,7 +20,7 @@ class HouseAction extends Action {
 		if(isLogin())
 		{
 			session_start();
-			$this->assign('user',$_SESSION ['user']);
+			$this->assign('user',currentUserName());
 			header ( "Content-Type:text/html; charset=utf-8" );
 		}
 		$this->display ( "search" );
@@ -80,14 +81,16 @@ class HouseAction extends Action {
 			$this->ajaxReturn($data);
 		}
 		session_start();
-		$user = D ("HouseInfo");
-		if($user->create ())
+		$houseInfo = D ("HouseInfo");
+		if($houseInfo->create ())
 		{
-			$user->userId=$_SESSION['userId'];
+			$houseInfo->userId=$_SESSION['userId'];
 			//houseType($user,$_POST['room'],$_POST['parlor'],$_POST['washroom']);
 			//floorInfo($user,$_POST['currentfloor'],$_POST['maxfloor']);
-			$user->createTime=intNow();
-			if($user->add()){
+			$houseInfo->createTime=intNow();
+			$houseInfo->viewCount=0;
+			
+			if($houseInfo->add()){
 				$data['code']=0;
 				$data['msg']="";
 			}else{
@@ -135,11 +138,9 @@ class HouseAction extends Action {
 			echo "对不起，您的请求中参数正确！";
 			return;
 		}
-		
 		if(isLogin())
 		{
-			session_start();
-			$this->assign('user',$_SESSION ['user']);
+			$this->assign('user',currentUserName());
 			header ( "Content-Type:text/html; charset=utf-8" );
 		}
 		
@@ -164,9 +165,28 @@ class HouseAction extends Action {
 		$userCollege = new UserCollegeModel();
 		$college = $userCollege->getUserCollege($houseUserId);
 		$this->assign("college",$college);
+		//保存用户浏览房源记录
+		$houseViewModel = new HouseViewModel();
+		$result = $houseViewModel->saveOrUpdate(currentUserId(),$houseId);
+		if(result==1)
+		{
+			$houseInfo->where("houseId={$houseId}")->setInc("viewCount",1);
+		}
+		
 		
 		header ( "Content-Type:text/html; charset=utf-8" );
 		$this->display("houseInfo");
+	}
+	
+	//关注度高的房子
+	function popularHouse()
+	{
+		$houseInfoModel = new HouseInfoModel();
+		$houseList =$houseInfoModel->popularHouse();
+		$data = array();
+		$data['result'] = true;
+		$data['houseList'] = $houseList;
+		$this->ajaxReturn($data);
 	}
 	
 	

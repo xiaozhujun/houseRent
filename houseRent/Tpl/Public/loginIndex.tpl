@@ -11,6 +11,7 @@
 <script src="/js/config.js" type="text/javascript"></script>
 <script src="/js/emptyNote.js" type="text/javascript"></script>
 <script src="/js/house.js" type="text/javascript"></script>
+<script src="/js/jquery-dateFormat.js" type="text/javascript"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
 <title>首页</title>  
 </head>  
@@ -23,7 +24,6 @@
 				data.password = $('#pwdLoginInput').val();
 				$.post($.URL.user.login,data,loginCallback,"json");
 			});
-			
 			
 			$('#regitserBtn').click(function(){
 				var data = {};
@@ -39,12 +39,34 @@
 			$('#verify').attr('src',$.URL.user.verify);
 			
 			$("input").emptyValue();
+			
+			$.get($.URL.house.popularlist,null,popularlistCallback,"json");
 				
 	});
 	
 	function reloadVerifyCode(){  
 	        document.getElementById("verify").src=$.URL.user.verify +'/' +Math.random();  
 	          
+	}
+	
+	//房源欢迎列表
+	function popularlistCallback(result)
+	{
+		$.each(result.data.houseList,function(index,value){
+
+   			var houseInfo = $("<div class='houseItem'></div>");
+   			houseInfo.attr('houseId',value.houseId);
+   			var title = $("<div class='houseItemColumn'></div>").append(value.title);
+   			var price = $("<div class='houseItemColumn'></div>").append(value.price).append("&nbsp;元/月");
+   			var type = $("<div class='houseItemColumn'></div>").append("房屋户型： "+value.room+"室"+value.parlor+"厅"+value.washroom+"卫");
+   			var transferTime = $("<div class='houseItemColumn'></div>").append("出租时间： "+$.format.date(value.transferTime,"yyyy-MM-dd"));
+   			houseInfo.append(title).append(price).append(type).append(transferTime);
+   			$("#popularHouseList").append(houseInfo);
+		});
+		
+		$('.houseItem').click(function(){
+			location=$.URL.house.info+"?id="+$(this).attr("houseId");
+		});
 	}
 	
 	//注册回调函数
@@ -80,7 +102,7 @@
     		<div class='headRightRow'>
     			<div id='topRow'>
 	    			<div class='nameInputDiv'>
-	    				<div class='loginColumnDiv'><input id='emailLoginInput' type='text' data-empty='账号'  value='346012526@qq.com'/></div>
+	    				<div class='loginColumnDiv'><input id='emailLoginInput' type='text' data-empty='邮箱'  value='346012526@qq.com'/></div>
 	    			</div>
 	    			<div class='pwdInputDiv'>
 	    				<div class='loginColumnDiv'><input type='text' data-empty='密码'  pass-empty='true' /><input id='pwdLoginInput' type='password' data-empty='密码'  pass-empty='true'  value='123456'/></div>
@@ -134,41 +156,8 @@
    <!--推荐房源 -->
    <div id='recommendDiv'>
    		<div class='recommendTitle'>优质房源</div>
-   		<div class='houseListDiv'>
-   			<div class='houseItem'>
-   				<div class='houseItemColumn'>海淀区 和平里和平街十四区 2室1厅65平米</div>
-   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
-   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
-   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
-   			</div>
+   		<div id='popularHouseList' class='houseListDiv'>
    			
-   			<div class='houseItem'>
-   				<div class='houseItemColumn'>和平里和平街十四区 2室1厅65平米</div>
-   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
-   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
-   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
-   			</div>
-   			
-   			<div class='houseItem'>
-   				<div class='houseItemColumn'>和平里和平街十四区 2室1厅65平米</div>
-   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
-   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
-   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
-   			</div>
-   			
-   			<div class='houseItem'>
-   				<div class='houseItemColumn'>和平里和平街十四区 2室1厅65平米</div>
-   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
-   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
-   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
-   			</div>
-   			
-   			<div class='houseItem'>
-   				<div class='houseItemColumn'>和平里和平街十四区 2室1厅65平米</div>
-   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
-   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
-   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
-   			</div>
    		</div>
    		
    		<!-- 用户分布，圈子分布 -->

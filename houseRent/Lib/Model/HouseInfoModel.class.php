@@ -83,5 +83,12 @@ class HouseInfoModel extends Model{
 		}
     	
     } 
+    
+    //受欢迎的房子
+    function popularHouse()
+    {
+    	$now = dateTime();
+    	return $this->where("transferTime>='{$now}'")->order("houseId desc")->limit(10)->select();
+    }
 
 }
