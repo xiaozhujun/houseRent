@@ -81,11 +81,14 @@ CREATE TABLE `house_info` (
   `washroom` int(11) DEFAULT NULL,
   `maxFloor` int(11) DEFAULT NULL,
   `currentFloor` int(11) DEFAULT NULL,
+  `viewCount` bigint(20) DEFAULT NULL,
+  `applyCount` bigint(20) DEFAULT NULL,
+  `transferTime` datetime DEFAULT NULL,
   PRIMARY KEY (`houseId`),
   KEY `idx_house` (`houseId`),
   KEY `idx_inputtime` (`createTime`),
   KEY `idx_house_userid` (`houseId`,`userId`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 /*
 *房源申请表  记录用户申请房源表

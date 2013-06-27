@@ -139,4 +139,16 @@ CREATE TABLE `user_target_house` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
+CREATE TABLE `house_view` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `userId` bigint(20) DEFAULT NULL,
+  `houseInfoId` bigint(20) DEFAULT NULL,
+  `createTime` datetime DEFAULT NULL,
+  `updateTime` datetime DEFAULT NULL,
+  `count` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8；
+
+
+
 
