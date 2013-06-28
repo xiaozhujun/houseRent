@@ -90,5 +90,16 @@ class HouseInfoModel extends Model{
     	$now = dateTime();
     	return $this->where("transferTime>='{$now}'")->order("houseId desc")->limit(10)->select();
     }
+    
+    //一个街道的房源
+    function streatHouse($street)
+    {
+    	if(is_null($street))
+    	{
+    		return array();
+    	}
+    	$now = dateTime();
+    	return $this->where("transferTime>='{$now}' and street like '%{$street}%'")->order("houseId desc")->limit(10)->select();
+    }
 
 }

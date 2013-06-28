@@ -14,6 +14,8 @@
 <link href="/css/common.css" type="text/css" rel="stylesheet">
 <link href="/css/header.css" type="text/css" rel="stylesheet">
 <link href="/css/house/houseInfo.css" type="text/css" rel="stylesheet">
+
+<script src="/js/jquery-dateFormat.js" type="text/javascript"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
 <title>房源详情</title>  
 </head>  
@@ -21,7 +23,29 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("input").emptyValue();
+		
+		$.get($.URL.house.streetHouseList+"?street={$houseInfo['street']}",null,streetHouseCallback,"json");
 	});
+	
+	//街道相对应的房源
+	function streetHouseCallback(result)
+	{
+		$.each(result.data.houseList,function(index,value){
+
+   			var houseInfo = $("<div class='houseItem'></div>");
+   			houseInfo.attr('houseId',value.houseId);
+   			var title = $("<div class='houseItemColumn'></div>").append(value.title);
+   			var price = $("<div class='houseItemColumn'></div>").append(value.price).append("&nbsp;元/月");
+   			var type = $("<div class='houseItemColumn'></div>").append("房屋户型： "+value.room+"室"+value.parlor+"厅"+value.washroom+"卫");
+   			var transferTime = $("<div class='houseItemColumn'></div>").append("出租时间： "+$.format.date(value.transferTime,"yyyy-MM-dd"));
+   			houseInfo.append(title).append(price).append(type).append(transferTime);
+   			$("#houseList").append(houseInfo);
+		});
+		
+		$('.houseItem').click(function(){
+			location=$.URL.house.info+"?id="+$(this).attr("houseId");
+		});
+	}
 </script>
 <div id='mainContainer'>
     <div id='headContainer'>
@@ -70,7 +94,7 @@
     		<div id='details'>
     			<div class='infoRow'>
     				<div class='infoLabel'>租金价格：</div>
-    				<div class='infoValue'>{$houseInfo['price']}</div>
+    				<div class='infoValue'>{$houseInfo['price']}元</div>
     			</div>
     			<div class='infoRow'>
     				<div class='infoLabel'>房屋户型：</div>
@@ -90,7 +114,7 @@
     			</div>
     			<div class='infoRow'>
     				<div class='infoLabel'>所在地址：</div>
-    				<div class='infoValue'>{$houseInfo['addressInfo']}</div>
+    				<div class='infoValue'>{$houseInfo['street']}{$houseInfo['community']}</div>
     			</div>
     			<div class='infoRow'>
     				<div class='infoLabel'>转让时间：</div>
@@ -146,30 +170,7 @@
     		<div id='relatedHouse'>
     					<div id='relatedHouseTitle'>相关房源推荐：</div>
     					<div id='houseList'>
-    						<div class='houseItem'>
-					   				<div class='houseItemColumn'>和平里和平街十四区 2室1厅65平米</div>
-					   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
-					   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
-					   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
-					   			</div>
-    							<div class='houseItem'>
-					   				<div class='houseItemColumn'>和平里和平街十四区 2室1厅65平米</div>
-					   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
-					   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
-					   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
-					   			</div>
-    							<div class='houseItem'>
-					   				<div class='houseItemColumn'>和平里和平街十四区 2室1厅65平米</div>
-					   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
-					   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
-					   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
-					   			</div>
-    							<div class='houseItem'>
-					   				<div class='houseItemColumn'>和平里和平街十四区 2室1厅65平米</div>
-					   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
-					   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
-					   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
-					   			</div>
+    						
     					</div>
     		</div>
     	</div>

@@ -42,7 +42,8 @@
 						data.area = $('#area').val();
 						data.currentFloor = $('#currentfloor').val();
 						data.maxFloor = $('#maxfloor').val();
-						data.addressInfo = $('#address_info').val();
+						data.street = $('#street').val();
+						data.community = $('#community').val();
 						data.contactPerson = $('#contact_person').val();
 						data.contactPhone = $('#contact_phone').val();
 						data.contactQQ = $('#contact_qq').val();
@@ -175,9 +176,13 @@
     	<div class='labelDiv'>区域：</div>   
     	<select class='inputDiv' id="region"></select>
     </div>
-    <div class='rowDiv'>  
-    	<div class='labelDiv'>详细地址：</div>  
-  		<div class='inputDiv'><input value='西二旗智学苑' type="text" id="address_info"></div>
+     <div class='rowDiv'>  
+    	<div class='labelDiv'>街道：</div>  
+  		<div class='inputDiv'><input value='西二旗' type="text" id="street"></div>
+    </div>
+     <div class='rowDiv'>  
+    	<div class='labelDiv'>小区：</div>  
+  		<div class='inputDiv'><input value='智学苑' type="text" id="community"></div>
     </div>
     <div class='rowDiv'>  
     	<div class='labelDiv'>联系人：</div>  

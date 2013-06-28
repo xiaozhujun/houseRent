@@ -189,5 +189,24 @@ class HouseAction extends Action {
 		$this->ajaxReturn($data);
 	}
 	
+	//一个街道的房子
+	function streetHouse()
+	{
+		$data = array();
+		$street = $_GET['street'];
+		if(is_null($street))
+		{
+			$data['result'] = false;
+			$data['msg']="参数不正确！";
+			$this->ajaxReturn($data);
+			return;
+		}
+		
+		$houseInfoModel = new HouseInfoModel();
+		$data['result'] = true;
+		$data['houseList'] = $houseInfoModel->streatHouse($street);
+		$this->ajaxReturn($data);
+	}
+	
 	
 }

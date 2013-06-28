@@ -29,6 +29,7 @@
 			"search":"/House/search",
 			"info":"/House/info",
 			"popularlist":"/House/popularHouse",
+			"streetHouseList":"/House/streetHouse",
 		},
 		"company":{
 			"add":"/Company/add",
