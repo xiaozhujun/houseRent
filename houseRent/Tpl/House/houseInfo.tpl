@@ -7,6 +7,9 @@
 <script src="/js/resouce.js" type="text/javascript"></script>
 <script src="/js/emptyNote.js" type="text/javascript"></script>
 <script src="/js/house.js" type="text/javascript"></script>
+<script type="text/javascript" src="/js/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+<script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+<script src="/js/jquery-dateFormat.js" type="text/javascript"></script>
 {if !isset($user)}
 <link href="/css/headLogin.css" type="text/css" rel="stylesheet">
 {/if}
@@ -14,8 +17,7 @@
 <link href="/css/common.css" type="text/css" rel="stylesheet">
 <link href="/css/header.css" type="text/css" rel="stylesheet">
 <link href="/css/house/houseInfo.css" type="text/css" rel="stylesheet">
-
-<script src="/js/jquery-dateFormat.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="/js/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
 <title>房源详情</title>  
 </head>  
@@ -25,6 +27,14 @@
 		$("input").emptyValue();
 		
 		$.get($.URL.house.streetHouseList+"?street={$houseInfo['street']}",null,streetHouseCallback,"json");
+		
+		$("a.addFriendBtn").fancybox({
+							'transitionIn'	:	'elastic',
+							'transitionOut'	:	'elastic',
+							'speedIn'		:	200, 
+							'speedOut'		:	200, 
+							'overlayShow'	:	false
+							});
 	});
 	
 	//街道相对应的房源
@@ -157,7 +167,7 @@
     					<div id='name'>{$houseUser["realName"]}</div>
     					<div id='company'>{$company}</div>
     					<div id='college'>{$college}</div>
-    					<div id='addFrinend'><div id='addFriendBtn' class='myButton'>+ 加为好友</div></div>
+    					<div id='addFrinend'><div id='addFriendBtn' class='myButton'><a class='addFriendBtn' href="/Friend/applyFriendPage?userId={$houseUser['id']}">+ 加为好友</a></div></div>
     				</div>
     			</div>
     		</div>
