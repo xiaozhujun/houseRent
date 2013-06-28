@@ -67,7 +67,7 @@
 	    			<div class='menuItem'><div class='menuNameDiv'>房源推荐</div></div>
 	    			<div class='menuItem'><div class='menuNameDiv'>我的房源</div></div>
 	    			<div class='menuItem'><div class='menuNameDiv'>关注房源</div></div>
-	    			<div class='menuItem' page='/mod/friend/addFriend.html'><div class='menuNameDiv'>房源申请</div></div>
+	    			<div class='menuItem' page='/mod/houseApply/applyingList.html'><div class='menuNameDiv'>房源申请</div></div>
 	    		</div>
 	    	</div>
 

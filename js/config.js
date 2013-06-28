@@ -31,6 +31,17 @@
 			"popularlist":"/House/popularHouse",
 			"streetHouseList":"/House/streetHouse",
 		},
+		"houseApply":{
+			"applyHouse":"/HouseApply/applyHouse",
+			"applyingUntreated":"/HouseApply/applyingUntreated",
+			"applyingPassed":"/HouseApply/applyingPassed",
+			"applyingRefused":"/HouseApply/applyingRefused",
+			"applyingUntreat":"/HouseApply/applyingUntreat",
+			"applyingPass":"/HouseApply/applyingPass",
+			"applyingRefuse":"/HouseApply/applyingRefuse",
+			"refuseApply":"/HouseApply/refuseApply",
+			"passApply":"/HouseApply/passApply",
+		},
 		"company":{
 			"add":"/Company/add",
 			"autoComplete":"/Company/autoComplete",

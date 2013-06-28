@@ -35,6 +35,13 @@
 							'speedOut'		:	200, 
 							'overlayShow'	:	false
 							});
+							
+		$('#loginBtn').click(function(){
+				var data = {};
+				data.email = $('#emailLoginInput').val();
+				data.password = $('#pwdLoginInput').val();
+				$.post($.URL.user.login,data,loginCallback,"json");
+			});
 	});
 	
 	//街道相对应的房源
@@ -55,6 +62,20 @@
 		$('.houseItem').click(function(){
 			location=$.URL.house.info+"?id="+$(this).attr("houseId");
 		});
+	}
+	
+	//登录回调函数
+	function loginCallback(result)
+	{
+		if(result.data.success)
+		{
+			location.reload();
+		}
+		else
+		{
+			$('#loginMsg').html(result.data.msg);
+		}
+			
 	}
 </script>
 <div id='mainContainer'>
@@ -132,7 +153,7 @@
     			</div>
     		</div>
     		<div id='actions'>
-    			<div id='applyBtn' class='myButton'>申请房源</div>
+    			<div id='applyBtn' class='myButton'><a class='addFriendBtn' href="/HouseApply/applyHousePage?userId={$houseUser['id']}&houseId={$houseInfo['houseId']}">申请房源</a></div>
     			<div id='collectBtn' class='myButton'>收藏</div>
     		</div>
     		<div id='description'>

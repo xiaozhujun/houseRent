@@ -1,0 +1,251 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">  
+<html>  
+<head>  
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
+<script type="text/javascript" src="/js/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+<script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+<link rel="stylesheet" type="text/css" href="/js/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+<link href="/css/common.css" type="text/css" rel="stylesheet">
+<link href="/css/friend/applyingList.css" type="text/css" rel="stylesheet">
+<title>查找房源</title>  
+</head>  
+<body>  
+	<script type="text/javascript">
+	$(document).ready(function(){
+		
+		$.get($.URL.houseApply.applyingUntreated,null,applyingUntreatedCallback,"json");
+		$.get($.URL.houseApply.applyingUntreat,null,applyingUntreatCallback,"json");
+		
+		$("#untreatedTab").unbind("mouseover");
+		$("#untreatedTab").mouseover(function(){
+			$.get($.URL.houseApply.applyingUntreated,null,applyingUntreatedCallback,"json");
+		});
+		
+		$("#passedTab").unbind("mouseover");
+		$("#passedTab").mouseover(function(){
+			$.get($.URL.houseApply.applyingPassed,null,applyingPassedCallback,"json");
+		});
+		
+		$("#refusedTab").unbind("mouseover");
+		$("#refusedTab").mouseover(function(){
+			$.get($.URL.houseApply.applyingRefused,null,applyingRefusedCallback,"json");
+		});
+		
+		$("#untreatTab").unbind("mouseover");
+		$("#untreatTab").mouseover(function(){
+			$.get($.URL.houseApply.applyingUntreat,null,applyingUntreatCallback,"json");
+		});
+		
+		$("#passTab").unbind("mouseover");
+		$("#passTab").mouseover(function(){
+			$.get($.URL.houseApply.applyingPass,null,applyingPassCallback,"json");
+		});
+		
+		$("#refuseTab").unbind("mouseover");
+		$("#refuseTab").mouseover(function(){
+			$.get($.URL.houseApply.applyingRefuse,null,applyingRefuseCallback,"json");
+		});
+		
+	});
+	
+	//未处理申请
+	function applyingUntreatedCallback(result)
+	{
+		$("#untreatedTabBody").html("");
+		if(result.data.list && result.data.list.length>=1)
+			{
+				var listHead = $("<div class='applyingRowHeadDiv'><div class='realNameDiv'>房源</div><div class='authInfoDiv'>申请信息</div><div class='createTimeDiv'>申请时间</div></div>");
+				$("#untreatedTabBody").append(listHead);
+				$(result.data.list).each(function(index,item){
+					var realNameDiv = $("<div class='realNameDiv'></div>").html(item.toRealName);
+					var authInfoDiv = $("<div class='authInfoDiv'></div>").html(item.authInfo);
+					var createTimeDiv = $("<div class='createTimeDiv'>&nbsp;</div>").append(item.createTime);
+					var rowDiv = $("<div class='applyingRowDiv'></div>").append(realNameDiv).append(authInfoDiv).append(createTimeDiv);
+					$("#untreatedTabBody").append(rowDiv);
+				});
+			}
+		else
+			{
+				$("#untreatedTabBody").append("亲，没有符合条件的记录！");	
+			}
+		
+		$("#untreatedTab").addClass("current").siblings().removeClass("current"); 
+		$("#untreatedTabBody").show().siblings().hide(); 
+	}
+	
+	//未处理申请
+	function applyingPassedCallback(result)
+	{
+		$("#passedTabBody").html("");
+		if(result.data.list && result.data.list.length>=1)
+			{
+				var listHead = $("<div class='applyingRowHeadDiv'><div class='realNameDiv'>房源</div><div class='authInfoDiv'>申请信息</div><div class='createTimeDiv'>申请时间</div></div>");
+				$("#passedTabBody").append(listHead);
+				$(result.data.list).each(function(index,item){
+					var realNameDiv = $("<div class='realNameDiv'></div>").html(item.toRealName);
+					var authInfoDiv = $("<div class='authInfoDiv'></div>").html(item.authInfo);
+					var createTimeDiv = $("<div class='createTimeDiv'>&nbsp;</div>").append(item.createTime);
+					var rowDiv = $("<div class='applyingRowDiv'></div>").append(realNameDiv).append(authInfoDiv).append(createTimeDiv);
+					$("#passedTabBody").append(rowDiv);
+				});
+			}
+		else
+			{
+				$("#passedTabBody").append("亲，没有符合条件的记录！");	
+			}
+		$("#passedTab").addClass("current").siblings().removeClass("current"); 
+		$("#passedTabBody").show().siblings().hide(); 
+	}
+	
+	//未处理申请
+	function applyingRefusedCallback(result)
+	{
+		$("#refusedTabBody").html("");
+		if(result.data.list && result.data.list.length>=1)
+			{
+				var listHead = $("<div class='applyingRowHeadDiv'><div class='realNameDiv'>房源</div><div class='authInfoDiv'>反馈信息</div><div class='createTimeDiv'>申请时间</div></div>");
+				$("#refusedTabBody").append(listHead);
+				$(result.data.list).each(function(index,item){
+					var realNameDiv = $("<div class='realNameDiv'></div>").html(item.toRealName);
+					var authInfoDiv = $("<div class='authInfoDiv'>&nbsp;</div>").append(item.replyInfo);
+					var createTimeDiv = $("<div class='createTimeDiv'>&nbsp;</div>").append(item.createTime);
+					var rowDiv = $("<div class='applyingRowDiv'></div>").append(realNameDiv).append(authInfoDiv).append(createTimeDiv);
+					$("#refusedTabBody").append(rowDiv);
+				});
+			}
+		else
+			{
+				$("#refusedTabBody").append("亲，没有符合条件的记录！");	
+			}
+		$("#refusedTab").addClass("current").siblings().removeClass("current"); 
+		$("#refusedTabBody").show().siblings().hide(); 
+	}
+	
+	//未处理申请
+	function applyingUntreatCallback(result)
+	{
+		$("#untreatTabBody").html("");
+		if(result.data.list && result.data.list.length>=1)
+			{
+				var listHead = $("<div class='applyingRowHeadDiv'><div class='realNameDiv'>房源</div><div class='authInfoDiv'>申请信息</div><div class='createTimeDiv'>申请时间</div><div class='applyActionDiv'>操作</div></div>");
+				$("#untreatTabBody").append(listHead);
+				$(result.data.list).each(function(index,item){
+					var realNameDiv = $("<div class='realNameDiv'></div>").html(item.toRealName);
+					var authInfoDiv = $("<div class='authInfoDiv'></div>").html(item.authInfo);
+					var createTimeDiv = $("<div class='createTimeDiv'>&nbsp;</div>").append(item.createTime);
+					var actionDiv = $("<div class='applyActionDiv'><a class='passApplyLink' href='/HouseApply/passApply?fromUser=" + item.fromUser + "&houseId="+item.houseId+"'>通过</a>&nbsp;<a class='refuseApplyLink' href='/HouseApply/refuseApplyPage?fromUser="+item.fromUser +"&houseId=" + item.houseId + "'>拒绝</a></div>");
+					var rowDiv = $("<div class='applyingRowDiv'></div>").append(realNameDiv).append(authInfoDiv).append(createTimeDiv).append(actionDiv);
+					$("#untreatTabBody").append(rowDiv);
+				});
+			}
+		else
+			{
+				$("#untreatTabBody").append("亲，没有符合条件的记录！");	
+			}
+		$("#untreatTab").addClass("current").siblings().removeClass("current"); 
+		$("#untreatTabBody").show().siblings().hide(); 
+		
+		$("a.refuseApplyLink").fancybox({
+			'transitionIn'	:	'elastic',
+			'transitionOut'	:	'elastic',
+			'speedIn'		:	200, 
+			'speedOut'		:	200, 
+			'overlayShow'	:	false
+		});
+		$("A.passApplyLink").click(function(){
+			$.get($(this).attr('href'),null,passApplyCallback,"json");
+			return false;
+		});
+	}
+	
+	//通过房源申请
+	function passApplyCallback(result)
+	{
+		if(result.data.success)
+			{
+				alert("操作成功");
+			}
+		else
+			{
+				alert("对不起，操作失败哦！"+result.data.msg);
+			}
+	}
+	
+	//未处理申请
+	function applyingPassCallback(result)
+	{
+		$("#passTabBody").html("");
+		if(result.data.list && result.data.list.length>=1)
+			{
+				var listHead = $("<div class='applyingRowHeadDiv'><div class='realNameDiv'>房源</div><div class='authInfoDiv'>申请信息</div><div class='createTimeDiv'>申请时间</div></div>");
+				$("#passTabBody").append(listHead);
+				$(result.data.list).each(function(index,item){
+					var realNameDiv = $("<div class='realNameDiv'></div>").html(item.toRealName);
+					var authInfoDiv = $("<div class='authInfoDiv'></div>").html(item.authInfo);
+					var createTimeDiv = $("<div class='createTimeDiv'>&nbsp;</div>").append(item.createTime);
+					var rowDiv = $("<div class='applyingRowDiv'></div>").append(realNameDiv).append(authInfoDiv).append(createTimeDiv);
+					$("#passTabBody").append(rowDiv);
+				});
+			}
+		else
+			{
+				$("#passTabBody").append("亲，没有符合条件的记录！");	
+			}
+		$("#passTab").addClass("current").siblings().removeClass("current"); 
+		$("#passTabBody").show().siblings().hide(); 
+		
+	}
+	
+	//未处理申请
+	function applyingRefuseCallback(result)
+	{
+		$("#refuseTabBody").html("");
+		if(result.data.list && result.data.list.length>=1)
+			{
+				var listHead = $("<div class='applyingRowHeadDiv'><div class='realNameDiv'>房源</div><div class='authInfoDiv'>反馈信息</div><div class='createTimeDiv'>申请时间</div></div>");
+				$("#refuseTabBody").append(listHead);
+				$(result.data.list).each(function(index,item){
+					var realNameDiv = $("<div class='realNameDiv'></div>").html(item.toRealName);
+					var authInfoDiv = $("<div class='authInfoDiv'>&nbsp;</div>").append(item.replyInfo);
+					var createTimeDiv = $("<div class='createTimeDiv'>&nbsp;</div>").append(item.createTime);
+					var rowDiv = $("<div class='applyingRowDiv'></div>").append(realNameDiv).append(authInfoDiv).append(createTimeDiv);
+					$("#refuseTabBody").append(rowDiv);
+				});
+			}
+		else
+			{
+				$("#refuseTabBody").append("亲，没有符合条件的记录！");	
+			}
+		$("#refuseTab").addClass("current").siblings().removeClass("current"); 
+		$("#refuseTabBody").show().siblings().hide(); 
+	}
+	
+	</script>
+	<div id="applyingListBody" class='modContainer'>
+		<div id="toHouseApplyTitle" class="tabTitle">发给房源的申请：</div>
+		<div  class="sidebar-tab">
+			<div id="untreatedTab" class="tab current">未处理</div>
+			<div id="passedTab" class="tab">已通过</div>
+			<div id="refusedTab" class="tab">被拒绝</div> 
+			<div class="tab-content">
+				<div id="untreatedTabBody" class="tab-body"></div>
+				<div id='passedTabBody' class="tab-body"></div>
+				<div id='refusedTabBody' class="tab-body"></div>
+			</div> 
+		</div>
+		
+		<div id="fromHouseApplyTitle" class="tabTitle">来自房源的申请：</div>
+		<div  class="sidebar-tab">
+			<div id="untreatTab" class="tab current">未处理</div>
+			<div id="passTab"  class="tab">已通过</div>
+			<div id="refuseTab" class="tab">被拒绝</div> 
+			<div class="tab-content">
+				<div id="untreatTabBody" class="tab-body"></div>
+				<div id='passTabBody' class="tab-body"></div>
+				<div id='refuseTabBody' class="tab-body"></div>
+			</div> 
+		</div>
+	</div>
+</body>  
+</html>  
+ 

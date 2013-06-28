@@ -1,48 +1,24 @@
 <?php
-import('Common.DateUtil',APP_PATH,'.php');
-class HouseViewModel extends Model{
+class HouseApplyModel extends Model{
 
-	//根据用户编号和房源编号查找申请记录
-	function findByIds($houseId,$userId)
+	//自动验证
+	protected $_validate=array(
+			//每个字段的详细验证内容
+			array("fromUser","require","申请人不能为空"),
+			array("toUser","require","被申请人不能为空"),
+			array("houseId","require","房源编号不能为空"),
+	);
+
+	//自动填充
+	protected $_auto=array(
+			array("createTime","dateTime",1,'callback'),
+			array("updateTime","dateTime",1,'callback'),
+	);
+
+	//当前系统时间
+	function dateTime()
 	{
-		if(is_null($houseId) || is_null($userId))
-		{
-			return null;
-		}
-		
-		$houseApply = $this->where("userId={$userId} and houseId={$houseId} and status=0")->find();
-		return $houseView;
+		return date("Y-m-d H:i:s");
 	}
 	
-	//保存用户申请房源记录
-	function saveOrUpdate($houseId,$userId)
-	{
-		if(is_null($houseId) || is_null($userId))
-		{
-			return 0;
-		}
-		
-		$houseApply = $this->findByIds($houseId, $userId);
-		if(is_null($houseApply))
-		{
-			$houseApply = array(
-					"houseId"=>$houseId,
-					"userId"=>$userId,
-					createTime=>dateTime(),
-					updateTime=>dateTime(),
-					status=>0,
-			);
-			
-			if($this->create($houseApply))
-			{
-				$this->add();
-				return 1;
-			}
-			return 0;
-		}
-		else
-		{
-			return 2;
-		}
-	}
 }
