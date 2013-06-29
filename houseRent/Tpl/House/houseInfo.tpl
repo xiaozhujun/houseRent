@@ -75,6 +75,7 @@
 	//评论列表回调
 	function commentListCallback(result)
 	{
+		$("#commentList").html("");
 		$.each(result.data.commentList,function(index,item){
 			var commentRow = $("<div class='commentRow'></div>");
 			var commentTitle = $("<div class='commentTitle'></div>")
@@ -93,7 +94,7 @@
 	{
 		if(result.data.success)
 		{
-			alert("评论成功");
+			$.get($.URL.houseComment.commentList+"?houseId="+houseId,null,commentListCallback,'json');
 		}
 		else
 		{
