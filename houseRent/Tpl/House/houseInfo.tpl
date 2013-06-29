@@ -42,7 +42,26 @@
 				data.password = $('#pwdLoginInput').val();
 				$.post($.URL.user.login,data,loginCallback,"json");
 			});
+			
+		$("#collectBtn").click(function(){
+			var data = {};
+			data.houseId = {$houseInfo['houseId']};
+			$.post($.URL.houseCollect.collect,data,collectCallback,'json');
+		});
 	});
+	
+	//收藏房源回调
+	function collectCallback(result)
+	{
+		if(result.data.result)
+		{
+			alert("收藏成功");
+		}
+		else
+		{
+			alert(result.data.msg);
+		}
+	}
 	
 	//街道相对应的房源
 	function streetHouseCallback(result)

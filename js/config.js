@@ -42,6 +42,10 @@
 			"refuseApply":"/HouseApply/refuseApply",
 			"passApply":"/HouseApply/passApply",
 		},
+		"houseCollect":{
+			"collect":"/HouseCollect/collect",
+			"collectList":"/HouseCollect/collectHouseList",
+		},
 		"company":{
 			"add":"/Company/add",
 			"autoComplete":"/Company/autoComplete",

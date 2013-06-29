@@ -149,6 +149,21 @@ CREATE TABLE `house_view` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8；
 
+CREATE TABLE `house_apply` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `fromUser` bigint(20) DEFAULT NULL,
+  `toUser` bigint(20) DEFAULT NULL,
+  `houseId` bigint(20) DEFAULT NULL,
+  `createTime` datetime DEFAULT NULL,
+  `updateTime` datetime DEFAULT NULL,
+  `status` tinyint(4) DEFAULT NULL,
+  `authInfo` varchar(255) DEFAULT NULL,
+  `replyInfo` varchar(255) DEFAULT NULL,
+  `fromRealName` varchar(255) DEFAULT NULL,
+  `toRealName` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
 
 
 

@@ -3,11 +3,11 @@
 function  isLogin()
 {
 	session_start();
-	if(isset($_SESSION ['user']))
+	if(is_null($_SESSION['user']))
 	{
-		return true;
+		return false;
 	}
-	return false;
+	return true;
 }
 
 //判断用户是否管理员

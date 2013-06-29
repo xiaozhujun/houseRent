@@ -65,7 +65,6 @@ CREATE TABLE `house_info` (
   `remark` varchar(1024) NOT NULL DEFAULT '' COMMENT '用户备注描述',
   `detailDescription` text NOT NULL COMMENT '详细描述，类似与物品详情页',
   `region` int(4) NOT NULL DEFAULT '1' COMMENT '用户大地址，到城市下面的区',
-  `addressInfo` varchar(512) NOT NULL DEFAULT '' COMMENT '详细地址',
   `contactPerson` varchar(256) NOT NULL DEFAULT '' COMMENT '联系人姓名',
   `contactPhone` varchar(50) NOT NULL DEFAULT '' COMMENT '联系人电话',
   `contactQQ` varchar(50) NOT NULL DEFAULT '' COMMENT '联系人qq',
@@ -84,11 +83,13 @@ CREATE TABLE `house_info` (
   `viewCount` bigint(20) DEFAULT NULL,
   `applyCount` bigint(20) DEFAULT NULL,
   `transferTime` datetime DEFAULT NULL,
+  `community` varchar(255) DEFAULT NULL,
+  `street` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`houseId`),
   KEY `idx_house` (`houseId`),
   KEY `idx_inputtime` (`createTime`),
   KEY `idx_house_userid` (`houseId`,`userId`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 /*
 *房源申请表  记录用户申请房源表

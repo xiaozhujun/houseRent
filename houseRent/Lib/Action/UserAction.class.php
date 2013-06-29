@@ -127,11 +127,20 @@ class UserAction extends Action {
 			$userModel = new UserModel ();
 			
 			if ($userModel->login ( $email, $password )) {
-				session_start ();
+				session_start();
 				$vo = $userModel->findByEmail($email);
 				$_SESSION ['user'] = $vo['realName'];
 				$_SESSION ['userId'] = $vo['id'];
-				
+				/*
+				if(session_register('user'))
+				{ 
+					$_SESSION ['user'] = $vo['realName'];
+				}
+				if(session_register('userId'))
+				{
+					$_SESSION ['userId'] = $vo['id'];
+				}
+				*/
 				$data['success'] = true;
 				$this->ajaxReturn($data);
 			} else {
