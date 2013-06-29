@@ -94,6 +94,7 @@
 	{
 		if(result.data.success)
 		{
+			$("#commentInput").val('请输入您的评价！');
 			$.get($.URL.houseComment.commentList+"?houseId="+houseId,null,commentListCallback,'json');
 		}
 		else
