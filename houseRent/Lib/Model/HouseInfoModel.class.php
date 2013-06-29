@@ -92,7 +92,7 @@ class HouseInfoModel extends Model{
     }
     
     //一个街道的房源
-    function streatHouse($street)
+    function streetHouse($street)
     {
     	if(is_null($street))
     	{

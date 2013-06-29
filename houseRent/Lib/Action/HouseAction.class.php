@@ -204,7 +204,7 @@ class HouseAction extends Action {
 		
 		$houseInfoModel = new HouseInfoModel();
 		$data['result'] = true;
-		$data['houseList'] = $houseInfoModel->streatHouse($street);
+		$data['houseList'] = $houseInfoModel->streetHouse($street);
 		$this->ajaxReturn($data);
 	}
 	

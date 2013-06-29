@@ -164,6 +164,27 @@ CREATE TABLE `house_apply` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
+CREATE TABLE `house_collect` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `collectUser` bigint(20) DEFAULT NULL,
+  `houseUser` bigint(20) DEFAULT NULL,
+  `houseId` bigint(20) DEFAULT NULL,
+  `createTime` datetime DEFAULT NULL,
+  `status` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `house_comment` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `houseId` bigint(20) DEFAULT NULL,
+  `comment` varchar(255) DEFAULT NULL,
+  `createTime` datetime DEFAULT NULL,
+  `userId` bigint(20) DEFAULT NULL,
+  `realName` varchar(255) DEFAULT NULL,
+  `replyCommentId` bigint(20) DEFAULT NULL,
+  `replyUser` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8
 
 
 

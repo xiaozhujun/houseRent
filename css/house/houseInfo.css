@@ -295,3 +295,42 @@
 	border-bottom: solid 1px #ccc;
 }
 
+.commentRow
+{
+	border: 1px solid #CCCCCC;
+    float: left;
+    margin-right: 10px;
+    margin-top: 5px;
+    width: 98%;
+}
+
+.commentTitle
+{
+	width:100%;
+	float:left;
+	background-color: #eee;
+	padding:5px 0px;
+}
+
+.commentUser
+{
+	width:50%;
+	float:left;
+	text-align: left;
+	margin-left:10px;
+}
+
+.commentTime
+{
+	width:40%;
+	float:right;
+	text-align: right;
+}
+
+.commentContent
+{
+	width:100%;
+	float:left;
+	text-align:left;
+	padding:10px 10px;
+}

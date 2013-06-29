@@ -46,6 +46,10 @@
 			"collect":"/HouseCollect/collect",
 			"collectList":"/HouseCollect/collectHouseList",
 		},
+		"houseComment":{
+			"comment":"/HouseComment/comment",
+			"commentList":"/HouseComment/houseCommentList",
+		},
 		"company":{
 			"add":"/Company/add",
 			"autoComplete":"/Company/autoComplete",

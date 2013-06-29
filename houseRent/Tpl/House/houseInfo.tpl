@@ -23,10 +23,13 @@
 </head>  
 <body>  
 <script type="text/javascript">
+	var houseId = {$houseInfo['houseId']};
+	var replyComment = null;
 	$(document).ready(function(){
 		$("input").emptyValue();
 		
 		$.get($.URL.house.streetHouseList+"?street={$houseInfo['street']}",null,streetHouseCallback,"json");
+		$.get($.URL.houseComment.commentList+"?houseId="+houseId,null,commentListCallback,'json');
 		
 		$("a.addFriendBtn").fancybox({
 							'transitionIn'	:	'elastic',
@@ -45,10 +48,58 @@
 			
 		$("#collectBtn").click(function(){
 			var data = {};
-			data.houseId = {$houseInfo['houseId']};
+			data.houseId = houseId;
 			$.post($.URL.houseCollect.collect,data,collectCallback,'json');
 		});
+		
+		$("#commentBtn").click(function(){
+			var comment = $("#commentInput").val();
+			if(comment=="请输入您的评价！"||comment=="")
+			{
+				alert("请输入评论内容！");
+				return;
+			}
+		
+			var data = {};
+			data.houseId = houseId;
+			data.comment = comment;
+			if(replyComment!=null)
+			{
+				data.replyComment = replyComment;
+			}
+			$.post($.URL.houseComment.comment,data,commentCallback,'json');
+		});
+		
 	});
+	
+	//评论列表回调
+	function commentListCallback(result)
+	{
+		$.each(result.data.commentList,function(index,item){
+			var commentRow = $("<div class='commentRow'></div>");
+			var commentTitle = $("<div class='commentTitle'></div>")
+			var commentUser = $("<div class='commentUser'>"+item.realName+" 评论说：</div>");
+			var commentTime = $("<div class='commetTime'>评论时间："+item.createTime+"</div>")
+			var commentContent = $("<div class='commentContent'>"+item.comment+"</div>");
+			
+			commentTitle.append(commentUser).append(commentTime);
+			commentRow.append(commentTitle).append(commentContent);
+			$("#commentList").append(commentRow);
+		});
+	}
+	
+	//评论回调
+	function commentCallback(result)
+	{
+		if(result.data.success)
+		{
+			alert("评论成功");
+		}
+		else
+		{
+			alert(result.data.msg);
+		}
+	}
 	
 	//收藏房源回调
 	function collectCallback(result)
@@ -189,13 +240,16 @@
     				<div class='comentRow'>
     					<div class='commentLabel'>内容：</div>
     					<div class='comemntInput'>
-    						<textarea id='detail_description' rows="8" cols="60">请输入您的评价！</textarea>
+    						<textarea id='commentInput' rows="8" cols="60">请输入您的评价！</textarea>
     					</div>
     				</div>
     				<div class='comentRow'>
     					<div class='commentLabel'>&nbsp;</div>
     					<div class='comemntInput'><div id='commentBtn' class='myButton'>评论</div></div>
     				</div>
+    			</div>
+    			<div id="commentList">
+    				
     			</div>
     		</div>
     	</div>
