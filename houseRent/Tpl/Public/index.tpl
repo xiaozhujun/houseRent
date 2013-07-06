@@ -14,6 +14,7 @@
 <script src="/js/config.js" type="text/javascript"></script>
 <script src="/js/emptyNote.js" type="text/javascript"></script>
 <script src="/js/house.js" type="text/javascript"></script>
+<script src="/js/jquery-dateFormat.js" type="text/javascript"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
 <title>首页</title>  
 </head>  
@@ -79,9 +80,47 @@
          $('#targetHouseInput').focusout(function(){
         	updateTargetHouse();
         });
+        
+        $.get($.URL.house.friendHouseList,null,friendHouseCallback,"json");
+        $.get($.URL.house.oneDuHouseList,null,oneDuHouseCallback,"json");
 	});
 	
-	//向后台请求匹配的公司信息
+	function oneDuHouseCallback(result)
+	{
+		$.each(result.data.houseList,function(index,value){
+
+   			var houseInfo = $("<div class='houseItem'></div>");
+   			houseInfo.attr('houseId',value.houseId);
+   			var title = $("<div class='houseItemColumn'></div>").append(value.title);
+   			var price = $("<div class='houseItemColumn'></div>").append(value.price).append("&nbsp;元/月");
+   			var type = $("<div class='houseItemColumn'></div>").append("房屋户型： "+value.room+"室"+value.parlor+"厅"+value.washroom+"卫");
+   			var transferTime = $("<div class='houseItemColumn'></div>").append("出租时间： "+$.format.date(value.transferTime,"yyyy-MM-dd"));
+   			houseInfo.append(title).append(price).append(type).append(transferTime);
+   			houseInfo.click(function(){
+					location=$.URL.house.info+"?id="+$(this).attr("houseId");
+				});
+   			$("#oneDuHouseList").append(houseInfo);
+		});
+	}
+	
+	function friendHouseCallback(result)
+	{
+		$.each(result.data.houseList,function(index,value){
+
+   			var houseInfo = $("<div class='houseItem'></div>");
+   			houseInfo.attr('houseId',value.houseId);
+   			var title = $("<div class='houseItemColumn'></div>").append(value.title);
+   			var price = $("<div class='houseItemColumn'></div>").append(value.price).append("&nbsp;元/月");
+   			var type = $("<div class='houseItemColumn'></div>").append("房屋户型： "+value.room+"室"+value.parlor+"厅"+value.washroom+"卫");
+   			var transferTime = $("<div class='houseItemColumn'></div>").append("出租时间： "+$.format.date(value.transferTime,"yyyy-MM-dd"));
+   			houseInfo.append(title).append(price).append(type).append(transferTime);
+   			houseInfo.click(function(){
+					location=$.URL.house.info+"?id="+$(this).attr("houseId");
+				});
+   			$("#directFriendHouseList").append(houseInfo);
+		});
+	}
+	
 	function doCompanyAutoComplete(request,response)
 	{
 		var data = {};
@@ -221,81 +260,15 @@
     		<div id='houseList'>
     			<div id='friendHouse'>
     				<div id='oneDegree'>
-    					<div class='degreeTitle'>一度房源</div>
-    					<div class='houseListDiv'>
-				   			<div class='houseItem'>
-				   				<div class='houseItemColumn'>海淀区 和平里和平街十四区 2室1厅65平米</div>
-				   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
-				   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
-				   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
-				   			</div>
+    					<div class='degreeTitle'>直系好友房源</div>
+    					<div id='directFriendHouseList' class='houseListDiv'>
 				   			
-				   			<div class='houseItem'>
-				   				<div class='houseItemColumn'>和平里和平街十四区 2室1厅65平米</div>
-				   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
-				   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
-				   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
-				   			</div>
-				   			
-				   			<div class='houseItem'>
-				   				<div class='houseItemColumn'>和平里和平街十四区 2室1厅65平米</div>
-				   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
-				   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
-				   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
-				   			</div>
-				   			
-				   			<div class='houseItem'>
-				   				<div class='houseItemColumn'>和平里和平街十四区 2室1厅65平米</div>
-				   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
-				   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
-				   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
-				   			</div>
-				   			
-				   			<div class='houseItem'>
-				   				<div class='houseItemColumn'>和平里和平街十四区 2室1厅65平米</div>
-				   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
-				   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
-				   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
-				   			</div>
 				   		</div>
     				</div>
     				<div id='twoDegree'>
     					<div class='degreeTitle'>二度房源</div>
-    					<div class='houseListDiv'>
-				   			<div class='houseItem'>
-				   				<div class='houseItemColumn'>海淀区 和平里和平街十四区 2室1厅65平米</div>
-				   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
-				   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
-				   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
-				   			</div>
+    					<div id='oneDuHouseList' class='houseListDiv'>
 				   			
-				   			<div class='houseItem'>
-				   				<div class='houseItemColumn'>和平里和平街十四区 2室1厅65平米</div>
-				   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
-				   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
-				   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
-				   			</div>
-				   			
-				   			<div class='houseItem'>
-				   				<div class='houseItemColumn'>和平里和平街十四区 2室1厅65平米</div>
-				   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
-				   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
-				   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
-				   			</div>
-				   			
-				   			<div class='houseItem'>
-				   				<div class='houseItemColumn'>和平里和平街十四区 2室1厅65平米</div>
-				   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
-				   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
-				   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
-				   			</div>
-				   			
-				   			<div class='houseItem'>
-				   				<div class='houseItemColumn'>和平里和平街十四区 2室1厅65平米</div>
-				   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
-				   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
-				   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
-				   			</div>
 				   		</div>
     				</div>
     			</div>

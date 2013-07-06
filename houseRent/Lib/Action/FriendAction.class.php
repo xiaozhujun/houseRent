@@ -4,8 +4,12 @@ define("UNTREAT",0);
 define("PASS",1);
 define("REFUSE",2);
 
+import("@.Model.OneDuFriend");
+
 import('Common.Misc',APP_PATH,'.php');
 import('Common.DateUtil',APP_PATH,'.php');
+import('Common.FriendUtil',APP_PATH,'.php');
+
 class FriendAction extends Action
 {
 	//返回申请好友页面
@@ -329,6 +333,9 @@ class FriendAction extends Action
 				"toUser"=>$_SESSION['userId'],
 				"createTime"=>dateTime(),
 		);
+		
+		addOneDuFriend($friendData["fromUser"],$friendData["toUser"]);
+		
 		if($friend->create($friendData))
 		{
 			$friend->add();	

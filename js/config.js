@@ -30,6 +30,8 @@
 			"info":"/House/info",
 			"popularlist":"/House/popularHouse",
 			"streetHouseList":"/House/streetHouse",
+			"friendHouseList":"/House/friendHouse",
+			"oneDuHouseList":"/House/oneDuHouse",
 		},
 		"houseApply":{
 			"applyHouse":"/HouseApply/applyHouse",

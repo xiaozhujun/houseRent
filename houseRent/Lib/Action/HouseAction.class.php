@@ -5,6 +5,7 @@ import("@.Model.UserModel");
 import("@.Model.UserCompanyModel");
 import("@.Model.UserCollegeModel");
 import("@.Model.HouseViewModel");
+import("@.Model.OneDuFriendModel");
 import('Common.HousePublish',APP_PATH,'.php');
 import('Common.Util',APP_PATH,'.php');
 import('Common.Misc',APP_PATH,'.php');
@@ -208,5 +209,54 @@ class HouseAction extends Action {
 		$this->ajaxReturn($data);
 	}
 	
+	//好友房源
+	function friendHouse()
+	{
+		if(!isLogin())
+		{
+			redirect(C('LOGIN_URL'));
+			return;
+		}
+		
+		$userId = currentUserId();
+		$friendModel = new FriendModel();
+		$houseList = $friendModel->join("INNER JOIN house_info ON friend.toUser = house_info.userId")->where("friend.fromUser={$userId}")->field("house_info.*")->order("house_info.houseId desc")->limit(10)->select();
+		
+		if($houseList==null)
+		{
+			$houseList = array();
+		}
+		
+		$data = array();
+		$data["success"] = true;
+		$data["houseList"] = $houseList;
+
+		$this->ajaxReturn($data);
+	}
+	
+	//一度好友房源
+	function oneDuHouse()
+	{
+		if(!isLogin())
+		{
+			redirect(C('LOGIN_URL'));
+			return;
+		}
+		
+		$userId = currentUserId();
+		$oneDuFriendModel = new OneDuFriendModel();
+		$houseList = $oneDuFriendModel->join("INNER JOIN house_info ON one_du_friend.toUser = house_info.userId")->where("one_du_friend.fromUser={$userId}")->field("house_info.*")->order("house_info.houseId desc")->limit(10)->select();
+		
+		if($houseList==null)
+		{
+			$houseList = array();
+		}
+		
+		$data = array();
+		$data["success"] = true;
+		$data["houseList"] = $houseList;
+
+		$this->ajaxReturn($data);
+	}
 	
 }
