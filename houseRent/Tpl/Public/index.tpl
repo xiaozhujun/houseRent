@@ -83,10 +83,106 @@
         
         $.get($.URL.house.friendHouseList,null,friendHouseCallback,"json");
         $.get($.URL.house.oneDuHouseList,null,oneDuHouseCallback,"json");
+   		
+   		{if !is_null($companyName)}
+        	var companyData = {};
+        	companyData.company = '{$companyName}';
+        	$.post($.URL.house.companyHouseList,companyData,companyHouseCallback,"json");
+        {/if}
+        
+        {if !is_null($collegeName)}
+        	var collegeData = {};
+        	collegeData.college = '{$collegeName}';
+        	$.post($.URL.house.collegeHouseList,collegeData,collegeHouseCallback,"json");
+        {/if}
+        
+        {if !is_null($communityName)}
+        	var communityData = {};
+        	communityData.community = '{$communityName}';
+        	$.post($.URL.house.communityHouseList,communityData,communityHouseCallback,"json");
+        {/if}
+        
 	});
+	
+	function communityHouseCallback(result)
+	{
+		if(result.data.houseList.length>0)
+		{
+			$("#communityHouseList").html("");
+		}
+		
+		$.each(result.data.houseList,function(index,value){
+
+   			var houseInfo = $("<div class='houseItem'></div>");
+   			houseInfo.attr('houseId',value.houseId);
+   			var title = $("<div class='houseItemColumn'></div>").append(value.title);
+   			var price = $("<div class='houseItemColumn'></div>").append(value.price).append("&nbsp;元/月");
+   			var type = $("<div class='houseItemColumn'></div>").append("房屋户型： "+value.room+"室"+value.parlor+"厅"+value.washroom+"卫");
+   			var transferTime = $("<div class='houseItemColumn'></div>").append("出租时间： "+$.format.date(value.transferTime,"yyyy-MM-dd"));
+   			houseInfo.append(title).append(price).append(type).append(transferTime);
+   			houseInfo.click(function(){
+					location=$.URL.house.info+"?id="+$(this).attr("houseId");
+				});
+   			$("#communityHouseList").append(houseInfo);
+		});
+	}
+	
+	function collegeHouseCallback(result)
+	{
+		if(result.data.houseList.length>0)
+		{
+			$("#collegeHouseList").html("");
+		}
+		
+		$.each(result.data.houseList,function(index,value){
+
+   			var houseInfo = $("<div class='houseItem'></div>");
+   			houseInfo.attr('houseId',value.houseId);
+   			var title = $("<div class='houseItemColumn'></div>").append(value.title);
+   			var price = $("<div class='houseItemColumn'></div>").append(value.price).append("&nbsp;元/月");
+   			var type = $("<div class='houseItemColumn'></div>").append("房屋户型： "+value.room+"室"+value.parlor+"厅"+value.washroom+"卫");
+   			var transferTime = $("<div class='houseItemColumn'></div>").append("出租时间： "+$.format.date(value.transferTime,"yyyy-MM-dd"));
+   			houseInfo.append(title).append(price).append(type).append(transferTime);
+   			houseInfo.click(function(){
+					location=$.URL.house.info+"?id="+$(this).attr("houseId");
+				});
+   			$("#collegeHouseList").append(houseInfo);
+		});
+	}
+	
+	
+	function companyHouseCallback(result)
+	{
+		
+		if(result.data.houseList.length>0)
+		{
+			$("#companyHouseList").html("");
+		}
+		
+		$.each(result.data.houseList,function(index,value){
+
+   			var houseInfo = $("<div class='houseItem'></div>");
+   			houseInfo.attr('houseId',value.houseId);
+   			var title = $("<div class='houseItemColumn'></div>").append(value.title);
+   			var price = $("<div class='houseItemColumn'></div>").append(value.price).append("&nbsp;元/月");
+   			var type = $("<div class='houseItemColumn'></div>").append("房屋户型： "+value.room+"室"+value.parlor+"厅"+value.washroom+"卫");
+   			var transferTime = $("<div class='houseItemColumn'></div>").append("出租时间： "+$.format.date(value.transferTime,"yyyy-MM-dd"));
+   			houseInfo.append(title).append(price).append(type).append(transferTime);
+   			houseInfo.click(function(){
+					location=$.URL.house.info+"?id="+$(this).attr("houseId");
+				});
+   			$("#companyHouseList").append(houseInfo);
+		});
+	}
 	
 	function oneDuHouseCallback(result)
 	{
+	
+		if(result.data.houseList.length>0)
+		{
+			$("#oneDuHouseList").html("");
+		}
+		
 		$.each(result.data.houseList,function(index,value){
 
    			var houseInfo = $("<div class='houseItem'></div>");
@@ -105,6 +201,11 @@
 	
 	function friendHouseCallback(result)
 	{
+		if(result.data.houseList.length>0)
+		{
+			$("#directFriendHouseList").html("");
+		}
+	
 		$.each(result.data.houseList,function(index,value){
 
    			var houseInfo = $("<div class='houseItem'></div>");
@@ -262,13 +363,13 @@
     				<div id='oneDegree'>
     					<div class='degreeTitle'>直系好友房源</div>
     					<div id='directFriendHouseList' class='houseListDiv'>
-				   			
+				   			&nbsp;&nbsp;没有找到您好友的房源，邀请好友一起来找房吧！
 				   		</div>
     				</div>
     				<div id='twoDegree'>
     					<div class='degreeTitle'>二度房源</div>
     					<div id='oneDuHouseList' class='houseListDiv'>
-				   			
+				   			&nbsp;&nbsp;没有找到您好友的好友房源哦，邀请好友一起来找房吧！
 				   		</div>
     				</div>
     			</div>
@@ -291,48 +392,24 @@
     					<div class='intentionRowDiv'>
     						<div class='intentionLableDiv'>您中意的小区：</div>
     						<div class='intentionInputDiv'>
-    							<input id='targetHouseInput' oldVal="{$targetHouseName}" value="{$targetHouseName}" class='intentionInput' type='text' data-empty='推荐意向居住地的房源'>
+    							<input id='targetHouseInput' oldVal="{$communityName}" value="{$communityName}" class='intentionInput' type='text' data-empty='推荐意向居住地的房源'>
     							<div id='targetHouseInputMsg' class='msgDiv'></div>
     						</div>
     					</div>
     				</div>
     				
     				<div id='intentionHouseList'>
-    					<div class='houseListDiv'>
-				   			<div class='houseItem'>
-				   				<div class='houseItemColumn'>海淀区 和平里和平街十四区 2室1厅65平米</div>
-				   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
-				   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
-				   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
-				   			</div>
-				   			
-				   			<div class='houseItem'>
-				   				<div class='houseItemColumn'>和平里和平街十四区 2室1厅65平米</div>
-				   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
-				   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
-				   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
-				   			</div>
-				   			
-				   			<div class='houseItem'>
-				   				<div class='houseItemColumn'>和平里和平街十四区 2室1厅65平米</div>
-				   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
-				   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
-				   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
-				   			</div>
-				   			
-				   			<div class='houseItem'>
-				   				<div class='houseItemColumn'>和平里和平街十四区 2室1厅65平米</div>
-				   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
-				   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
-				   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
-				   			</div>
-				   			
-				   			<div class='houseItem'>
-				   				<div class='houseItemColumn'>和平里和平街十四区 2室1厅65平米</div>
-				   				<div class='houseItemColumn'>租金价格：3100 元/月 </div>
-				   				<div class='houseItemColumn'>房屋户型： 2室 1厅 1卫 70㎡</div>
-				   				<div class='houseItemColumn'>出租时间：2013-6-15</div>
-				   			</div>
+    					<div class="houseListDiv">同事房源：</div>
+    					<div id='companyHouseList' class='houseListDiv'>
+				   			暂无匹配房源，邀请同事一起使用吧！
+				   		</div>
+				   		<div class="houseListDiv">校友房源：</div>
+				   		<div id='collegeHouseList' class='houseListDiv'>
+				   			暂无匹配房源哦，邀请校友一起使用吧！
+				   		</div>
+				   		<div class="houseListDiv">中意小区房源：</div>
+				   		<div id='communityHouseList' class='houseListDiv'>
+				   			&nbsp;&nbsp;暂无目标小区的房源哦！
 				   		</div>
     				</div>
     			</div>

@@ -259,4 +259,90 @@ class HouseAction extends Action {
 		$this->ajaxReturn($data);
 	}
 	
+	//同一个公司的房源
+	function companyHouse()
+	{
+		if(!isLogin())
+		{
+			redirect(C('LOGIN_URL'));
+			return;
+		}
+		
+		$data = array();
+		$data['success'] = false;
+		
+		if(is_null($_POST['company']))
+		{
+			$data['msg'] = "请填写公司信息！";
+			$this->ajaxReturn($data);
+			return;	
+		}
+		$companyModel = new CompanyModel();
+		$company = $companyModel->where("name='{$_POST['company']}'")->find();
+		
+		$companyId = $company['id'];
+		
+		$userCompanyModel = new UserCompanyModel();
+		$hosueList = $userCompanyModel->join("INNER JOIN house_info ON user_company.userId = house_info.userId")->where("user_company.companyId={$companyId}")->field("house_info.*")->order("house_info.houseId desc")->limit(10)->select();
+		$data['success'] = true;
+		$data['houseList'] = $hosueList;
+		$this->ajaxReturn($data);
+	}
+	
+	//同一个学校的房源
+	function collegeHouse()
+	{
+		if(!isLogin())
+		{
+			redirect(C('LOGIN_URL'));
+			return;
+		}
+		
+		$data = array();
+		$data['success'] = false;
+		
+		if(is_null($_POST['college']))
+		{
+			$data['msg'] = "请填写学校信息！";
+			$this->ajaxReturn($data);
+			return;
+		}
+		$collegeModel = new CollegeModel();
+		$college = $collegeModel->where("name='{$_POST['college']}'")->find();
+		
+		$collegeId = $college['id'];
+		
+		$userCollegeModel = new UserCollegeModel();
+		$hosueList = $userCollegeModel->join("INNER JOIN house_info ON user_college.userId = house_info.userId")->where("user_college.collegeId={$collegeId}")->field("house_info.*")->order("house_info.houseId desc")->limit(10)->select();
+		$data['success'] = true;
+		$data['houseList'] = $hosueList;
+		$this->ajaxReturn($data);
+	}
+	
+	//小区的房源
+	function communityHouse()
+	{
+		if(!isLogin())
+		{
+			redirect(C('LOGIN_URL'));
+			return;
+		}
+		
+		$data = array();
+		$data['success'] = false;
+		
+		if(is_null($_POST['community']))
+		{
+			$data['msg'] = "请填写目标小区信息！";
+			$this->ajaxReturn($data);
+			return;
+		}
+		$houseInfoModel = new HouseInfoModel();
+		$hosueList = $houseInfoModel->where("community like '%{$_POST['community']}%'")->order("houseId desc")->limit(10)->select();;
+		
+		$data['success'] = true;
+		$data['houseList'] = $hosueList;
+		$this->ajaxReturn($data);
+	}
+	
 }

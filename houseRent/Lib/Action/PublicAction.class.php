@@ -23,7 +23,7 @@ class PublicAction extends Action
 			$this->assign('user',$_SESSION ['user']);
 			$companyName = "";
 			$collegeName = "";
-			$targetHouseName = "";
+			$communityName = "";
 			
 			//获得当前用户的公司名称
 			$userCompany = new UserCompanyModel();
@@ -52,12 +52,12 @@ class PublicAction extends Action
 			{
 				$targetHouse = new TargetHouseModel();
 				$targetHouseObj = $targetHouse->find($userTargetHouseObj['targetHouseId']);
-				$targetHouseName =$targetHouseObj['name'];
+				$communityName =$targetHouseObj['name'];
 			}
 			
 			$this->assign('companyName',$companyName);
 			$this->assign('collegeName',$collegeName);
-			$this->assign('targetHouseName',$targetHouseName);
+			$this->assign('communityName',$communityName);
 			header ( "Content-Type:text/html; charset=utf-8" );
 			$this->display ( "index" );
 		}

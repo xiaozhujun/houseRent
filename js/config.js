@@ -32,6 +32,9 @@
 			"streetHouseList":"/House/streetHouse",
 			"friendHouseList":"/House/friendHouse",
 			"oneDuHouseList":"/House/oneDuHouse",
+			"companyHouseList":"/House/companyHouse",
+			"collegeHouseList":"/House/collegeHouse",
+			"communityHouseList":"/House/communityHouse",
 		},
 		"houseApply":{
 			"applyHouse":"/HouseApply/applyHouse",
