@@ -13,7 +13,11 @@
 <script src="/js/house.js" type="text/javascript"></script>
 <script src="/js/jquery-dateFormat.js" type="text/javascript"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
-<title>首页</title>  
+<meta name="Keywords" content="租房,租客,团租,租客团,房源,圈子" />
+<meta name="Description" content="租客团是中国领先的提供房源分享与交换社区服务的互联网技术公司，为用户提供免费的房源分享、检索、交换、交易服务。" />
+<meta name="robots" content="index, follow" />
+<meta name="googlebot" content="index, follow" />  
+<title>租客团-首页</title>  
 </head>  
 <body>  
 <script type="text/javascript">
@@ -195,6 +199,10 @@
    		</div>
    </div>
 </div>
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fa712b75dc1788d09dbf388a019b92836' type='text/javascript'%3E%3C/script%3E"));
+</script>
 </body>  
 </html>  
   
