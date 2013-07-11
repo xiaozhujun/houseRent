@@ -10,6 +10,8 @@
 <script type="text/javascript" src="/js/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
 <script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
 <script src="/js/jquery-dateFormat.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.5&ak=0414726b722ea5ad257d0b96a3c6117a"></script>
+
 {if !isset($user)}
 <link href="/css/headLogin.css" type="text/css" rel="stylesheet">
 {/if}
@@ -74,7 +76,19 @@
 			$.post($.URL.houseComment.comment,data,commentCallback,'json');
 		});
 		
+		showHouseLocation();
 	});
+	
+	function showHouseLocation()
+	{
+		var map = new BMap.Map("allmap");            // 创建Map实例
+		map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
+		var renderOptions = {};
+		renderOptions.map = map;
+		var local = new BMap.LocalSearch(map, renderOptions
+		);
+		local.search("西二旗");
+	}
 	
 	//评论列表回调
 	function commentListCallback(result)
@@ -240,6 +254,7 @@
 					{$houseInfo['detailDescription']}
     			</div>
     		</div>
+    		<div id="allmap"></div>
     		<div id='comment'>
     			<div id='comentTitle'>房源评价：</div>
     			<div id='commentContainer'>
